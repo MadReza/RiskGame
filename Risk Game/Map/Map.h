@@ -40,6 +40,8 @@ public:
 	string getAuthor();
 	int getMaxPlayers();
 
+	void calculateReinforcements(Player* player);
+
 private:
 	const int MIN_COUNTRIES = 10;
 	const int MAX_COUNTRIES = 256;

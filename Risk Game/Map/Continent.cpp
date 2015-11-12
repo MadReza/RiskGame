@@ -40,9 +40,10 @@ bool Continent::getVisited()
 	return visited;
 }
 
-void Continent::setContinentOwner(Player * player)
+void Continent::setContinentOwner(Player * player)	//TODO: Maybe Renaming ????
 {
 	continent_owner = player;
+	continent_owner->AddContinent(this);	//TODO We need For Removing Continents from previous owners.
 }
 
 Player * Continent::getContinentOwner()

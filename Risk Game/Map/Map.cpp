@@ -183,6 +183,8 @@ void Map::distributePlayers(vector<Player*> player_vector)
 			continents[i]->getContinentVector()[j]->setOwner(next_player);
 			cout << "Assigned Country: " << continents[i]->getContinentVector()[j]->getName()
 				<< ", to Player: " << next_player->getName() << "." << endl;
+
+			continents[i]->getContinentVector()[j]->addArmies(1);
 			k++; //go to next index only if the country was assigned.
 		}
 

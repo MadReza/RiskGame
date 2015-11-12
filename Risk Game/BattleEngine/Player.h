@@ -5,13 +5,15 @@
 #include "../Subject.h"
 
 #include <vector>
-#include<string>
+#include <string>
 #include <set>
+#include <algorithm>
 
 using std::string;
 using std::set;
 
 class Country;
+class Continent;
 
 class Player : public Subject 
 {
@@ -26,6 +28,8 @@ public :
 	};
 
 private:
+	const int MIN_REINFORCEMENT = 3;
+
 	bool alive{true};
 	Color color;
 	string _name;
@@ -36,8 +40,8 @@ private:
 	Strategy *Astrategy;
 	Country *c1;
 	//TODO change vector to set for duplicates. @kendy & @Zack
-	vector<Country*> Adjacent_Countries;	//TODO: DO we need adjacent ???? or just my own ? See @Zack
-	//set<Country> _countries; //TODO Depends on ^ adjacent
+	vector<Country*> countries;	//TODO: DO we need adjacent ???? or just my own ? See @Zack
+	vector<Continent*> continents;
 	
 	void Initialize();
 
@@ -56,12 +60,17 @@ public:
 		Astrategy->doStrategy(c1);
 	}
 	
-	void SetArmiesTotal(int n);
-    void SetReinforcementTotal(int n);
+	void AddCountry(Country* country);
+	void RemoveCountry(Country* country);
+	void AddContinent(Continent* continent);
+	void RemoveContinent(Continent* continent);
+	void CalculateTotalArmies();
     void SetBattlesWonTotal(int n);
     int GetArmiesTotal();
     int GetReinforcementTotal();
     int GetBattlesWonTotal();
+
+	void AssignReinforcements();
 
 	bool GetAlive();
 };

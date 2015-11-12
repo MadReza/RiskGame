@@ -56,26 +56,16 @@ bool GameDriver::CheckWinCondition()
 	return true;
 }
 
-void GameDriver::AssignPlayOrder()
-{
-	cout << "Randomize the order in a way that no 2 turns same players goes first." << endl;
-}
-
 void GameDriver::ReinforcePhase(Player* player)
 {
 	cout << "****Reinforcment Phase:: ****" << endl;
-	AssignReinforcmentToPlayers();
-	PlayerAssignReinforcmentToCountries();
+	PlayerAssignReinforcmentToCountries(player);
 }
 
-void GameDriver::AssignReinforcmentToPlayers()
+void GameDriver::PlayerAssignReinforcmentToCountries(Player* player)
 {
-	cout << "\tAdd units to each player depending on their current status." << endl;
-}
-
-void GameDriver::PlayerAssignReinforcmentToCountries()
-{
-	cout << "\tPlayer Adding Units to Countries." << endl;
+	cout << "\tPlayer: " << player->getName() << " Adding Units to Countries." << endl;
+	player->AssignReinforcements();
 }
 
 void GameDriver::AttackPhase(Player* player)
@@ -95,4 +85,12 @@ void GameDriver::FortifcationPhase(Player* player)
 {
 	cout << "****Fortification Phase:: ****" << endl;
 	cout << "\tFor all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
+
+	//TODO
+	//Check he has more than 1 country
+	//Then call DFS get true or false for connection
+	//if connected
+	//Call player transfer
+	//else notify and let player choose again.
+	//until player ends turn.	
 }

@@ -36,7 +36,8 @@ void Country::addAdjacentCountry(Country* c)
 
 void Country::setOwner(Player *p)
 {
-	owner = p;	
+	owner = p;	//TODO switching owner, notify of change.... e.g.: army 
+	owner->AddCountry(this);
 }
 
 Player* Country::getOwner()
@@ -91,6 +92,7 @@ void Country::displayAdjacentCountries()
 void Country::addArmies(int add)
 {
 	num_armies = num_armies + add;
+	owner->CalculateTotalArmies();	//TODO find difference and add only that.
 }
 
 void Country::setContinent(Continent * continent)

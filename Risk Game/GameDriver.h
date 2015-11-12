@@ -21,9 +21,7 @@ private:
 
 	bool CheckWinCondition();	//return true if one player left in the game, false otherwise.
 
-	void AssignPlayOrder();
-	void AssignReinforcmentToPlayers();
-	void PlayerAssignReinforcmentToCountries();
+	void PlayerAssignReinforcmentToCountries(Player* player);
 	
 	void Play();
 	void ReinforcePhase(Player* player);
