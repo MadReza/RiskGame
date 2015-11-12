@@ -6,11 +6,9 @@
 
 #include <vector>
 #include <string>
-#include <set>
 #include <algorithm>
 
 using std::string;
-using std::set;
 
 class Country;
 class Continent;
@@ -38,17 +36,15 @@ private:
     int _battlesWonTotal;
 	Type typeOfPlayer;
 	Strategy *Astrategy;
-	Country *c1;
-	//TODO change vector to set for duplicates. @kendy & @Zack
-	vector<Country*> countries;	//TODO: DO we need adjacent ???? or just my own ? See @Zack
+	vector<Country*> countries;	
 	vector<Continent*> continents;
 	
-	void Initialize();
+	void initialize();
 
 public:
 	Player();
 	Player(string name, Type typeOfPlayer);
-	Player(string name, Type typeOfPlayer, Strategy *strat);	//TODO if strategy is not set for Player. Remove third parameter and force initilization till set.
+	Player(string name, Strategy *strat);	
 	~Player();
 	Type getType();
 	void setName(string name);
@@ -56,22 +52,23 @@ public:
 	void setPlayerStrategy(Strategy *strat);
 	bool isHuman(Player p);
 	
-	void doStrategy(){
-		Astrategy->doStrategy(c1);
+	void doStrategy(Country* country){
+		Astrategy->doStrategy(country);
 	}
 	
-	void AddCountry(Country* country);
-	void RemoveCountry(Country* country);
-	void AddContinent(Continent* continent);
-	void RemoveContinent(Continent* continent);
-	void CalculateTotalArmies();
-    void SetBattlesWonTotal(int n);
-    int GetArmiesTotal();
-    int GetReinforcementTotal();
-    int GetBattlesWonTotal();
+	void addCountry(Country* country);
+	void removeCountry(Country* country);
+	void addContinent(Continent* continent);
+	void removeContinent(Continent* continent);
+	void calculateTotalArmies();
+    void setBattlesWonTotal(int n);
+    int getArmiesTotal();
+    int getReinforcementTotal();
+    int getBattlesWonTotal();
 
-	void AssignReinforcements();
+	void assignReinforcements();
 
-	bool GetAlive();
+	bool getAlive();
+	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!
 };
 

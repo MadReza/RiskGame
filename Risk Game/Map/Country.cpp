@@ -26,6 +26,10 @@ Country::Country(string nameOfCountry, Player *ownerID, int numberOfarmies)
 
 Country::~Country()
 {
+	for (int i = 0; i != Adjacent_Countries.size(); i++)		
+	{		
+		delete Adjacent_Countries[i];		
+	}
 }
 
 void Country::addAdjacentCountry(Country* c)
@@ -37,7 +41,7 @@ void Country::addAdjacentCountry(Country* c)
 void Country::setOwner(Player *p)
 {
 	owner = p;	//TODO switching owner, notify of change.... e.g.: army 
-	owner->AddCountry(this);
+	owner->addCountry(this);
 }
 
 Player* Country::getOwner()
@@ -92,7 +96,7 @@ void Country::displayAdjacentCountries()
 void Country::addArmies(int add)
 {
 	num_armies = num_armies + add;
-	owner->CalculateTotalArmies();	//TODO find difference and add only that.
+	owner->calculateTotalArmies();	//TODO find difference and add only that.
 }
 
 void Country::setContinent(Continent * continent)
@@ -131,5 +135,12 @@ int Country::getY()
 	return y_coordinate;
 }
 
-
+void Country::setReinforcementVisit(bool s)
+{
+	reinforcementVisit = s; 
+}
+bool Country::getReinforcementVisit()
+{
+	return reinforcementVisit;
+}
 

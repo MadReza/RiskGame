@@ -2,12 +2,12 @@
 
 #include "Map.h"
 
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
-#include <fstream>
 #include <exception>
+#include <map>
 
 using namespace std;
 
@@ -54,10 +54,13 @@ namespace std{
 		bool writeMapFile(string fileLocation);
 
 		bool isEmpty() { return CountryList.size() == 0; }
+		bool isValidMap(); 
 
 		void bufferMapFile(string fileLocation);
 		void bufferMapObject(Map &MapObject);
-	private:
+
+		
+	protected:
 		string name;
 		string author;
 

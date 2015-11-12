@@ -12,6 +12,10 @@ Continent::Continent(string n, int o)
 
 Continent::~Continent()
 {
+	for (int i = 0; i != countries.size(); i++)		
+	{		
+		delete countries[i];		
+	}
 }
 
 void Continent::addCountriesToContinent(Country* c)
@@ -43,7 +47,7 @@ bool Continent::getVisited()
 void Continent::setContinentOwner(Player * player)	//TODO: Maybe Renaming ????
 {
 	continent_owner = player;
-	continent_owner->AddContinent(this);	//TODO We need For Removing Continents from previous owners.
+	continent_owner->addContinent(this);	//TODO We need For Removing Continents from previous owners.
 }
 
 Player * Continent::getContinentOwner()

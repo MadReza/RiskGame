@@ -4,10 +4,7 @@ using namespace std;
 
 int main()
 {
-	cout << "Press Enter To show Functionality" << endl;
-	system("pause");
-	system("cls");
-	GameDriver::GetInstance();
+	GameDriver::getInstance();
 
 	system("pause");
 	return 0;

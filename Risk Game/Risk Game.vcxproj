@@ -73,6 +73,7 @@
     <ClCompile Include="Map\Continent.cpp" />
     <ClCompile Include="Map\Country.cpp" />
     <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\MapCreator.cpp" />
     <ClCompile Include="Map\Map_View.cpp" />
     <ClCompile Include="Map\UtilityMap.cpp" />
     <ClCompile Include="Subject.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="Map\Continent.h" />
     <ClInclude Include="Map\Country.h" />
     <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Map\MapCreator.h" />
     <ClInclude Include="Map\Map_View.h" />
     <ClInclude Include="Map\UtilityMap.h" />
     <ClInclude Include="Observer.h" />

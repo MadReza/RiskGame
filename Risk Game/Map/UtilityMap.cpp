@@ -181,41 +181,58 @@ void std::UtilityMap::bufferMapFile(string fileLocation) {
 }
 
 /*******************************
-Gets the Map object from the UtilityMap Class.
+Constructs the Map object from the UtilityMap Class.
 *******************************/
 Map* std::UtilityMap::getMapObject(){
+	if (isEmpty())
+		throw InvalidMapObjectException;
+
 	Map* theMapObject = new Map(name, ContinentList.size(), CountryList.size());
+
 	vector<Continent* > RealContinentObjects;
-	/*******************************
-		Creation of Countries.
-	*******************************/
-	for (unsigned int i = 0; i < ContinentList.size(); i++){
-		RealContinentObjects.push_back(new Continent(ContinentList[i].getContinentName(), ContinentList[i].getBonus()));
-		theMapObject->addContinentsToMap(RealContinentObjects[i]);
-		//cout << ContinentList[i].getContinentName() << " Created Successfully!" << endl;
-	}
+	map<string, int> CountryHashTable;
+	map<string, int> ContinentHashTable;
+	std::map<string, int>::iterator it;
+	
 	/*******************************
 		Creation of Continents.
 	*******************************/
+	for (unsigned int i = 0; i < ContinentList.size(); i++){
+		RealContinentObjects.push_back(new Continent(ContinentList[i].getContinentName(), ContinentList[i].getBonus()));
+		ContinentHashTable[ContinentList[i].getContinentName()] = i;
+		theMapObject->addContinentsToMap(RealContinentObjects[i]);
+		//cout << ContinentList[i].getContinentName() << " Created Successfully!" << endl;
+	}
+	
+	/*******************************
+		Creation of Country.
+	*******************************/
 	vector<Country*> RealCountryObjects; 
-	map<string, int> CountryHashTable;
+	
 	for (unsigned int i = 0; i < CountryList.size(); i++){
 		RealCountryObjects.push_back(new Country(CountryList[i].getCountryName(), CountryList[i].getX(), CountryList[i].getY()));
 		CountryHashTable[CountryList[i].getCountryName()] = i;
 		//add country to continent
-		for (unsigned int j = 0; j < ContinentList.size(); j++){
-			if (ContinentList[j].getContinentName().compare(CountryList[i].getContinent()) == 0) {
-				RealContinentObjects[j]->addCountriesToContinent(RealCountryObjects[i]);
-				//cout << CountryList[i].getCountryName() << " Added & Created Successfully!" << endl;
-				break;
-			}
+		it = ContinentHashTable.find(CountryList[i].getContinent());
+		if (ContinentHashTable.end() == it) {
+			cout << "Could not find this continent ->" << CountryList[i].getContinent() << "." << endl;
+			throw InvalidMapObjectException;
 		}
+		int index = ContinentHashTable[CountryList[i].getContinent()];
+		RealContinentObjects[index]->addCountriesToContinent(RealCountryObjects[i]);
+		//cout << CountryList[i].getCountryName() << " added to " << RealContinentObjects[index]->getContinentName() << endl;
+				
 	}
 	/*******************************
 		Adjacency of Countries.
 	*******************************/
 	for (unsigned int i = 0; i < CountryList.size(); i++){//for each country
 		for (unsigned int j = 0; j < CountryList[i].getAdjacentCountries().size(); j++){//for each adjacentcountry find country object and link.
+			it = CountryHashTable.find(CountryList[i].getAdjacentCountries()[j]);
+			if (CountryHashTable.end() == it) {
+				cout << "Could not find this country ->" << CountryList[i].getAdjacentCountries()[j] << "." << endl;
+				throw InvalidMapObjectException;
+			}
 			int index = CountryHashTable[CountryList[i].getAdjacentCountries()[j]];
 			RealCountryObjects[i]->addAdjacentCountry(RealCountryObjects[index]);
 			//cout << RealCountryObjects[index]->getName() << " Added to " << RealCountryObjects[i]->getName() << endl;
@@ -223,7 +240,7 @@ Map* std::UtilityMap::getMapObject(){
 	}
 
 	theMapObject->visitAllCountries(RealCountryObjects[0]);
-	if (!theMapObject->isConnectedGraphCountries()) 
+	if (!theMapObject->isConnectedGraphCountries() || !theMapObject->isConnectedGraphContinents()) 
 		throw InvalidMapObjectException;
 	return theMapObject;
 }
@@ -233,7 +250,7 @@ Writes to from UtilityMap to File
 *******************************/
 bool std::UtilityMap::writeMapFile(string fileLocation) {
 	if (isEmpty())
-		return false;
+		throw InvalidMapObjectException;
 	fstream mapFile;
 	mapFile.open(fileLocation, ios::out);
 
@@ -268,6 +285,15 @@ bool std::UtilityMap::writeMapFile(string fileLocation) {
 			mapFile << "," << CountryList[i].getAdjacentCountries()[j];
 		}
 		mapFile << endl;
+	}
+	return true;
+}
+
+bool std::UtilityMap::isValidMap() {
+	try{
+		getMapObject();
+	} catch (const std::exception&) {
+		return false;
 	}
 	return true;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <set>
 #include "../Observer.h"
 #include "../BattleEngine/Player.h"
 
@@ -14,5 +15,5 @@ private:
     int _battlesWonTotal;
 public:
     PlayerView(Player &p);
-    void Update();
+    void update();
 };

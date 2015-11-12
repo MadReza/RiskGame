@@ -19,9 +19,11 @@ class Country
 {
 private:
 	string name; 
-	int num_armies = 0; //number of armies currently occupying the country
+	int num_armies{ 0 }; //number of armies currently occupying the country
 	int x_coordinate, y_coordinate; //used and set when parsing from a map .txt file
-	bool visited = false;  //used to confirm connected graph in DFS graph traversal, set to true upon being visited
+	bool visited{ false };  //used to confirm connected graph in DFS graph traversal, set to true upon being visited
+	bool reinforcementVisit{ false };
+
 	
 	Player *owner = nullptr; //TODO Update	
 	vector<Country*> Adjacent_Countries; //stores all the country edges for this country	
@@ -52,5 +54,7 @@ public:
 
 	int getX();
 	int getY();
+	void setReinforcementVisit(bool s);
+	bool getReinforcementVisit();
 };
 

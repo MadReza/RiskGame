@@ -1,4 +1,4 @@
-//CHRISTOPHER KRAJEWSKI 25189209
+﻿//CHRISTOPHER KRAJEWSKI 25189209
 //COMP 345 ASSIGNMENT 2
 
 #include "Map.h"
@@ -14,6 +14,10 @@ Map::Map(string n, int continents, int countries)
 
 Map::~Map()
 {
+	for (int i = 0; i != continents.size(); i++)		
+	{		
+		delete continents[i];		
+	}
 }
 
 void Map::addContinentsToMap(Continent* c)
@@ -206,3 +210,42 @@ int Map::getMaxPlayers()
 	return max(this->countCountries() / 7, MIN_PLAYERS);
 }
 
+bool Map::connectedDFS(Player* owner, Country* start, Country* target)
+{
+	bool pathFound = false;
+	start->setReinforcementVisit(true);	//Marks country as visited
+
+	if (!(start->getOwner() == owner && target->getOwner() == owner))
+	{
+		return false;
+	}
+
+	for (int i = 0; i != start->getAdjacencyVector().size(); i++)
+	{
+		if (start->getAdjacencyVector()[i] == target)	//found target
+		{
+			cout << "There is a path between these two countries, reinforcement is possible!" << endl;
+			return true;
+		}
+		if (start->getAdjacencyVector()[i]->getOwner() == owner && start->getAdjacencyVector()[i]->getReinforcementVisit() == false)	//If owned and not visited
+		{
+			pathFound = connectedDFS(owner, start->getAdjacencyVector()[i], target);
+		}
+		if (pathFound == true)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Map::resetFortificationDFS()
+{
+	for each (Continent* continent in continents)
+	{
+		for each (Country* country in continent->getContinentVector())
+		{
+			country->setReinforcementVisit(false);
+		}
+	}
+}

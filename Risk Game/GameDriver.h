@@ -7,7 +7,7 @@
 class GameDriver
 {
 public:
-	static GameDriver GetInstance();
+	static GameDriver getInstance();
 	~GameDriver();
 
 private:
@@ -19,16 +19,17 @@ private:
 	
 	GameDriver();
 
-	bool CheckWinCondition();	//return true if one player left in the game, false otherwise.
+	bool checkWinCondition();	//return true if one player left in the game, false otherwise.
 
-	void PlayerAssignReinforcmentToCountries(Player* player);
+	void playerAssignReinforcmentToCountries(Player* player);
 	
-	void Play();
-	void ReinforcePhase(Player* player);
-	void AttackPhase(Player* player);
-	void FortifcationPhase(Player* player);
+	void play();
+	void reinforcePhase(Player* player);
+	void attackPhase(Player* player);
+	void fortifcationPhase(Player* player);
 	
-	void PlayerAssignsAttacks();
+	void playerAssignsAttacks();
 
+	void displayCountriesWithArmy(vector<Country*> countries);
 };
 #endif 

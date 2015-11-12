@@ -33,15 +33,14 @@ public:
 										//It is a DFS of the country nodes and their edges
 	string getMapName(); //Returns map name
 	void setContinentOwnership();
-	void setMaxPlayers(); //minimum 7 countries per player
 	bool checkAllCountriesOwned();
 
 	void distributePlayers(vector<Player*> player_vector); //randomly distributes a vector of players across all countries
 	string getAuthor();
 	int getMaxPlayers();
 
-	void calculateReinforcements(Player* player);
-
+	bool connectedDFS(Player* owner, Country* start, Country* target);
+	void resetFortificationDFS();
 private:
 	const int MIN_COUNTRIES = 10;
 	const int MAX_COUNTRIES = 256;
@@ -53,5 +52,6 @@ private:
 	int num_continents; 
 	int num_countries;
 	string author; //Map Creator's name	
+
 };
 

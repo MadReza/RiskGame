@@ -93,6 +93,9 @@
     <ClCompile Include="Map\UtilityMap.cpp">
       <Filter>Map\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapCreator.cpp">
+      <Filter>Map\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -144,6 +147,9 @@
       <Filter>Utilities\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Map\UtilityMap.h">
+      <Filter>Map\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapCreator.h">
       <Filter>Map\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

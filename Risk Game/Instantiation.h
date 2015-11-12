@@ -4,6 +4,7 @@
 #include "Directory.h"
 #include "Map\Map.h"
 #include "Map\UtilityMap.h"
+#include "Map\MapCreator.h"
 
 #include <iostream>
 #include <string>
@@ -20,10 +21,10 @@ public:
 	Instantiation();
 	~Instantiation();
 
-	int GetTotalPlayers() const;
-	vector<Player*> GetPlayers() const;
-	Map *GetMap() const;
-	bool GetIsNewGame() const;
+	int getTotalPlayers() const;
+	vector<Player*> getPlayers() const;
+	Map *getMap() const;
+	bool getIsNewGame() const;
 
 private:
 	vector<Player*> players;
@@ -32,23 +33,23 @@ private:
 	int totalCompPlayers;
 	string mapPath;
 	Map *map;
-	bool newGame;
+	bool isNewGame;
 
-	void Intro();
-	void GameSelection();
-	void AssignCountriesToPlayer();
-	void PlayerInfo();
-	void DisplayTitleScreen();
-	int StartOrLoad();
-	void NewGame();
-	void LoadGame();
-	void CreateMap();
-	void CreatePlayers();
-	void MapSelection();
+	void intro();
+	void gameSelection();
+	void assignCountriesToPlayer();
+	void playerInfo();
+	void displayTitleScreen();
+	int startOrLoad();
+	void newGame();
+	void loadGame();
+	void createMap();
+	void createPlayers();
+	void mapSelection();
 
-	void CreateHumanPlayers();
-	void CreateCompPlayers();
-	void RandomizePlayerOrder();
+	void createHumanPlayers();
+	void createCompPlayers();
+	void randomizePlayerOrder();
 };
 
 #endif

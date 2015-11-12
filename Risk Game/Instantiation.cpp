@@ -2,8 +2,8 @@
 
 Instantiation::Instantiation()
 {
-	DisplayTitleScreen();
-	GameSelection();
+	displayTitleScreen();
+	gameSelection();
 }
 
 Instantiation::~Instantiation()
@@ -11,19 +11,19 @@ Instantiation::~Instantiation()
 
 }
 
-void Instantiation::GameSelection()
+void Instantiation::gameSelection()
 {
-	int selection(StartOrLoad());
+	int selection(startOrLoad());
 	switch (selection)
 	{
 	case 0:
-		NewGame();
+		newGame();
 		break;
 	case 1:
-		LoadGame();
+		loadGame();
 		break;
 	case 2:
-		CreateMap();
+		createMap();
 		break;
 	default:
 		throw new std::exception("Game Selection Incorrect");
@@ -31,46 +31,46 @@ void Instantiation::GameSelection()
 	}
 }
 
-int Instantiation::GetTotalPlayers() const
+int Instantiation::getTotalPlayers() const
 {
 	return totalPlayers;
 }
 
-Map* Instantiation::GetMap() const
+Map* Instantiation::getMap() const
 {
 	return map;
 }
 
-bool Instantiation::GetIsNewGame() const
+bool Instantiation::getIsNewGame() const
 {
-	return newGame;
+	return isNewGame;
 }
 
-void Instantiation::NewGame()
+void Instantiation::newGame()
 {
 	system("cls");
-	newGame = true;
-	MapSelection();
-	CreatePlayers();
-	RandomizePlayerOrder();
-	AssignCountriesToPlayer();
+	isNewGame = true;
+	mapSelection();
+	createPlayers();
+	randomizePlayerOrder();
+	assignCountriesToPlayer();
 }
 
-void Instantiation::LoadGame()
+void Instantiation::loadGame()
 {
 	//TODO LOAD FROM FILE HERE. OR FROM GAME DRIVER
 	cout << "Stubs to Load a Game...." << endl;
-	newGame = false;
+	isNewGame = false;
 	totalPlayers = 3;
 	mapPath = 1;
 }
 
-void Instantiation::CreateMap()
+void Instantiation::createMap()
 {
-	//TODO Laurendy Map Creator.
+	MapCreator mapCreator;
 }
 
-void Instantiation::CreatePlayers()
+void Instantiation::createPlayers()
 {	
 	system("cls");
 	do
@@ -85,11 +85,11 @@ void Instantiation::CreatePlayers()
 		cin >> totalHumanPlayers;
 	} while (totalHumanPlayers < 0 || totalHumanPlayers > totalPlayers);
 
-	CreateHumanPlayers();
-	CreateCompPlayers();
+	createHumanPlayers();
+	createCompPlayers();
 }
 
-void Instantiation::CreateHumanPlayers()
+void Instantiation::createHumanPlayers()
 {
 	for (int i = 0; i < totalHumanPlayers; i++)
 	{
@@ -100,7 +100,7 @@ void Instantiation::CreateHumanPlayers()
 	}
 }
 
-void Instantiation::CreateCompPlayers()
+void Instantiation::createCompPlayers()
 {
 	totalCompPlayers = totalPlayers - totalHumanPlayers;
 	for (int i = 0; i < totalCompPlayers; i++)
@@ -111,7 +111,7 @@ void Instantiation::CreateCompPlayers()
 	}
 }
 
-void Instantiation::MapSelection()
+void Instantiation::mapSelection()
 {
 	system("cls");
 	string str(Directory::GetCurrentWorkingDirectory());
@@ -137,12 +137,12 @@ void Instantiation::MapSelection()
 	system("pause");
 }
 
-void Instantiation::AssignCountriesToPlayer()
+void Instantiation::assignCountriesToPlayer()
 {
 	map->distributePlayers(players);
 }
 
-int Instantiation::StartOrLoad()
+int Instantiation::startOrLoad()
 {
 	int selection(-1);
 	cout << "Type 0: To Start a New Game" << endl;
@@ -159,7 +159,7 @@ int Instantiation::StartOrLoad()
 	return selection;
 }
 
-void Instantiation::DisplayTitleScreen()
+void Instantiation::displayTitleScreen()
 {
 	cout << "RRRRRRRRRRRRRRRRR   IIIIIIIIII   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKK" << endl;
 	cout << "R::::::::::::::::R  I::::::::I SS:::::::::::::::SK:::::::K    K:::::K" << endl;
@@ -180,12 +180,12 @@ void Instantiation::DisplayTitleScreen()
 	cout << endl;
 }
 
-vector<Player*> Instantiation::GetPlayers() const
+vector<Player*> Instantiation::getPlayers() const
 {
 	return players;
 }
 
-void Instantiation::RandomizePlayerOrder()
+void Instantiation::randomizePlayerOrder()
 {
 	vector<Player*> newOrder;
 	std::default_random_engine generator;

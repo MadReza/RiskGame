@@ -2,29 +2,30 @@
 
 Player::Player()
 {
-	Initialize();
+	initialize();
 }
 
 Player::Player(string name, Type type_Player)
 {
 	_name = name;
 	typeOfPlayer = type_Player;
-	Initialize();
+	initialize();
 }
 
-Player::Player(string name, Type type_Player, Strategy *strat)
+Player::Player(string name, Strategy *strat)
 {
 	_name = name;
-	typeOfPlayer = type_Player;
+	typeOfPlayer = Computer;
 	Astrategy = strat;
-	Initialize();
+	initialize();
 }
 
 Player::~Player()
 {
+	delete Astrategy;
 }
 
-void Player::Initialize()
+void Player::initialize()
 {
     _armiesTotal = 0;
     _battlesWonTotal = 0;
@@ -59,26 +60,28 @@ bool Player::isHuman(Player p)
 		return false;
 }
 
-void Player::CalculateTotalArmies()		//TODO: @Kendy or @Zack: We are currently looping a lot ... maybe get a better way ? As we add 1 to every country...
+//TODO: @Kendy or @Zack: We are currently looping a lot ... maybe get a better way ? As we add 1 to every country...
+void Player::calculateTotalArmies()
 {
 	_armiesTotal = 0;
 	for each (Country* country in countries)
 	{
 		_armiesTotal += country->getNumArmies();
 	}
-    Notify();
+	notify();
 }
 
-void Player::SetBattlesWonTotal(int n) {
+
+void Player::setBattlesWonTotal(int n) {
     _battlesWonTotal = n;
-    Notify();
+    notify();
 }
 
-int Player::GetArmiesTotal() {
+int Player::getArmiesTotal() {
     return _armiesTotal;
 }
 
-int Player::GetReinforcementTotal() {
+int Player::getReinforcementTotal() {
 	int reinforcement{0};
 	reinforcement += countries.size() / 3;
 	cout << "Bonus From Countries: " << reinforcement << endl;;
@@ -91,53 +94,65 @@ int Player::GetReinforcementTotal() {
 	return max(reinforcement, MIN_REINFORCEMENT);
 }
 
-void Player::AssignReinforcements()
+void Player::assignReinforcements()
 {
-	int armyToAssign{GetReinforcementTotal()};
+	int armyToAssign{getReinforcementTotal()};
 
 	while (armyToAssign > 0)
 	{
-		for (int i = 0; i < countries.size(); i++)
+		for (unsigned int i = 0; i < countries.size(); i++)
 		{
 			cout << i << ": " << countries[i]->getName() << endl;
 		}
 		int selection{-1};
-		cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//TODO CLEAN THIS FUNCTION e.g.:Boundry
-		cin >> selection;	//Todo: currently assuming boundry is met.
 		
+		do {
+			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
+			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
+		} while (selection < 0 || selection > (countries.size()-1));
+
 		int armyToAdd{ 0 };
-		cout << countries[selection]->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
-		cin >> armyToAdd;
+		
+		do {
+			cout << countries[selection]->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
+			cin >> armyToAdd;
+		} while (armyToAdd < 0 || armyToAdd > armyToAssign);
 
 		countries[selection]->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
 	}
+	system("cls"); //COMPLETED TODO: Done by Zack
 }
 
-int Player::GetBattlesWonTotal() {
+int Player::getBattlesWonTotal() {
     return _battlesWonTotal;
 }
 
-bool Player::GetAlive()
+bool Player::getAlive()
 {
 	return alive;
 }
 
-void Player::AddCountry(Country* country)
+void Player::addCountry(Country* country)
 {
 	countries.push_back(country);
 }
 
-void Player::RemoveCountry(Country* country)	//TODO TEST
+void Player::removeCountry(Country* country)	//TODO TEST
 {
 	countries.erase(std::remove(countries.begin(), countries.end(), country), countries.end());
 }
 
-void Player::AddContinent(Continent* continent)	//TODO TEST
+void Player::addContinent(Continent* continent)	//TODO TEST
 {
 	continents.push_back(continent);
 }
-void Player::RemoveContinent(Continent* continent)
+void Player::removeContinent(Continent* continent)
 {
 	continents.erase(std::remove(continents.begin(), continents.end(), continent), continents.end());
+}
+
+vector<Country*> Player::getCountries()
+{
+	return countries;
 }
