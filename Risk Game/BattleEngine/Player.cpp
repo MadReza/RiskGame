@@ -60,7 +60,7 @@ bool Player::isHuman(Player p)
 		return false;
 }
 
-//TODO: @Kendy or @Zack: We are currently looping a lot ... maybe get a better way ? As we add 1 to every country...
+
 void Player::calculateTotalArmies()
 {
 	_armiesTotal = 0;

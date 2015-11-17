@@ -74,6 +74,7 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 void GameDriver::attackPhase(Player* player)
 {
 	cout << "\n****Attack Phase:: ****" << endl;
+	cout << "Please choose Country to your country to attack";
 	playerAssignsAttacks();
 	cout << "\tIf Won Allow, Movement to new country" << endl;
 	system("pause");
