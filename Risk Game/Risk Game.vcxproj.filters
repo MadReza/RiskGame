@@ -81,9 +81,6 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Main\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Instantiation.cpp">
       <Filter>UI\Source Files</Filter>
     </ClCompile>
@@ -95,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="Map\MapCreator.cpp">
       <Filter>Map\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
