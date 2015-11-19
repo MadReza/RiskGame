@@ -3,6 +3,10 @@
 
 #include "BattleEngine\Player.h"
 #include "Map\Map.h"
+#include "Instantiation.h"
+#include "GUI.h"
+
+#include <iostream>
 
 class GameDriver
 {
@@ -12,6 +16,7 @@ public:
 
 private:
 	static GameDriver instance;
+	Gui gui;
 
 	int totalPlayers;
 	vector<Player*> players;

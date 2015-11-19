@@ -96,6 +96,9 @@
     <ClCompile Include="Map\MapCreator.cpp">
       <Filter>Map\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>UI\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Map\MapCreator.h">
       <Filter>Map\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>UI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

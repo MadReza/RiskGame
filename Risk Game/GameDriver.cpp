@@ -1,8 +1,4 @@
 #include "GameDriver.h"
-#include "Instantiation.h"
-#include <iostream>
-
-using namespace std;
 
 GameDriver GameDriver::instance;
 
@@ -13,6 +9,7 @@ GameDriver GameDriver::getInstance()
 
 GameDriver::GameDriver()
 {
+	gui.start();
 	Instantiation start;
 	totalPlayers = start.getTotalPlayers();
 	players = start.getPlayers();
