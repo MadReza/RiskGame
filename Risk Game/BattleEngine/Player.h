@@ -4,12 +4,18 @@
 #include "../Map/Country.h"
 #include "../Subject.h"
 
+
+
+
 #include <vector>
 #include <string>
 #include <algorithm>
 
+
 using std::string;
 
+//forward declarations
+class Card;
 class Country;
 class Continent;
 
@@ -38,6 +44,10 @@ private:
 	Strategy *Astrategy;
 	vector<Country*> countries;	
 	vector<Continent*> continents;
+
+	// Attributes related to cards
+	vector<Card*> cards;
+	int _cardRedemptionsTotal;
 	
 	void initialize();
 
@@ -70,5 +80,10 @@ public:
 
 	bool getAlive();
 	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!
+
+	//Card Methods
+	vector<Card*> getCards();
+	void incrementCardRedemptionsTotal();
+	int getCardRedemptionsTotal();
 };
 
