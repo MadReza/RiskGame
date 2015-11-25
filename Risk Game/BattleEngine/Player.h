@@ -3,7 +3,6 @@
 #include "Strategy.h"
 #include "../Map/Country.h"
 #include "../Subject.h"
-
 #include <vector>
 #include <string>
 #include <algorithm>

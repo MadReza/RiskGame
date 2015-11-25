@@ -1,11 +1,9 @@
 #pragma once
 #include "BattleEngine.h"
-#include "Player.h"
-#include "Country.h"
+#include "../BattleEngine/Player.h"
+#include "../Map/Country.h"
 #include<vector>
 using namespace std;
-
-class Player;
 
 //Decorative Game Log Pattern
 class GameLog{

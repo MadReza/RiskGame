@@ -2,6 +2,7 @@
 #pragma once //BattleEngine_H safe include guard
 #include <iostream>
 #include "../Map/Country.h"
+#include "GameLog.h"
 #include "../BattleEngine/Player.h"
 #include <string>
 using namespace std;
