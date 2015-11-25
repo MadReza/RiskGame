@@ -1,7 +1,7 @@
-﻿Build started 2015-11-25 01:34:40.
+﻿Build started 2015-11-25 01:51:03.
      1>Project "C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattleEngine\BattleEngine.cpp BattleEngine\Player.cpp GameDriver.cpp Instantiation.cpp Main.cpp Map\Continent.cpp Map\Country.cpp Map\Map.cpp Map\MapCreator.cpp Map\Map_View.cpp Map\UtilityMap.cpp UI\PlayerView.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattleEngine\Player.cpp GameDriver.cpp Instantiation.cpp Main.cpp Map\Continent.cpp Map\Country.cpp Map\Map.cpp Map\MapCreator.cpp Map\Map_View.cpp Map\UtilityMap.cpp UI\PlayerView.cpp
          PlayerView.cpp
      1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\battleengine\gamelog.h(20): error C2027: use of undefined type 'Player'
                  c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\map\continent.h(11) : see declaration of 'Player'
@@ -468,10 +468,9 @@
                  c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\map\continent.h(11) : see declaration of 'Player'
      1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\battleengine\gamelog.h(56): error C2227: left of '->getBattlesWonTotal' must point to class/struct/union/generic type
      1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\battleengine\player.cpp(112): warning C4018: '>' : signed/unsigned mismatch
-         BattleEngine.cpp
          Generating Code...
      1>Done Building Project "C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:11.02
+Time Elapsed 00:00:13.61

@@ -1,11 +1,11 @@
 #pragma once
-#include "BattleEngine.h"
 #include "Player.h"
 #include "Country.h"
 #include<vector>
+class Player;
+
 using namespace std;
 
-class Player;
 
 //Decorative Game Log Pattern
 class GameLog{
@@ -15,7 +15,7 @@ class GameLog{
 };
 
 class PlayerLog : public GameLog{
-		
+
 public:
 	void Info(Player *a_Player) {
 
