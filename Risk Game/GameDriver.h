@@ -7,15 +7,19 @@
 #include "GUI.h"
 
 #include <iostream>
+#include <thread>
 
 class GameDriver
 {
 public:
-	static GameDriver getInstance();
+	static GameDriver* getInstance();	//TODO: Should probably set this to reference to not allow random delete the object
 	~GameDriver();
 
+	void startGame();
+	std::thread startGameThread();	//Call this to initiate startGame on a new thread.
+
 private:
-	static GameDriver instance;
+	static GameDriver* instance;
 	Gui gui;
 
 	int totalPlayers;

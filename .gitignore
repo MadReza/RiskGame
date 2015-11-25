@@ -26,3 +26,13 @@
 *.exe
 *.out
 *.app
+Risk Game/Debug/Risk Game.tlog/unsuccessfulbuild
+*.idb
+*.pdb
+*.tlog
+*.log
+*.opensdf
+*.sdf
+*.ilk
+*.sdf
+*.suo

@@ -1,21 +1,19 @@
 #include "GameDriver.h"
 
-GameDriver GameDriver::instance;
+GameDriver* GameDriver::instance = 0;
 
-GameDriver GameDriver::getInstance()
+GameDriver* GameDriver::getInstance()
 {
+	if (instance == nullptr)
+	{
+		instance = new GameDriver();
+	}
 	return instance;
 }
 
 GameDriver::GameDriver()
 {
-	gui.start();
-	Instantiation start;
-	totalPlayers = start.getTotalPlayers();
-	players = start.getPlayers();
-	selectedMap = start.getMap();
 	
-	play();
 }
 
 GameDriver::~GameDriver()
@@ -25,6 +23,21 @@ GameDriver::~GameDriver()
 		delete players[i];		
 	}		
 	delete selectedMap;
+}
+
+void GameDriver::startGame()
+{
+	//gui.start(); //Making it seperate from the GameDriver
+	Instantiation start;
+	totalPlayers = start.getTotalPlayers();
+	players = start.getPlayers();
+	selectedMap = start.getMap();
+
+	play();
+}
+
+std::thread GameDriver::startGameThread() {
+	return std::thread([=] { startGame(); });
 }
 
 void GameDriver::play()
