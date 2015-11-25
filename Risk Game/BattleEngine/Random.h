@@ -6,6 +6,7 @@ using namespace std;
 class Random : public Strategy{
 
 public:
+	//Will randomly decide whether to attack a valid adjacent enemy country.
 	void doStrategy(Country *c1){
 
 		srand((unsigned)time(0));

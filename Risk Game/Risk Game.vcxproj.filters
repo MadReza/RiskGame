@@ -152,5 +152,8 @@
     <ClInclude Include="Map\MapCreator.h">
       <Filter>Map\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Gamelog.h">
+      <Filter>BattleEngine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
