@@ -99,6 +99,9 @@
     <ClCompile Include="GUI.cpp">
       <Filter>UI\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Main\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -157,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="GUI.h">
       <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Main\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Main\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

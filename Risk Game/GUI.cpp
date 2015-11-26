@@ -2,7 +2,7 @@
 
 void Gui::start()
 {
-	window = new RenderWindow(sf::VideoMode(200, 200), "SFML works!");
+	window = new RenderWindow(sf::VideoMode(800, 600), "SFML works!");
 	font = new Font();
 	if (!font->loadFromFile("..\\Resources\\arial.ttf"))
 	{

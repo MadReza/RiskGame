@@ -74,6 +74,7 @@
     <ClCompile Include="BattleEngine\BattleEngine.cpp" />
     <ClCompile Include="BattleEngine\Player.cpp" />
     <ClCompile Include="Directory.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameDriver.cpp" />
@@ -95,7 +96,9 @@
     <ClInclude Include="BattleEngine\Random.h" />
     <ClInclude Include="BattleEngine\Strategy.h" />
     <ClInclude Include="Directory.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameDriver.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Instantiation.h" />
     <ClInclude Include="Map\Continent.h" />
