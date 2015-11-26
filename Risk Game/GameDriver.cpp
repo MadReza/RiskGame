@@ -1,5 +1,6 @@
 #include "GameDriver.h"
 #include "Instantiation.h"
+#include "Gamelog.h"
 #include <iostream>
 
 using namespace std;
@@ -73,8 +74,10 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
+
 	cout << "\n****Attack Phase:: ****" << endl;
 	cout << "Please choose Country to your country to attack";
+	displayGameLog(player);
 	playerAssignsAttacks();
 	cout << "\tIf Won Allow, Movement to new country" << endl;
 	system("pause");
@@ -84,6 +87,7 @@ void GameDriver::attackPhase(Player* player)
 
 void GameDriver::playerAssignsAttacks()
 {
+	
 	cout << "\tGo through player countries. Allow attack adjacent country." << endl;
 }
 
@@ -180,4 +184,19 @@ void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 	{
 		cout << i << ": " << countries[i]->getName() << " army: " << countries[i]->getNumArmies() << endl;
 	}
+}
+
+void GameDriver::displayGameLog(Player* player1)//Decorator pattern
+{
+	
+	//Decorator pattern of Game log
+	GameLog *game_log = new PlayerLog();
+
+	game_log->Info(player1);
+
+	game_log = new PlayerArmiesLog();
+
+	game_log->Info(player1);
+
+
 }

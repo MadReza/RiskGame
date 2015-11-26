@@ -1,6 +1,5 @@
 #pragma once
-#include "BattleEngine.h"
-#include "../BattleEngine/Player.h"
+#include "Player.h"
 #include "../Map/Country.h"
 #include<vector>
 using namespace std;
@@ -15,9 +14,11 @@ class GameLog{
 class PlayerLog : public GameLog{
 		
 public:
+
+	//info of the PlayerLog class
 	void Info(Player *a_Player) {
 
-		cout << "\nPlayer : " << a_Player->getName() << " owns the following countries : " << endl;
+		cout << "\n\n" << a_Player->getName() << " owns the following countries : " << endl;
 
 		vector<Country*> playerCountries = a_Player->getCountries();
 		
@@ -25,6 +26,7 @@ public:
 		for (vector<Country*>::iterator it = playerCountries.begin(); it != playerCountries.end(); ++it){
 			cout << (*it)->getName() << endl;
 		}
+		cout << endl;
 	}
 
 };
@@ -32,27 +34,31 @@ public:
 class PlayerArmiesLog : public PlayerLog{
 
 public:
+	
+	//info of the PlayerArmiesLog class
 	void Info(Player *a_Player) {
 
-		cout << "\nPlayer : " << a_Player->getName() << " owns the following countries : " << endl;
+		cout << "\n\n" << a_Player->getName() << " owns the following countries : " << endl;
 
 		vector<Country*> playerCountries = a_Player->getCountries();
 
 		for (vector<Country*>::iterator it = playerCountries.begin(); it != playerCountries.end(); ++it){
-			cout << (*it)->getName() << " Current number of armies : " << (*it)->getNumArmies() << endl;
+			cout << (*it)->getName() << " - Current number of armies : " << (*it)->getNumArmies() << endl;
 		}
+		cout << endl;
 	}
 
 };
 
 //This class decorate the Info class by adding the total Number of battle won and the card type owned.
-class AllPlayerInfo : public PlayerArmiesLog {
+class CompletePlayerLog : public PlayerArmiesLog {
 
 public:
-	void Info(Player *a_Player){
+		//info of the CompletePlayerLog class
+		void Info(Player *a_Player){
+			PlayerArmiesLog::Info(a_Player);
 
-		 PlayerArmiesLog::Info(a_Player);
-		
 		 cout << "\nTotal number of Battle won : " << a_Player->getBattlesWonTotal() << endl;
+		 //cout << "Cards owned " << a_Player->getCards() << endl; Will display the cards
 	}
 };
