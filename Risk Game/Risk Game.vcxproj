@@ -84,8 +84,8 @@
     <ClInclude Include="BattleEngine\Agressive.h" />
     <ClInclude Include="BattleEngine\BattleEngine.h" />
     <ClInclude Include="BattleEngine\Defensive.h" />
-    <ClInclude Include="BattleEngine\Gamelog.h" />
     <ClInclude Include="BattleEngine\Player.h" />
+    <ClInclude Include="BattleEngine\PlayerViewDecorator.h" />
     <ClInclude Include="BattleEngine\Random.h" />
     <ClInclude Include="BattleEngine\Strategy.h" />
     <ClInclude Include="Directory.h" />

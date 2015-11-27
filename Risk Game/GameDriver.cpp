@@ -1,6 +1,6 @@
 #include "GameDriver.h"
 #include "Instantiation.h"
-#include "Gamelog.h"
+#include "PlayerViewDecorator.h"
 #include <iostream>
 
 using namespace std;
@@ -77,7 +77,7 @@ void GameDriver::attackPhase(Player* player)
 
 	cout << "\n****Attack Phase:: ****" << endl;
 	cout << "Please choose Country to your country to attack";
-	displayGameLog(player);
+	DisplayDecorativeView(player);
 	playerAssignsAttacks();
 	cout << "\tIf Won Allow, Movement to new country" << endl;
 	system("pause");
@@ -186,17 +186,14 @@ void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 	}
 }
 
-void GameDriver::displayGameLog(Player* player1)//Decorator pattern
+void GameDriver::DisplayDecorativeView(Player* player1)//Decorator pattern
 {
 	
 	//Decorator pattern of Game log
-	GameLog *game_log = new PlayerLog();
+	cout << "\nDECORATIVE PATTERN OF PLAYER OBSERVER 1 " << endl;
+	PlayerView *playerview = new PlayerViewDecorator(*player1);
 
-	game_log->Info(player1);
-
-	game_log = new PlayerArmiesLog();
-
-	game_log->Info(player1);
-
+	cout << "\nDECORATIVE PATTERN OF PLAYER OBSERVER 2 " << endl;
+	playerview = new CompletePlayerView(*player1);
 
 }
