@@ -152,7 +152,11 @@
     <ClInclude Include="Map\MapCreator.h">
       <Filter>Map\Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="BattleEngine\PlayerViewDecorator.h">
+=======
+    <ClInclude Include="Gamelog.h">
+>>>>>>> origin/KendyBranch
       <Filter>BattleEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

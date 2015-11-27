@@ -44,7 +44,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>C:\Users\kjmas\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine;C:\Users\kjmas\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map;C:\Users\kjmas\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+>>>>>>> origin/KendyBranch
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -90,6 +94,7 @@
     <ClInclude Include="BattleEngine\Strategy.h" />
     <ClInclude Include="Directory.h" />
     <ClInclude Include="GameDriver.h" />
+    <ClInclude Include="Gamelog.h" />
     <ClInclude Include="Instantiation.h" />
     <ClInclude Include="Map\Continent.h" />
     <ClInclude Include="Map\Country.h" />

@@ -1,2 +1,6 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v120:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
+<<<<<<< HEAD
 Debug|Win32|C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\|
+=======
+Debug|Win32|C:\Users\kjmas\Documents\Visual Studio 2013\Projects\RiskGame\|
+>>>>>>> origin/KendyBranch
