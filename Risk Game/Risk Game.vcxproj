@@ -44,7 +44,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-
       <AdditionalIncludeDirectories>C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -67,6 +66,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BattleEngine\BattleEngine.cpp" />
+    <ClCompile Include="BattleEngine\Card.cpp" />
+    <ClCompile Include="BattleEngine\CardUtilities.cpp" />
     <ClCompile Include="BattleEngine\Player.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -84,6 +85,8 @@
   <ItemGroup>
     <ClInclude Include="BattleEngine\Agressive.h" />
     <ClInclude Include="BattleEngine\BattleEngine.h" />
+    <ClInclude Include="BattleEngine\Card.h" />
+    <ClInclude Include="BattleEngine\CardUtilities.h" />
     <ClInclude Include="BattleEngine\Defensive.h" />
     <ClInclude Include="BattleEngine\Player.h" />
     <ClInclude Include="BattleEngine\PlayerViewDecorator.h" />

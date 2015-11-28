@@ -27,14 +27,20 @@ public:
 
 };
 
-//This class decorate the Info class by adding the total Number of battle won and the card type owned.
+//This class decorate the Info class by adding the total Number of battle won and the cards owned.
 class CompletePlayerView : public PlayerViewDecorator {
 
 public:
 		//Decorate the already existing Playerview Decorator
 	CompletePlayerView(Player &p) : PlayerViewDecorator(p){
+		
 		Player *a_Player(&p);//pass reference to a player object
 
-		cout << "\t\t\tCards owned (Will display when ready)\n" << endl;// a_Player->getCards() << endl; Will display the cards
+		vector<Card*> playerCards = a_Player->getCards();
+		
+		cout << "\t\t\tCards owned (Display Nothing if no cards has been assigned)\n" << endl;
+		for (vector<Card*>::iterator it = playerCards.begin(); it != playerCards.end(); ++it){
+			cout << (*it)->getCardSuit() << endl;
+		}
 	}
 };

@@ -2,14 +2,14 @@
 
 bool CardUtilities::checkRedemption(Player * p)
 {
-	int infantry_count, artillery_count, cavalry_count;
+	int infantry_count = 0, artillery_count = 0, cavalry_count = 0;
 
 	if (p->getCards().size() == 5)
 	{
 		return true;
 	}
 
-	for (int i; i != p->getCards().size(); i++)
+	for (int i = 0; i != p->getCards().size(); i++)
 	{
 		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
 		{

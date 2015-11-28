@@ -1,163 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{cdd6301d-51db-4f53-bea5-2b1a4f2b6efe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BattleEngine">
-      <UniqueIdentifier>{44b35666-d0fc-4d09-8095-6a02afee5574}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BattleEngine\Header Files">
-      <UniqueIdentifier>{ab117a4c-af37-42dd-a92e-a4a6cb465159}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BattleEngine\Source Files">
-      <UniqueIdentifier>{8289529b-6e67-43fa-b7c7-9d7f5503d0f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map\Header Files">
-      <UniqueIdentifier>{05f7e4b5-b264-46c9-8164-4db2e5910a06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map\Source Files">
-      <UniqueIdentifier>{717e8e70-39e3-4ea7-8c27-3fca8c833b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{d7a3a4c9-b6f2-4cd4-9006-ef3d03b2b74b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Header Files">
-      <UniqueIdentifier>{e661b552-4312-46d3-a1ee-527ad0d14154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Source Files">
-      <UniqueIdentifier>{bfed3e55-b3bf-4428-9ba3-8ecb7905c139}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main">
-      <UniqueIdentifier>{85f25fde-306b-477e-bcd3-289665361351}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Main\Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{6c2755e2-ebb0-4cb5-91c5-910b0b6e05de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities\Header Files">
-      <UniqueIdentifier>{d665a963-b22f-4673-ac9c-eb80eeacfa96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities\Source Files">
-      <UniqueIdentifier>{2e125fed-b7ef-4dd2-b1ff-4e384a6ea6d5}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="BattleEngine\BattleEngine.cpp" />
+    <ClCompile Include="BattleEngine\Player.cpp" />
+    <ClCompile Include="Directory.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameDriver.cpp" />
+    <ClCompile Include="Instantiation.cpp" />
+    <ClCompile Include="Map\Continent.cpp" />
+    <ClCompile Include="Map\Country.cpp" />
+    <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\MapCreator.cpp" />
+    <ClCompile Include="Map\Map_View.cpp" />
+    <ClCompile Include="Map\UtilityMap.cpp" />
+    <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="UI\PlayerView.cpp" />
+    <ClCompile Include="BattleEngine\Card.cpp" />
+    <ClCompile Include="BattleEngine\CardUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameDriver.cpp">
-      <Filter>Main\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleEngine\BattleEngine.cpp">
-      <Filter>BattleEngine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleEngine\Player.cpp">
-      <Filter>BattleEngine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Continent.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Country.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Map.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Map_View.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\PlayerView.cpp">
-      <Filter>UI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Subject.cpp">
-      <Filter>Main\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Instantiation.cpp">
-      <Filter>UI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Directory.cpp">
-      <Filter>Utilities\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\UtilityMap.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\MapCreator.cpp">
-      <Filter>Map\Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameDriver.h">
-      <Filter>Main\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\Player.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\Defensive.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\Agressive.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\BattleEngine.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\Strategy.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleEngine\Random.h">
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Continent.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Country.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Map.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Map_View.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\PlayerView.h">
-      <Filter>UI\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Subject.h">
-      <Filter>Main\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Main\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Instantiation.h">
-      <Filter>UI\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Directory.h">
-      <Filter>Utilities\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\UtilityMap.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\MapCreator.h">
-      <Filter>Map\Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="BattleEngine\PlayerViewDecorator.h">
-=======
-    <ClInclude Include="Gamelog.h">
->>>>>>> origin/KendyBranch
-      <Filter>BattleEngine\Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="BattleEngine\Agressive.h" />
+    <ClInclude Include="BattleEngine\BattleEngine.h" />
+    <ClInclude Include="BattleEngine\Defensive.h" />
+    <ClInclude Include="BattleEngine\Player.h" />
+    <ClInclude Include="BattleEngine\PlayerViewDecorator.h" />
+    <ClInclude Include="BattleEngine\Random.h" />
+    <ClInclude Include="BattleEngine\Strategy.h" />
+    <ClInclude Include="Directory.h" />
+    <ClInclude Include="GameDriver.h" />
+    <ClInclude Include="Gamelog.h" />
+    <ClInclude Include="Instantiation.h" />
+    <ClInclude Include="Map\Continent.h" />
+    <ClInclude Include="Map\Country.h" />
+    <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Map\MapCreator.h" />
+    <ClInclude Include="Map\Map_View.h" />
+    <ClInclude Include="Map\UtilityMap.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Subject.h" />
+    <ClInclude Include="UI\PlayerView.h" />
+    <ClInclude Include="BattleEngine\Card.h" />
+    <ClInclude Include="BattleEngine\CardUtilities.h" />
   </ItemGroup>
 </Project>
