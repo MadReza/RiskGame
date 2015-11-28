@@ -1,30 +1,31 @@
-﻿Build started 2015-11-27 23:01:28.
+﻿Build started 2015-11-28 00:53:20.
      1>Project "C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameDriver.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Kendy\Documents\Visual Studio 2013\SFML-2.3.2\include" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Sfml\include" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles" /I"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattleEngine\BattleEngine.cpp BattleEngine\Card.cpp BattleEngine\CardUtilities.cpp BattleEngine\Player.cpp Directory.cpp Main.cpp GameDriver.cpp Instantiation.cpp Map\Continent.cpp Map\Country.cpp Map\Map.cpp Map\MapCreator.cpp Map\Map_View.cpp Map\UtilityMap.cpp Subject.cpp UI\PlayerView.cpp
+         PlayerView.cpp
+     1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\ui\playerview.cpp : fatal error C1041: cannot open program database 'c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\debug\vc120.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+         Subject.cpp
+     1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\subject.cpp : fatal error C1041: cannot open program database 'c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\debug\vc120.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+         UtilityMap.cpp
+         Map_View.cpp
+         MapCreator.cpp
+         Map.cpp
+         Country.cpp
+         Continent.cpp
+         Instantiation.cpp
          GameDriver.cpp
      1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\gamedriver.cpp(52): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\gamedriver.cpp(183): warning C4018: '<' : signed/unsigned mismatch
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.lib" /MACHINE:X86 Debug\BattleEngine.obj
-         Debug\Card.obj
-         Debug\CardUtilities.obj
-         Debug\Player.obj
-         Debug\Directory.obj
-         Debug\Main.obj
-         Debug\GameDriver.obj
-         Debug\Instantiation.obj
-         Debug\Continent.obj
-         Debug\Country.obj
-         Debug\Map.obj
-         Debug\MapCreator.obj
-         Debug\Map_View.obj
-         Debug\UtilityMap.obj
-         Debug\Subject.obj
-         Debug\PlayerView.obj
-         Risk Game.vcxproj -> C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.exe
-     1>Done Building Project "C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" (Build target(s)).
+         Main.cpp
+         Directory.cpp
+         Player.cpp
+     1>c:\users\kendy\documents\visual studio 2013\projects\riskgame\risk game\battleengine\player.cpp(117): warning C4018: '>' : signed/unsigned mismatch
+         CardUtilities.cpp
+         Card.cpp
+         BattleEngine.cpp
+         Generating Code...
+     1>Done Building Project "C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.70
+Time Elapsed 00:00:11.76

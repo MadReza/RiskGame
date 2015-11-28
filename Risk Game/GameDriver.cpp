@@ -1,6 +1,6 @@
 #include "GameDriver.h"
 #include "Instantiation.h"
-#include "PlayerViewDecorator.h"
+#include "../BattleEngine/PlayerViewDecorator.h"
 #include <iostream>
 
 using namespace std;
