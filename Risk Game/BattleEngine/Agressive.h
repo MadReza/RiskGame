@@ -6,6 +6,7 @@ using namespace std;
 class Agressive : public Strategy{
 
 public:
+	//An Agressive player checks if One adjacent enemy country have less countries than it has, Then attack tgat country.
 	void useStrategy(Country *c1){
 
 		vector<Country*> VectorCountry = c1->getAdjacencyVector();

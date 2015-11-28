@@ -38,23 +38,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\SFML-2.3.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SFML-2.3.2\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)\SFML-2.3.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SFML-2.3.2\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Kendy\Documents\Visual Studio 2013\SFML-2.3.2\include;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Sfml\include;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Map;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\MapFiles;C:\Users\Kendy\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\BattleEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Kendy\Documents\Visual Studio 2013\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,21 +60,25 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Kendy\Documents\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Kendy\Documents\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BattleEngine\BattleEngine.cpp" />
+    <ClCompile Include="BattleEngine\Card.cpp" />
+    <ClCompile Include="BattleEngine\CardUtilities.cpp" />
     <ClCompile Include="BattleEngine\Player.cpp" />
     <ClCompile Include="Directory.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameDriver.cpp" />
     <ClCompile Include="Instantiation.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\Continent.cpp" />
     <ClCompile Include="Map\Country.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -91,12 +91,16 @@
   <ItemGroup>
     <ClInclude Include="BattleEngine\Agressive.h" />
     <ClInclude Include="BattleEngine\BattleEngine.h" />
+    <ClInclude Include="BattleEngine\Card.h" />
+    <ClInclude Include="BattleEngine\CardUtilities.h" />
     <ClInclude Include="BattleEngine\Defensive.h" />
     <ClInclude Include="BattleEngine\Player.h" />
+    <ClInclude Include="BattleEngine\PlayerViewDecorator.h" />
     <ClInclude Include="BattleEngine\Random.h" />
     <ClInclude Include="BattleEngine\Strategy.h" />
     <ClInclude Include="Directory.h" />
     <ClInclude Include="GameDriver.h" />
+    <ClInclude Include="Gamelog.h" />
     <ClInclude Include="Instantiation.h" />
     <ClInclude Include="Map\Continent.h" />
     <ClInclude Include="Map\Country.h" />

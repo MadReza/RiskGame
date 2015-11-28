@@ -175,7 +175,7 @@ bool isAttackOver(int attackerNum_armies, int defenderNum_armies);//Foward decla
 		//Defender armies reach 0
 		if (isAttackOver(attackerNum_armies, defenderNum_armies) && defenderNum_armies < 1){
 			cout << "\n\t\tDefender lost, Attacker conquered the defending country\n";
-			defender_player->setBattlesWonTotal(defender_player->getBattlesWonTotal() + 1);
+			attacker_player->setBattlesWonTotal(attacker_player->getBattlesWonTotal() + 1);//Add 1 to the number of Battle won
 			num_ArmiesToSend = numberOfArmiesToSend(attackerNum_Roll, attackerNum_armies);
 			goto stop;
 		}
@@ -183,7 +183,7 @@ bool isAttackOver(int attackerNum_armies, int defenderNum_armies);//Foward decla
 		//Attacker armies reach 1
 		if (isAttackOver(attackerNum_armies, defenderNum_armies) && attackerNum_armies <= 1){
 			cout << "\n\t\tAttacker ran out of armies\n";
-			attacker_player->setBattlesWonTotal(attacker_player->getBattlesWonTotal() + 1);//Add 1 to the number of Battle won
+			defender_player->setBattlesWonTotal(defender_player->getBattlesWonTotal() + 1);//Add 1 to the number of Battle won
 			goto stop;
 		}
 

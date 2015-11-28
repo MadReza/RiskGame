@@ -23,6 +23,11 @@ Player::Player(string name, Strategy *strat)
 Player::~Player()
 {
 	delete Astrategy;
+
+	for (int i = 0; i != cards.size(); i++)
+	{
+		delete cards[i];
+	}
 }
 
 void Player::initialize()
@@ -60,7 +65,7 @@ bool Player::isHuman(Player p)
 		return false;
 }
 
-//TODO: @Kendy or @Zack: We are currently looping a lot ... maybe get a better way ? As we add 1 to every country...
+
 void Player::calculateTotalArmies()
 {
 	_armiesTotal = 0;
@@ -155,4 +160,19 @@ void Player::removeContinent(Continent* continent)
 vector<Country*> Player::getCountries()
 {
 	return countries;
+}
+
+vector<Card*> Player::getCards()
+{
+	return cards;
+}
+
+void Player::incrementCardRedemptionsTotal()
+{
+	_cardRedemptionsTotal++;
+}
+
+int Player::getCardRedemptionsTotal()
+{
+	return _cardRedemptionsTotal;
 }

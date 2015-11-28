@@ -31,5 +31,6 @@ private:
 	void playerAssignsAttacks();
 
 	void displayCountriesWithArmy(vector<Country*> countries);
+	void DisplayDecorativeView(Player* player1);
 };
 #endif 

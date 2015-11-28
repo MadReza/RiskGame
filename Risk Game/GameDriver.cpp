@@ -1,5 +1,6 @@
 #include "GameDriver.h"
 #include "Instantiation.h"
+#include "../BattleEngine/PlayerViewDecorator.h"
 #include <iostream>
 
 using namespace std;
@@ -73,7 +74,10 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
+
 	cout << "\n****Attack Phase:: ****" << endl;
+	cout << "Please choose Country to your country to attack";
+	DisplayDecorativeView(player);
 	playerAssignsAttacks();
 	cout << "\tIf Won Allow, Movement to new country" << endl;
 	system("pause");
@@ -83,6 +87,7 @@ void GameDriver::attackPhase(Player* player)
 
 void GameDriver::playerAssignsAttacks()
 {
+	
 	cout << "\tGo through player countries. Allow attack adjacent country." << endl;
 }
 
@@ -179,4 +184,16 @@ void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 	{
 		cout << i << ": " << countries[i]->getName() << " army: " << countries[i]->getNumArmies() << endl;
 	}
+}
+
+void GameDriver::DisplayDecorativeView(Player* player1)//Decorator pattern
+{
+	
+	//Decorator pattern of Game log
+	cout << "\n\tDECORATIVE PATTERN 1 OF PLAYER OBSERVER";
+	PlayerView *playerview = new PlayerViewDecorator(*player1);
+
+	cout << "\n\tDECORATIVE PATTERN 2 OF PLAYER OBSERVER";
+	playerview = new CompletePlayerView(*player1);
+
 }
