@@ -190,10 +190,10 @@ void GameDriver::DisplayDecorativeView(Player* player1)//Decorator pattern
 {
 	
 	//Decorator pattern of Game log
-	cout << "\nDECORATIVE PATTERN OF PLAYER OBSERVER 1 " << endl;
+	cout << "\n\tDECORATIVE PATTERN 1 OF PLAYER OBSERVER";
 	PlayerView *playerview = new PlayerViewDecorator(*player1);
 
-	cout << "\nDECORATIVE PATTERN OF PLAYER OBSERVER 2 " << endl;
+	cout << "\n\tDECORATIVE PATTERN 2 OF PLAYER OBSERVER";
 	playerview = new CompletePlayerView(*player1);
 
 }

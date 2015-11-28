@@ -14,7 +14,7 @@ public:
 		//pass reference to a player object
 		Player *a_Player(&p);
 
-		cout << "\n\n" << a_Player->getName() << " Owned Countries : " << endl;
+		cout << "\n" << a_Player->getName() << " Owned Countries : " << endl;
 		vector<Country*> playerCountries = a_Player->getCountries();
 
 		//Displays all the countries owned by the player with their armies.
@@ -35,6 +35,6 @@ public:
 	CompletePlayerView(Player &p) : PlayerViewDecorator(p){
 		Player *a_Player(&p);//pass reference to a player object
 
-		cout << "Cards owned " << endl;// a_Player->getCards() << endl; Will display the cards
+		cout << "\t\t\tCards owned (Will display when ready)\n" << endl;// a_Player->getCards() << endl; Will display the cards
 	}
 };

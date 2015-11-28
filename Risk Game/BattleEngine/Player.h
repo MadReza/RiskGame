@@ -3,16 +3,6 @@
 #include "Strategy.h"
 #include "../Map/Country.h"
 #include "../Subject.h"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> refs/remotes/origin/Cards-Implementation
->>>>>>> origin/KendyBranch
 #include <vector>
 #include <string>
 #include <algorithm>
