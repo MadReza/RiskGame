@@ -1,23 +1,18 @@
 #ifndef GUI_H
 #define GUI_H
 
+#define ARIAL "..\\Resources\\arial.ttf"
+
 #include <SFML/Graphics.hpp>
 #include <string>
 
-using sf::RenderWindow;
-using sf::Font;
 using std::string;
 
-class Gui
+static class GUI
 {
 public:
-	void start();
-
+	static sf::Text GUI::Text(string msg, string fontName = ARIAL, int fontSize = 12, sf::Color color = sf::Color::Red);
 private:
-	RenderWindow *window;
-	Font *font;
-
-	sf::Text Text(string msg);
 };
 
 #endif // !GUI_H

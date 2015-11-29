@@ -3,6 +3,8 @@ c:\users\a_madab\desktop\riskgame\risk game\debug\vc120.idb
 c:\users\a_madab\desktop\riskgame\risk game\debug\battleengine.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\player.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\directory.obj
+c:\users\a_madab\desktop\riskgame\risk game\debug\gamemanager.obj
+c:\users\a_madab\desktop\riskgame\risk game\debug\gui.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\main.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\gamedriver.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\instantiation.obj
@@ -14,6 +16,8 @@ c:\users\a_madab\desktop\riskgame\risk game\debug\map_view.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\utilitymap.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\subject.obj
 c:\users\a_madab\desktop\riskgame\risk game\debug\playerview.obj
+c:\users\a_madab\desktop\riskgame\risk game\debug\mainmenu.obj
+c:\users\a_madab\desktop\riskgame\risk game\debug\guiold.obj
 c:\users\a_madab\desktop\riskgame\debug\risk game.ilk
 c:\users\a_madab\desktop\riskgame\debug\risk game.exe
 c:\users\a_madab\desktop\riskgame\debug\risk game.pdb

@@ -96,11 +96,17 @@
     <ClCompile Include="Map\MapCreator.cpp">
       <Filter>Map\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>UI\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIold.cpp">
+      <Filter>UI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Utilities\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,14 +164,20 @@
     <ClInclude Include="Map\MapCreator.h">
       <Filter>Map\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>UI\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Main\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Main\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Main\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIold.h">
+      <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Utilities\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

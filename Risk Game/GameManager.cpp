@@ -11,7 +11,7 @@ void GameManager::gameLoop()
 
 		if (peekState() == nullptr)
 			continue;
-		peekState()->handInput();
+		peekState()->handleInput();
 		peekState()->update(dt);
 
 		window.clear(sf::Color::Black);

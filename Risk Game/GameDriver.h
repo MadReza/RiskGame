@@ -4,7 +4,7 @@
 #include "BattleEngine\Player.h"
 #include "Map\Map.h"
 #include "Instantiation.h"
-#include "GUI.h"
+#include "GUIold.h"
 
 #include <iostream>
 #include <thread>
@@ -20,7 +20,7 @@ public:
 
 private:
 	static GameDriver* instance;
-	Gui gui;
+	GUIold gui;
 
 	int totalPlayers;
 	vector<Player*> players;

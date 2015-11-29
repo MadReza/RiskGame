@@ -8,11 +8,17 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
 
+using std::string; 
+
 class GameState;
 
 class GameManager
 {
 public:
+	//Stack of game state because of Pause and other neat states requiring to temporaraly move from the active state.
+	std::stack<GameState*> gameState;
+	sf::RenderWindow window;
+
 	GameManager(string gameTitle);
 	~GameManager();
 
@@ -22,11 +28,6 @@ public:
 	GameState* peekState();
 
 	void gameLoop();	
-
-private:
-	//Stack of game state because of Pause and other neat states requiring to temporaraly move from the active state.
-	std::stack<GameState*> gameState;
-	sf::RenderWindow window;
 };
 
 #endif // !GAME_MANAGER_H

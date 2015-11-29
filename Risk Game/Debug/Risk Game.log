@@ -1,16 +1,20 @@
-﻿Build started 11/18/2015 7:05:44 PM.
+﻿Build started 11/28/2015 10:22:07 PM.
      1>Project "C:\Users\a_madab\Desktop\RiskGame\Risk Game\Risk Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GUI.cpp
-         GUI.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainMenu.cpp
+         MainMenu.cpp
+     1>c:\users\a_madab\desktop\riskgame\risk game\gui.h(16): warning C4091: 'static ' : ignored on left of 'GUI' when no variable is declared
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\lib" "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.lib" /MACHINE:X86 Debug\BattleEngine.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.lib" /MACHINE:X86 Debug\BattleEngine.obj
          Debug\Player.obj
          Debug\Directory.obj
+         Debug\GameManager.obj
          Debug\GUI.obj
+         Debug\GUIold.obj
          Debug\Main.obj
          Debug\GameDriver.obj
          Debug\Instantiation.obj
+         Debug\MainMenu.obj
          Debug\Continent.obj
          Debug\Country.obj
          Debug\Map.obj

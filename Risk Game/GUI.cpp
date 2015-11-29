@@ -1,38 +1,17 @@
 #include "GUI.h"
 
-void Gui::start()
+sf::Text GUI::Text(string msg, string fontName, int fontSize, sf::Color color)
 {
-	window = new RenderWindow(sf::VideoMode(800, 600), "SFML works!");
-	font = new Font();
-	if (!font->loadFromFile("..\\Resources\\arial.ttf"))
+	sf::Text text;
+	sf::Font font;
+
+	if (!font.loadFromFile(fontName))
 	{
 		// TODO Declare errors in here.
 	}
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-	while (window->isOpen())
-	{
-		sf::Event event;
-		while (window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)	
-				window->close();
-		}
-
-		window->clear();
-		window->draw(shape);
-		window->draw(Text("poop"));
-		window->display();
-	}
-}
-
-sf::Text Gui::Text(string msg)
-{
-	sf::Text text;
 
 	// select the font
-	text.setFont(*font); // font is a sf::Font
+	text.setFont(font); 
 
 	// set the string to display
 	text.setString(msg);
@@ -41,7 +20,7 @@ sf::Text Gui::Text(string msg)
 	text.setCharacterSize(24); // in pixels, not points!
 
 	// set the color
-	text.setColor(sf::Color::Red);
+	text.setColor(color);
 
 	// set the text style
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
