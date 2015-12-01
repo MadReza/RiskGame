@@ -5,6 +5,7 @@
 #include "Map\Map.h"
 #include "Map\UtilityMap.h"
 #include "Map\MapCreator.h"
+#include "GameDriver.h"
 
 #include <iostream>
 #include <string>
@@ -14,6 +15,8 @@ using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
+
+class GameDriver;
 
 class Instantiation
 {
@@ -25,8 +28,10 @@ public:
 	vector<Player*> getPlayers() const;
 	Map *getMap() const;
 	bool getIsNewGame() const;
+	GameDriver *getGameDriver() const;
 
 private:
+	GameDriver* _game;
 	vector<Player*> players;
 	int totalPlayers;
 	int totalHumanPlayers;
