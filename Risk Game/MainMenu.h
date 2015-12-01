@@ -17,7 +17,7 @@ public:
 	void draw(const float dt);
 
 private:
-
+	sf::View view;	//unbounded Camera
 };
 
 #endif
