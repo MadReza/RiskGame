@@ -34,13 +34,11 @@ void MainMenu::handleInput()
 	{
 		switch (event.type)
 		{
-			/* Close the window */
 		case sf::Event::Closed:
 		{
 			game->window.close();
 			break;
 		}
-			/* Resize the window */
 		case sf::Event::Resized:
 		{
 			view.setSize(event.size.width, event.size.height);	//TODO: Fix as image goes out of view.
@@ -50,6 +48,15 @@ void MainMenu::handleInput()
 		{
 			if (event.key.code == sf::Keyboard::Escape) 
 				game->window.close();
+			break;
+		}
+		case sf::Event::MouseButtonPressed:
+		{
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				//sf::Mouse::setPosition(sf::Vector2i(10, 50));	//To the Desktop, global position
+				sf::Mouse::setPosition(sf::Vector2i(10, 50), game->window); //To the Game Window position
+			}
 			break;
 		}
 		default: break;
