@@ -47,7 +47,8 @@ private:
 
 	// Attributes related to cards
 	vector<Card*> cards;
-	int _cardRedemptionsTotal;
+	/*Number of times the player has redeemed cards */
+	int _cardRedemptionsTotal = 0;
 	
 	void initialize();
 
