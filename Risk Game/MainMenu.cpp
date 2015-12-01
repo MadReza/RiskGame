@@ -4,6 +4,11 @@
 MainMenu::MainMenu(GameManager* game)
 {
 	this->game = game;
+	//Center the View to the Main View.
+	sf::Vector2f pos = sf::Vector2f(game->window.getSize());
+	view.setSize(pos);
+	pos *= 0.5f;
+	view.setCenter(pos);
 }
 
 MainMenu::~MainMenu()
@@ -27,7 +32,7 @@ void MainMenu::handleInput()
 			/* Resize the window */
 		case sf::Event::Resized:
 		{
-			view.setSize(event.size.width, event.size.height);			
+			view.setSize(event.size.width, event.size.height);	//TODO: Fix as image goes out of view.
 			break;
 		}
 		case sf::Event::KeyPressed:
