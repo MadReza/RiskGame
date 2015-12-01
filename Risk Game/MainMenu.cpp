@@ -9,10 +9,21 @@ MainMenu::MainMenu(GameManager* game)
 	view.setSize(pos);
 	pos *= 0.5f;
 	view.setCenter(pos);
+
+	uploadResources();	
 }
 
 MainMenu::~MainMenu()
 {
+}
+
+void MainMenu::uploadResources()
+{
+	font = new sf::Font();
+	if (!font->loadFromFile("..\\Resources\\arial.ttf"))
+	{
+		// TODO Declare errors in here.
+	}
 }
 
 void MainMenu::handleInput()
@@ -59,6 +70,44 @@ void MainMenu::draw(const float dt)
 	game->window.setView(view); //Change Camera to ours.
 	game->window.clear(sf::Color::Black);
 	game->window.draw(shape);
-	sf::Text poop{GUI::Text("poop")};
-	//game->window.draw(poop);
+	game->window.draw(text("poop"));
+}
+
+
+void MainMenu::startGame()
+{
+
+}
+
+void MainMenu::loadGame()
+{
+
+}
+
+void MainMenu::map()
+{
+
+}
+
+sf::Text MainMenu::text(string msg)
+{
+	sf::Text text;
+
+	// select the font
+	text.setFont(*font); // font is a sf::Font
+
+	// set the string to display
+	text.setString(msg);
+
+	// set the character size
+	text.setCharacterSize(24); // in pixels, not points!
+
+	// set the color
+	text.setColor(sf::Color::Red);
+
+	// set the text style
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	// inside the main loop, between window.clear() and window.display()
+	return text;
 }

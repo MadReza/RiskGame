@@ -18,6 +18,15 @@ public:
 
 private:
 	sf::View view;	//unbounded Camera
+	sf::Font *font;
+
+	void uploadResources();
+
+	void startGame();
+	void loadGame();
+	void map();
+
+	sf::Text text(string msg);
 };
 
 #endif
