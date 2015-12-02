@@ -23,6 +23,11 @@ Player::Player(string name, Strategy *strat)
 Player::~Player()
 {
 	delete Astrategy;
+
+	for (int i = 0; i != cards.size(); i++)
+	{
+		delete cards[i];
+	}
 }
 
 void Player::initialize()
@@ -98,9 +103,19 @@ void Player::assignReinforcements()
 {
 	int armyToAssign{getReinforcementTotal()};
 
-
 	while (armyToAssign > 0)
 	{
+		for (unsigned int i = 0; i < countries.size(); i++)
+		{
+			cout << i << ": " << countries[i]->getName() << endl;
+		}
+		int selection{-1};
+		
+		do {
+			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
+			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
+		} while (selection < 0 || selection > (countries.size() -1));
+
 		cout << endl;
 		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };
@@ -207,6 +222,21 @@ void Player::removeContinent(Continent* continent)
 vector<Country*> Player::getCountries()
 {
 	return countries;
+}
+
+vector<Card*> Player::getCards()
+{
+	return cards;
+}
+
+void Player::incrementCardRedemptionsTotal()
+{
+	_cardRedemptionsTotal++;
+}
+
+int Player::getCardRedemptionsTotal()
+{
+	return _cardRedemptionsTotal;
 }
 
 void Player::assignAttack()
