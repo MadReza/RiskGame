@@ -27,7 +27,6 @@ GameDriver::~GameDriver()
 
 void GameDriver::startGame()
 {
-	//gui.start(); //Making it seperate from the GameDriver
 	Instantiation start;
 	/*
 	if (start.getIsNewGame())
@@ -93,10 +92,18 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 void GameDriver::attackPhase(Player* player)
 {
 	cout << "\n****Attack Phase:: ****" << endl << endl;
-	
-	player->assignAttack();
+	char answer;
 
-	cout << "\tIf Won Allow, Movement to new country" << endl;
+	do
+	{
+		cout << "Would you like to attack a country (y,n): ";
+		cin >> answer;
+
+		if (answer == 'y' || answer == 'Y')
+			player->assignAttack();
+
+	} while (answer != 'n' && answer != 'N');
+
 	system("pause");
 	system("cls");
 	//If won move to country X soldies.

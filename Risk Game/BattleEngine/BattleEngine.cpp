@@ -16,7 +16,10 @@ BattleEngine::~BattleEngine(){
 }
 		
 void BattleEngine::attack() {
-	 
+	int* attackerRollsList = nullptr;;
+	int* defenderRollsList = nullptr;
+
+
 	srand((unsigned)time(0)); //generate random number based on computer clocks
 
 	int	attackerNumRoll, defenderNumRoll;
@@ -35,18 +38,20 @@ void BattleEngine::attack() {
 
 playerAttack:
 	attackerNumRoll = attackerRoll();
+	if (attackerNumRoll == 0) //User Cancelled
+		goto stop;
 	goto skipAllIn;
 
 allIn:
 
 	attackerNumRoll = attackerCountry->getNumArmies() > 2 ? 3 : 2;
 
-	skipAllIn:
+skipAllIn:
 	defenderNumRoll = defenderCountry->getNumArmies() > 1 ? 2 : 1;
 
 	//Creating the arrays that will contains the rolls list
-	int* attackerRollsList = generateDescSortedRollList(attackerNumRoll);
-	int* defenderRollsList = generateDescSortedRollList(defenderNumRoll);
+	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
+	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
 
 	system("cls");
 	
@@ -81,7 +86,10 @@ allIn:
 		attackerPlayer->setBattlesWonTotal(attackerPlayer->getBattlesWonTotal() + 1);
 		num_ArmiesToSend = numberOfArmiesToSend(attackerNumRoll, attackerCountry->getNumArmies());
 		defenderCountry->setOwner(attackerPlayer);
+		//Move Army from country to new country
+		attackerCountry->addArmies(-num_ArmiesToSend);
 		defenderCountry->addArmies(num_ArmiesToSend);
+
 		cout << attackerPlayer->getName() << " sent " << num_ArmiesToSend << " to " << defenderCountry->getName() << endl;
 		system("pause");
 		
@@ -111,8 +119,10 @@ allIn:
 stop:
 
 	//Clean
-	delete[]attackerRollsList;//Deallocate memory
-	delete[]defenderRollsList;//Deallocate memory
+	if (attackerRollsList != nullptr)
+		delete[]attackerRollsList;//Deallocate memory
+	if (defenderRollsList != nullptr)
+		delete[]defenderRollsList;//Deallocate memory
 }
 
 int* BattleEngine::generateDescSortedRollList(int size){
@@ -221,17 +231,18 @@ int BattleEngine::attackerRoll()
 	int sentArmies; 
 	system("cls");
 	displayBattleInfo();
-	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack? (Not more than " << attackerCountry->getNumArmies() - 1 << " ): ";
+	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack? (Not more than " << attackerCountry->getNumArmies() - 1 << " )" << endl;
+	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
 	cin >> sentArmies;
 
 	//if Users input an invalid number return to start 
-	if (sentArmies > attackerCountry->getNumArmies() - 1 || sentArmies <= 0)
+	if (sentArmies > attackerCountry->getNumArmies() - 1 || sentArmies < 0)
 		goto start;
 
 	//Will determine how many rolls the Attacker have (3,2 or 1)
 	if (sentArmies >= 3)
 		return 3;
-	return sentArmies;	//return 2 or 1
+	return sentArmies;	//return 2 or 1 or 0 to cancel
 }
 
 //loop and verify the attacker and defender corresponding dices
