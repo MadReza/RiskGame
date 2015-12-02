@@ -18,6 +18,11 @@ public:
 	void startGame();
 	std::thread startGameThread();	//Call this to initiate startGame on a new thread.
 
+	// setters
+	void setTotalPlayers(int n);
+	void setPlayers(vector<Player*> p);
+	void setSelectedMap(Map* m);
+
 private:
 	static GameDriver* instance;
 	GUIold gui;

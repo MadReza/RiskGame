@@ -29,10 +29,19 @@ void GameDriver::startGame()
 {
 	//gui.start(); //Making it seperate from the GameDriver
 	Instantiation start;
-	totalPlayers = start.getTotalPlayers();
-	players = start.getPlayers();
-	selectedMap = start.getMap();
-
+	/*
+	if (start.getIsNewGame())
+	{
+		totalPlayers = start.getTotalPlayers();
+		players = start.getPlayers();
+		selectedMap = start.getMap();
+	}
+	else
+	{
+		*this = *(start.getGameDriver());
+	}
+	//*/
+	
 	play();
 }
 
@@ -186,4 +195,17 @@ void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 	{
 		cout << i << ": " << countries[i]->getName() << " army: " << countries[i]->getNumArmies() << endl;
 	}
+}
+
+void GameDriver::setTotalPlayers(int n)
+{
+	totalPlayers = n;
+}
+void GameDriver::setPlayers(vector<Player*> p)
+{
+	players = p;
+}
+void GameDriver::setSelectedMap(Map* m)
+{
+	selectedMap = m;
 }

@@ -36,6 +36,7 @@ public:
 	bool checkAllCountriesOwned();
 
 	void distributePlayers(vector<Player*> player_vector); //randomly distributes a vector of players across all countries
+	void assignCountriesToPlayer(Player* player, int continent_index, vector<int> countries_indices); // assign a player to specific countries of a continent (Not random)
 	string getAuthor();
 	int getMaxPlayers();
 
