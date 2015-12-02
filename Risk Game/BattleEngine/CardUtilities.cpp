@@ -43,7 +43,7 @@ bool CardUtilities::checkRedemption(Player * p)
 
 bool CardUtilities::mandatoryRedemption(Player * p)
 {
-	if (p->getCards().size() >= 5)
+	if (p->getCards().size() >= MAX_REDEMPTION_HAND_SIZE)
 	{
 		return true;
 	}
@@ -53,13 +53,12 @@ bool CardUtilities::mandatoryRedemption(Player * p)
 	}
 }
 
-void CardUtilities::selectRedemption(Player * p)
+int CardUtilities::selectRedemption(Player * p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
-	bool tripinf = false, tripcav = false, tripart = false, threedif = false;
 
 	for (int i=0; i != p->getCards().size(); i++)
-	{
+	{		
 		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
 		{
 			infantry_count++;
@@ -74,54 +73,56 @@ void CardUtilities::selectRedemption(Player * p)
 		}
 	}
 
-	cout << "The following redemptions are possible: " << endl;
-	if (infantry_count >= 3)
-	{
-		cout << "Enter 'i'. Redeem three INFANTRY cards." << endl;
-	}
-	if (cavalry_count >= 3)
-	{
-		cout << "Enter 'c'. Redeem three CAVALRY cards." << endl;
-	}
-	if (artillery_count >= 3)
-	{
-		cout << "Enter 'a'. Redeem three ARTILLERY cards." << endl;
-	}
-	if (artillery_count >= 1 && cavalry_count >= 1 && infantry_count >=1 )
-	{
-		cout << "Enter 'd'. Redeem three DIFFERENTLY suited cards (1 INFANTRY, 1 ARTILLERY, 1 CAVALRY)." << endl;
-	}
-	cout << "Enter 'q' to quit redemption" << endl;
-
 	char selection;
-	cout << "Please enter your selection from the above choices" << endl;
-	cin >> selection;
-
-	if (selection == 'i')
+	do
 	{
-		removeThreeSimilar(p, "INFANTRY"); 
-		p->incrementCardRedemptionsTotal();
-	}
+		cout << "The following redemptions are possible: " << endl;
+		if (infantry_count >= 3)
+		{
+			cout << "\tEnter 'i'. Redeem three INFANTRY cards." << endl;
+		}
+		if (cavalry_count >= 3)
+		{
+			cout << "\tEnter 'c'. Redeem three CAVALRY cards." << endl;
+		}
+		if (artillery_count >= 3)
+		{
+			cout << "\tEnter 'a'. Redeem three ARTILLERY cards." << endl;
+		}
+		if (artillery_count >= 1 && cavalry_count >= 1 && infantry_count >= 1)
+		{
+			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 INFANTRY, 1 ARTILLERY, 1 CAVALRY)." << endl;
+		}
+		cout << "\tEnter 'q' to quit redemption" << endl;
+
+		cout << "Please enter your selection from the above choices: ";
+		cin >> selection;	//TODO VALIDATION
+	} while (selection != 'i' && selection != 'c' && selection != 'a' && selection != 'd' && selection != 'q');
+
+	if (selection == 'q')
+	{
+		cout << "Exiting card redemption..." << endl;
+		return 0;
+	}	
 	else if (selection == 'c')
 	{
 		removeThreeSimilar(p, "CAVALRY");
-		p->incrementCardRedemptionsTotal();
 	}
 	else if (selection == 'a')
 	{
 		removeThreeSimilar(p, "ARTILLERY");
-		p->incrementCardRedemptionsTotal();
 	}
 	else if (selection == 'd')
 	{
 		removeThreeDiff(p);
-		p->incrementCardRedemptionsTotal();
 	}
-	else if (selection == 'q')
+	else if (selection == 'i')
 	{
-		cout << "Exiting card redemption..." << endl;
+		removeThreeSimilar(p, "INFANTRY");
 	}
 
+	p->incrementCardRedemptionsTotal();
+	return getRedemptionReinforcements(p);	
 }
 
 void CardUtilities::displayPlayerCards(Player * p)
@@ -134,19 +135,21 @@ void CardUtilities::displayPlayerCards(Player * p)
 		cout << p->getCards()[i]->getCardSuit() << ", ";
 	}
 
+	//TODO: Add Emptry Drawing....
+
 	cout << endl;
 }
 
-void CardUtilities::takePlayerCards(Player * a, Player * b)
+void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 {
-	while (a->getCards().size() != 0)
+	while (loser->getCards().size() != 0)
 	{
-		b->getCards().push_back(a->getCards().back());
-		a->getCards().pop_back();
+		winner->getCards().push_back(loser->getCards().back());
+		loser->getCards().pop_back();
 	}
 
-	cout << "All of Player: " << a->getName() << "'s cards have been moved to "
-		<< b->getName() << "'s hand." << endl;
+	cout << "All of Player: " << loser->getName() << "'s cards have been moved to "
+		<< winner->getName() << "'s hand." << endl;
 }
 
 void CardUtilities::getVictoryCard(Player * p)
@@ -157,7 +160,12 @@ void CardUtilities::getVictoryCard(Player * p)
 from: http://www.hasbro.com/common/instruct/risk.pdf*/
 int CardUtilities::getRedemptionReinforcements(Player * p)
 {
+	if (p->getRedeemThisTurn())
+	{
+		return 2;
+	}
 	int num = p->getCardRedemptionsTotal();
+	p->setRedeemThisTurn(true);
 
 	switch (num)
 	{
@@ -183,8 +191,6 @@ int CardUtilities::getRedemptionReinforcements(Player * p)
 	{
 		return (15 + ((num - 6) * 5));
 	}
-
-	return 0;
 }
 
 void CardUtilities::removeThreeSimilar(Player * p, string s)
@@ -205,22 +211,20 @@ void CardUtilities::removeThreeDiff(Player * p)
 	deleteSuit(p, "CAVALRY");
 }
 
-
-
 CardUtilities::~CardUtilities()
 {
 
 }
 
-void CardUtilities::deleteSuit(Player *p,string suit)
+void CardUtilities::deleteSuit(Player *p, string suit)
 {
-		for (int i = 0; i != p->getCards().size(); i++)
+	for (int i = 0; i != p->getCards().size(); i++)
+	{
+		if (p->getCards()[i]->getCardSuit() == suit)
 		{
-			if (p->getCards()[i]->getCardSuit() == suit)
-			{
-				p->getCards().erase(p->getCards().begin() + i);
-				break;
-			}
+			p->getCards().erase(p->getCards().begin() + i);
+			return;
 		}
-	
+	}
+
 }

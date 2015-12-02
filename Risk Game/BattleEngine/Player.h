@@ -3,14 +3,11 @@
 #include "Strategy.h"
 #include "../Map/Country.h"
 #include "../Subject.h"
-
-
-
+#include "CardUtilities.h"
 
 #include <vector>
 #include <string>
 #include <algorithm>
-
 
 using std::string;
 
@@ -44,10 +41,11 @@ private:
 	Strategy *Astrategy;
 	vector<Country*> countries;	
 	vector<Continent*> continents;
+	bool turnVictory;
+	bool redeemThisTurn;
 
 	// Attributes related to cards
 	vector<Card*> cards;
-	/*Number of times the player has redeemed cards */
 	int _cardRedemptionsTotal = 0;
 	
 	void initialize();
@@ -64,7 +62,12 @@ public:
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
 	bool isHuman(Player p);
-	
+	void setTurnVictory(bool trueFalse);
+	bool getTurnVictory();
+	void setRedeemThisTurn(bool trueFalse);
+	bool getRedeemThisTurn();
+	void resetRoundVariables();
+
 	void doStrategy(Country* country){
 		Astrategy->doStrategy(country);
 	}
@@ -77,6 +80,7 @@ public:
     void setBattlesWonTotal(int n);
     int getArmiesTotal();
     int getReinforcementTotal();
+	int getCardReinforcementTotal();
     int getBattlesWonTotal();
 
 	void assignReinforcements();

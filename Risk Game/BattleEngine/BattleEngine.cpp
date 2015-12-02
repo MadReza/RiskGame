@@ -83,6 +83,7 @@ skipAllIn:
 		cout << attackerPlayer->getName() << " now owns " << defenderCountry->getName() << endl;
 
 		//Process
+		attackerPlayer->setTurnVictory(true);
 		attackerPlayer->setBattlesWonTotal(attackerPlayer->getBattlesWonTotal() + 1);
 		num_ArmiesToSend = numberOfArmiesToSend(attackerNumRoll, attackerCountry->getNumArmies());
 		defenderCountry->setOwner(attackerPlayer);

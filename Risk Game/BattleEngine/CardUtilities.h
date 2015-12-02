@@ -14,24 +14,25 @@ TODO:
 class CardUtilities{
 
 public:
+	static const int MAX_REDEMPTION_HAND_SIZE = 5;
+	
 	static bool checkRedemption(Player* p);
 	static bool mandatoryRedemption(Player* p);
-	static void selectRedemption(Player* p);
+	static int selectRedemption(Player* p);
 	static void displayPlayerCards(Player* p);
 	/*This method transfers all the cards from Player a to Player b.
 	Call this only when player a is defeated by Player b.*/
-	static void takePlayerCards(Player* a, Player* b); 
+	static void takePlayerCards(Player* loser, Player* winner); 
 	/* If the player wins a battle, add one card to his hand */
 	static void getVictoryCard(Player* p);
-	/*The number of reinforcements for a successful card redemption will
-	increase with every subsequent redemptions*/
-	static int getRedemptionReinforcements(Player* p);
-	static void removeThreeSimilar(Player* p, string s);
-	static void removeThreeDiff(Player* p);
-	
+
 private:
 	CardUtilities();
 	~CardUtilities();
 	static void deleteSuit(Player *p, string suit);
-
+	static void removeThreeSimilar(Player* p, string s);
+	static void removeThreeDiff(Player* p);
+	/*The number of reinforcements for a successful card redemption will
+	increase with every subsequent redemptions*/
+	static int getRedemptionReinforcements(Player* p);
 };
