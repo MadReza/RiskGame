@@ -72,6 +72,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BattleEngine\BattleEngine.cpp" />
+    <ClCompile Include="BattleEngine\Card.cpp" />
+    <ClCompile Include="BattleEngine\CardUtilities.cpp" />
     <ClCompile Include="BattleEngine\Player.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -93,6 +95,8 @@
   <ItemGroup>
     <ClInclude Include="BattleEngine\Agressive.h" />
     <ClInclude Include="BattleEngine\BattleEngine.h" />
+    <ClInclude Include="BattleEngine\Card.h" />
+    <ClInclude Include="BattleEngine\CardUtilities.h" />
     <ClInclude Include="BattleEngine\Defensive.h" />
     <ClInclude Include="BattleEngine\Player.h" />
     <ClInclude Include="BattleEngine\Random.h" />

@@ -1,5 +1,7 @@
 #include "Card.h"
 
+int Card::num_cards_dealt = 0;
+
 Card::Card()
 {
 	default_random_engine generator;
@@ -24,7 +26,7 @@ Card::Card()
 		IMG_FILE_LOCATION = "cavalry.jpg";	//TODO
 	}
 
-	num_cards_dealt++;
+	num_cards_dealt++;	//Maybe do Card::num_cards_dealt++; 
 }
 
 

@@ -108,6 +108,12 @@
     <ClCompile Include="GUI.cpp">
       <Filter>Utilities\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BattleEngine\Card.cpp">
+      <Filter>BattleEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleEngine\CardUtilities.cpp">
+      <Filter>BattleEngine\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -178,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="GUI.h">
       <Filter>Utilities\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleEngine\Card.h">
+      <Filter>BattleEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleEngine\CardUtilities.h">
+      <Filter>BattleEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
