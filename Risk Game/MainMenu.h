@@ -1,0 +1,32 @@
+#ifndef MAIN_MENU_H
+#define MAIN_MENU_H
+
+#include "GameManager.h"
+#include "GameState.h"
+#include "GUI.h"
+#include <SFML/Graphics.hpp>
+
+class MainMenu : public GameState
+{
+public:
+	MainMenu(GameManager* game);
+	~MainMenu();
+
+	void handleInput();
+	void update(const float dt);
+	void draw(const float dt);
+
+private:
+	sf::View view;	//unbounded Camera
+	sf::Font *font;
+
+	void uploadResources();
+
+	void startGame();
+	void loadGame();
+	void map();
+
+	sf::Text text(string msg);
+};
+
+#endif

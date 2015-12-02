@@ -13,6 +13,5 @@ using namespace std;
 class Strategy {
 
 public :
-
 	virtual void doStrategy(Country *c1) = 0;// pure virtual fonction
 };

@@ -54,15 +54,74 @@ void Instantiation::newGame()
 	createPlayers();
 	randomizePlayerOrder();
 	assignCountriesToPlayer();
+
+	_game = GameDriver::getInstance();
+	_game->setTotalPlayers(getTotalPlayers());
+	_game->setPlayers(getPlayers());
+	_game->setSelectedMap(getMap());
 }
 
 void Instantiation::loadGame()
 {
 	//TODO LOAD FROM FILE HERE. OR FROM GAME DRIVER
-	cout << "Stubs to Load a Game...." << endl;
+	cout << "Game is loading...." << endl;
 	isNewGame = false;
 	totalPlayers = 3;
 	mapPath = 1;
+	return;
+	// map creation
+	string str(Directory::GetCurrentWorkingDirectory());
+	const char* cd = str.c_str();
+	string path = Directory::CombinePaths(2, cd, "Mapfiles");
+	vector<string> maps(Directory::GetFilesNamesFrom(path));
+	mapPath = path + "\\" + maps[2];
+	UtilityMap m(mapPath);
+	map = m.getMapObject();
+
+	// players creation
+	players.push_back(new Player("p1", Player::Human));
+	players.push_back(new Player("p2", Player::Human));
+	players.push_back(new Player("p3", Player::Human));
+
+	// countries assignation to players
+	//map->distributePlayers(players); this is random distribution
+	/*
+	TODO: Assign countries to players
+	foreach player
+		vector<int> continents_indices; // load continent indices
+		continents_indices.push_back(1);
+		continents_indices.push_back(3);
+		continents_indices.push_back(4);
+
+		foreach continent
+			vector<int> countries_indices; // load country indices in continent
+			countries_indices.push_back(1);
+			countries_indices.push_back(3);
+			countries_indices.push_back(4);
+			foreach country
+				map->assignCountryToPlayer(player, continent_index, countries_indices) // assign country to player
+	*/
+	_game = GameDriver::getInstance();
+	_game->setTotalPlayers(3);
+	_game->setPlayers(getPlayers());
+	_game->setSelectedMap(getMap());
+
+	/*
+	TODO by @zack : load serialized game from file and build the game using the GameBuilder
+	string serializedGame = "serialized-string-example";
+
+	GameBuilder* builder = new GameBuilder(serializedGame);
+	GameDirector* director = new GameDirector(builder);
+
+	director->buildGame();
+
+	_game = director->getGame();
+	//*/
+}
+
+GameDriver* Instantiation::getGameDriver() const
+{
+	return _game;
 }
 
 void Instantiation::createMap()

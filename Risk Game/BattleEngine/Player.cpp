@@ -116,17 +116,79 @@ void Player::assignReinforcements()
 			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
 		} while (selection < 0 || selection > (countries.size() -1));
 
-		int armyToAdd{ 0 };
-		
+		cout << endl;
+		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
+		Country* countrySelection{ selectPlayerCountry() };
+
+		cout << endl;
+		int armyToAdd{ 0 };		
 		do {
-			cout << countries[selection]->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
+			cout << countrySelection->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
 			cin >> armyToAdd;
 		} while (armyToAdd < 0 || armyToAdd > armyToAssign);
 
-		countries[selection]->addArmies(armyToAdd);
+		countrySelection->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
 	}
 	system("cls"); //COMPLETED TODO: Done by Zack
+}
+
+Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
+{
+	vector<Country*> allAdjacentCountries = country->getAdjacencyVector();
+	vector<Country*> enemyAdjacentCountries;
+
+	//Get Enemy Adjacent countries
+	for (int x = 0; x < allAdjacentCountries.size(); x++)
+	{
+		if (allAdjacentCountries[x]->getOwner() != this)
+		{
+			enemyAdjacentCountries.push_back(allAdjacentCountries[x]);
+		}
+	}
+
+	//Display Enemy Adjacent Countries to attack
+	for (int x = 0; x < enemyAdjacentCountries.size(); x++)
+	{
+		cout << x << ": " << enemyAdjacentCountries[x]->getName() << ", Army Size: " << enemyAdjacentCountries[x]->getNumArmies() << endl;
+	}
+	int selection{ -1 };
+
+	do {
+		cout << "Select the country number from 0 to " << enemyAdjacentCountries.size() - 1 << ": ";
+		cin >> selection;
+	} while (selection < 0 || selection >(enemyAdjacentCountries.size() - 1));
+
+	return enemyAdjacentCountries[selection];
+}
+
+Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
+{
+	vector<Country*> eligibleCountries;
+
+	for (int i = 0; i < countries.size(); i++)
+	{
+		if (countries[i]->getNumArmies() >= showWithMinArmy)
+		{
+			eligibleCountries.push_back(countries[i]);
+		}
+	}
+
+	for (int i = 0; i < eligibleCountries.size(); i++)
+	{
+		cout << i << ": " << eligibleCountries[i]->getName();
+		if (showArmy)
+			cout << " Army Size: " << eligibleCountries[i]->getNumArmies();
+		cout << endl;
+	}
+	int selection{ -1 };
+
+	do {
+		cout << "Select the country number from 0 to " << eligibleCountries.size() - 1 << ": ";
+		cin >> selection;
+	} while (selection < 0 || selection >(eligibleCountries.size() - 1));
+
+	return eligibleCountries[selection];
 }
 
 int Player::getBattlesWonTotal() {
@@ -175,4 +237,16 @@ void Player::incrementCardRedemptionsTotal()
 int Player::getCardRedemptionsTotal()
 {
 	return _cardRedemptionsTotal;
+}
+
+void Player::assignAttack()
+{
+	cout << "Select Country to attack from: " << endl;
+	Country* attackingCountry(selectPlayerCountry(true,2));					
+	cout << endl;
+	cout << "Select Country to attack to: " << endl;
+	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry));
+
+	BattleEngine(attackingCountry, targetCountry);
+
 }

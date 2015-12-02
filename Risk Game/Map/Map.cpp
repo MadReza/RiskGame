@@ -196,6 +196,20 @@ void Map::distributePlayers(vector<Player*> player_vector)
 
 }
 
+void Map::assignCountriesToPlayer(Player* player, int continent_index, vector<int> countries_indices)
+{
+	for (int i = 0; i < countries_indices.size(); i++)
+	{
+		if (continents[continent_index]->getContinentVector()[(countries_indices[i])]->checkIfOwned() == false)
+		{
+			continents[continent_index]->getContinentVector()[countries_indices[i]]->setOwner(player);
+			cout << "Assigned Country: " << continents[continent_index]->getContinentVector()[countries_indices[i]]->getName()
+				<< ", to Player: " << player->getName() << "." << endl;
+			continents[continent_index]->getContinentVector()[countries_indices[i]]->addArmies(1); // TODO @zack: Assign the correct number of armies
+		}
+	}
+}
+
 string Map::getAuthor()
 {
 	return author;

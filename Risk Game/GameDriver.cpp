@@ -1,24 +1,19 @@
 #include "GameDriver.h"
-#include "Instantiation.h"
-#include <iostream>
 
-using namespace std;
+GameDriver* GameDriver::instance = 0;
 
-GameDriver GameDriver::instance;
-
-GameDriver GameDriver::getInstance()
+GameDriver* GameDriver::getInstance()
 {
+	if (instance == nullptr)
+	{
+		instance = new GameDriver();
+	}
 	return instance;
 }
 
 GameDriver::GameDriver()
 {
-	Instantiation start;
-	totalPlayers = start.getTotalPlayers();
-	players = start.getPlayers();
-	selectedMap = start.getMap();
 	
-	play();
 }
 
 GameDriver::~GameDriver()
@@ -28,6 +23,29 @@ GameDriver::~GameDriver()
 		delete players[i];		
 	}		
 	delete selectedMap;
+}
+
+void GameDriver::startGame()
+{
+	Instantiation start;
+	/*
+	if (start.getIsNewGame())
+	{
+		totalPlayers = start.getTotalPlayers();
+		players = start.getPlayers();
+		selectedMap = start.getMap();
+	}
+	else
+	{
+		*this = *(start.getGameDriver());
+	}
+	//*/
+	
+	play();
+}
+
+std::thread GameDriver::startGameThread() {
+	return std::thread([=] { startGame(); });
 }
 
 void GameDriver::play()
@@ -61,7 +79,7 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
-	cout << "\n****Reinforcment Phase:: ****" << endl;
+	cout << "\n****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
 
@@ -73,17 +91,22 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
-	cout << "\n****Attack Phase:: ****" << endl;
-	playerAssignsAttacks();
-	cout << "\tIf Won Allow, Movement to new country" << endl;
+	cout << "\n****Attack Phase:: ****" << endl << endl;
+	char answer;
+
+	do
+	{
+		cout << "Would you like to attack a country (y,n): ";
+		cin >> answer;
+
+		if (answer == 'y' || answer == 'Y')
+			player->assignAttack();
+
+	} while (answer != 'n' && answer != 'N');
+
 	system("pause");
 	system("cls");
 	//If won move to country X soldies.
-}
-
-void GameDriver::playerAssignsAttacks()
-{
-	cout << "\tGo through player countries. Allow attack adjacent country." << endl;
 }
 
 void GameDriver::fortifcationPhase(Player* player)
@@ -179,4 +202,17 @@ void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 	{
 		cout << i << ": " << countries[i]->getName() << " army: " << countries[i]->getNumArmies() << endl;
 	}
+}
+
+void GameDriver::setTotalPlayers(int n)
+{
+	totalPlayers = n;
+}
+void GameDriver::setPlayers(vector<Player*> p)
+{
+	players = p;
+}
+void GameDriver::setSelectedMap(Map* m)
+{
+	selectedMap = m;
 }

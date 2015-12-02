@@ -1,12 +1,20 @@
-﻿Build started 2015-11-18 6:53:08 PM.
-     1>Project "C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.exe" /INCREMENTAL /NOLOGO "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.lib" /MACHINE:X86 Debug\BattleEngine.obj
+﻿Build started 11/28/2015 10:22:07 PM.
+     1>Project "C:\Users\a_madab\Desktop\RiskGame\Risk Game\Risk Game.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainMenu.cpp
+         MainMenu.cpp
+     1>c:\users\a_madab\desktop\riskgame\risk game\gui.h(16): warning C4091: 'static ' : ignored on left of 'GUI' when no variable is declared
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.lib" /MACHINE:X86 Debug\BattleEngine.obj
          Debug\Player.obj
          Debug\Directory.obj
+         Debug\GameManager.obj
+         Debug\GUI.obj
+         Debug\GUIold.obj
+         Debug\Main.obj
          Debug\GameDriver.obj
          Debug\Instantiation.obj
-         Debug\Main.obj
+         Debug\MainMenu.obj
          Debug\Continent.obj
          Debug\Country.obj
          Debug\Map.obj
@@ -15,9 +23,24 @@
          Debug\UtilityMap.obj
          Debug\Subject.obj
          Debug\PlayerView.obj
-         Risk Game.vcxproj -> C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Debug\Risk Game.exe
-     1>Done Building Project "C:\Users\TheChosenOne\Documents\Visual Studio 2013\Projects\RiskGame\Risk Game\Risk Game.vcxproj" (Build target(s)).
+         Risk Game.vcxproj -> C:\Users\a_madab\Desktop\RiskGame\Debug\Risk Game.exe
+       PostBuildEvent:
+         xcopy /y "C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\*.dll" "C:\Users\a_madab\Desktop\RiskGame\Debug\"
+         :VCEnd
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\openal32.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-audio-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-audio-d-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-graphics-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-graphics-d-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-network-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-network-d-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-system-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-system-d-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-window-2.dll
+         C:\Users\a_madab\Desktop\RiskGame\\SFMLx86-2.3.2\bin\sfml-window-d-2.dll
+         11 File(s) copied
+     1>Done Building Project "C:\Users\a_madab\Desktop\RiskGame\Risk Game\Risk Game.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.71
+Time Elapsed 00:00:00.90
