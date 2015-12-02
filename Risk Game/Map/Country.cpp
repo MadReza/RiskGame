@@ -40,7 +40,9 @@ void Country::addAdjacentCountry(Country* c)
 
 void Country::setOwner(Player *p)
 {
-	owner = p;	//TODO switching owner, notify of change.... e.g.: army 
+	if (owner != nullptr)
+		owner->removeCountry(this);
+	owner = p;
 	owner->addCountry(this);
 }
 
@@ -85,12 +87,10 @@ vector<Country*> Country::getAdjacencyVector()
 
 void Country::displayAdjacentCountries()
 {
-
 	for (int i = 0; i != Adjacent_Countries.size(); i++)
 	{
 		cout << Adjacent_Countries[i]->getName() << ", ";
 	}
-
 }
 
 void Country::addArmies(int add)
@@ -120,9 +120,7 @@ bool Country::checkIfOwned()
 	{
 		return false;
 	}
-
-	else
-		return true;
+	return true;
 }
 
 int Country::getX()

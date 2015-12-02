@@ -40,6 +40,8 @@ private:
 	vector<Continent*> continents;
 	
 	void initialize();
+	Country* selectPlayerCountry(bool showArmy = false, int showWithMinArmy = 0);
+	Country* Player::selectAdjacentEnemyCountriesTo(Country* country);
 
 public:
 	Player();
@@ -67,6 +69,7 @@ public:
     int getBattlesWonTotal();
 
 	void assignReinforcements();
+	void assignAttack();
 
 	bool getAlive();
 	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!

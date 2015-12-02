@@ -37,8 +37,6 @@ private:
 	void attackPhase(Player* player);
 	void fortifcationPhase(Player* player);
 	
-	void playerAssignsAttacks();
-
 	void displayCountriesWithArmy(vector<Country*> countries);
 };
 #endif 

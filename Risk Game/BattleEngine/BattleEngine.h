@@ -1,32 +1,45 @@
+#pragma once 
 
-#pragma once //BattleEngine_H safe include guard
-#include <iostream>
-#include "../Map/Country.h"
 #include "Player.h"
+#include "../Map/Country.h"
+
+#include <iostream> 
+#include <iomanip>
 #include <string>
-using namespace std;
+#include <cstdlib>		//Random Generator
+#include <ctime>
+#include <algorithm>	//sort algorithm used
+#include <functional>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::setw;
+using std::sort;
+using std::greater;
+using std::string;
 
 class Country;
+class Player;
 
 class BattleEngine
 {
-	private:	
+private:
+	Player *attackerPlayer;
+	Player *defenderPlayer;
 	Country *attackerCountry;
 	Country *defenderCountry;
-	int attackerNum_armies;
-	int defenderNum_armies; //Not safe since these variables is available to all the functions (Purpose for Assignment 1)
-	int attackerNum_Roll, defenderNum_Roll;
-	
 
 public:
-	BattleEngine(Country *attackerCountry, Country *defenderCountry);
+	BattleEngine(Country *attacker, Country *defender);
 	~BattleEngine();
-	void attack(); //Method declaration
-	void generateRollList(int* emptyArray, int size); //Method declaration
-	void displayBattleInfo(int attackerNumOfArmies, int defenderNumOfArmies);//Method declaration
-	int roll(); //Method declaration
-	bool isAttackOver(int attackerNum_armies, int defenderNum_armies); //Method declaration
-	bool isContinue(); //Method declaration
-	bool isAllInMode();//Method declaration
-	int numberOfArmiesToSend(int numberOfRolls, int attackerNumArmies); //Method declaration
+
+	void attack(); 
+	void generateRollList(int* emptyArray, int size); 
+	void displayBattleInfo(int attackerNumOfArmies, int defenderNumOfArmies);
+	int roll(int min = 1, int max = 6);
+	bool isAttackOver(int attackerNum_armies, int defenderNum_armies); 
+	bool isContinue();
+	bool isAllInMode();
+	int numberOfArmiesToSend(int numberOfRolls, int attackerNumArmies);
 };

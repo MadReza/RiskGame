@@ -32,7 +32,7 @@ private:
 public:
 	Country(string n);
 	Country(string n, int x, int y); //this constructor will be used for the GUI and the Reading/Writing maps due to specified coordinates
-	Country(string nameOfCountry, Player *ownerID, int numberOfarmies); // Added by Kendy for Assignment 2
+	Country(string nameOfCountry, Player *ownerID, int numberOfarmies); 
 	~Country();
 	
 	void addAdjacentCountry(Country* c); //Used to add adjacent countries or edges to the Adjacent_Countries vector

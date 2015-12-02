@@ -71,7 +71,7 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
-	cout << "\n****Reinforcment Phase:: ****" << endl;
+	cout << "\n****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
 
@@ -83,17 +83,14 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
-	cout << "\n****Attack Phase:: ****" << endl;
-	playerAssignsAttacks();
+	cout << "\n****Attack Phase:: ****" << endl << endl;
+	
+	player->assignAttack();
+
 	cout << "\tIf Won Allow, Movement to new country" << endl;
 	system("pause");
 	system("cls");
 	//If won move to country X soldies.
-}
-
-void GameDriver::playerAssignsAttacks()
-{
-	cout << "\tGo through player countries. Allow attack adjacent country." << endl;
 }
 
 void GameDriver::fortifcationPhase(Player* player)
