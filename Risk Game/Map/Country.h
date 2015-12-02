@@ -1,7 +1,3 @@
-//CHRISTOPHER KRAJEWSKI 25189209
-//COMP 345 ASSIGNMENT 2
-
-
 #pragma once
 using namespace std;
 #include<string>
