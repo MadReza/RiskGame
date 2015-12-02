@@ -2,14 +2,14 @@
 
 bool CardUtilities::checkRedemption(Player * p)
 {
-	int infantry_count, artillery_count, cavalry_count;
+	int infantry_count=0, artillery_count=0, cavalry_count=0;
 
 	if (p->getCards().size() >= 5)
 	{
 		return true;
 	}
 
-	for (int i; i != p->getCards().size(); i++)
+	for (int i = 0; i != p->getCards().size(); i++)
 	{
 		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
 		{
@@ -43,144 +43,72 @@ bool CardUtilities::checkRedemption(Player * p)
 
 void CardUtilities::selectRedemption(Player * p)
 {
-	vector<string> selection;
-	bool badSelection = true;
-	bool badRedemption = true;
-	bool tripleinf, triplecav, tripleart, threediff;
+	int infantry_count=0, artillery_count=0, cavalry_count=0;
+	bool tripinf = false, tripcav = false, tripart = false, threedif = false;
 
-	while (badRedemption)
+	for (int i=0; i != p->getCards().size(); i++)
 	{
-		while (badSelection) {
-			displayPlayerCards(p);
-			string sel1, sel2, sel3;
-			cout << "Please enter the first card to redeem : " << endl;
-			cin >> sel1;
-			cout << "Please enter the second card to redeem : " << endl;
-			cin >> sel2;
-			cout << "Please enter the third card to redeem : " << endl;
-			cin >> sel3;
-
-			selection.push_back(sel1); selection.push_back(sel2); selection.push_back(sel3);
-
-			int infcount = 0, artcount = 0, cavcount = 0;
-			for (int i = 0; i < 3; i++)
-			{
-				if (selection[i] == "INFANTRY")
-				{
-					infcount++;
-				}
-				if (selection[i] == "ARTILLERY")
-				{
-					artcount++;
-				}
-				if (selection[i] == "CAVALRY")
-				{
-					cavcount++;
-				}
-			}
-
-			if (infcount == 3)
-			{
-				badSelection = false;
-				tripleinf = true;
-			}
-			else if (artcount == 3)
-			{
-				badSelection = false;
-				tripleart = true;
-			}
-			else if (cavcount == 3)
-			{
-				badSelection = false;
-				triplecav = true;
-			}
-
-			else if (infcount == 1 && cavcount == 1 && artcount == 1)
-			{
-				badSelection = false;
-				threediff = true;
-			}
-			else
-			{
-				badSelection = true;
-				cout << "That is a bad selection of cards please try again" << endl;
-				//delete the selection to try again
-				for (int i = 0; i < 3; i++)
-				{
-					selection.pop_back();
-				}
-			}
-		}
-		//now test against possible redemption
-		int infhandcount = 0, arthandcount = 0, cavhandcount = 0;
-		bool tripinfhand=false, triparthand=false, tripcavhand=false, threediffhand=false;
-		int counter = 3;
-		for (int i = 0; i != p->getCards().size(); i++)
+		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
 		{
-			if (p->getCards()[i]->getCardSuit() == "INFANTRY")
-			{
-				infhandcount++;
-			}
-			if (p->getCards()[i]->getCardSuit() == "ARTILLERY")
-			{
-				arthandcount++;
-			}
-			if (p->getCards()[i]->getCardSuit() == "CAVALRY")
-			{
-				cavhandcount++;
-			}
+			infantry_count++;
 		}
-
-		if (infhandcount == 3)
+		if (p->getCards()[i]->getCardSuit() == "ARTILLERY")
 		{
-			tripinfhand = true;
+			artillery_count++;
 		}
-		else if (arthandcount == 3)
+		if (p->getCards()[i]->getCardSuit() == "CAVALRY")
 		{
-			triparthand = true;
-		}
-		else if (cavhandcount == 3)
-		{
-			tripcavhand = true;
-		}
-		else if (infhandcount == 1 && cavhandcount == 1 && arthandcount == 1)
-		{
-			threediffhand = true;
-		}
-
-		if (tripinfhand && tripleinf)
-		{
-			badRedemption = false;
-			removeThreeInf(p);
-		}
-		else if (triparthand && tripleart)
-		{
-			badRedemption = false;
-			removeThreeArt(p);
-		}
-		else if (tripcavhand && triplecav)
-		{
-			badRedemption = false;
-			removeThreeCav(p);
-		}
-		else if (threediffhand && threediff)
-		{
-			badRedemption = false;
-			removeThreeDiff(p);
-		}
-		else
-		{
-			badRedemption = true;
-			cout << "ERROR: That is not a possible redemption!" << endl;
+			cavalry_count++;
 		}
 	}
 
+	cout << "The following redemptions are possible: " << endl;
+	if (infantry_count >= 3)
+	{
+		cout << "Enter 'i'. Redeem three INFANTRY cards." << endl;
+	}
+	if (cavalry_count >= 3)
+	{
+		cout << "Enter 'c'. Redeem three CAVALRY cards." << endl;
+	}
+	if (artillery_count >= 3)
+	{
+		cout << "Enter 'a'. Redeem three ARTILLERY cards." << endl;
+	}
+	if (artillery_count >= 1 && cavalry_count >= 1 && infantry_count >=1 )
+	{
+		cout << "Enter 'd'. Redeem three DIFFERENTLY suited cards (1 INFANTRY, 1 ARTILLERY, 1 CAVALRY)." << endl;
+	}
+	cout << "Enter 'q' to quit redemption" << endl;
 
+	char selection;
+	cout << "Please enter your selection from the above choices" << endl;
+	cin >> selection;
 
-
-
-
-
+	if (selection == 'i')
+	{
+		removeThreeSimilar(p, "INFANTRY"); 
+		p->incrementCardRedemptionsTotal();
+	}
+	else if (selection == 'c')
+	{
+		removeThreeSimilar(p, "CAVALRY");
+		p->incrementCardRedemptionsTotal();
+	}
+	else if (selection == 'a')
+	{
+		removeThreeSimilar(p, "ARTILLERY");
+		p->incrementCardRedemptionsTotal();
+	}
+	else if (selection == 'd')
+	{
+		removeThreeDiff(p);
+		p->incrementCardRedemptionsTotal();
+	}
+	else if (selection == 'q')
+	{
+		cout << "Exiting card redemption..." << endl;
+	}
 
 }
 
@@ -247,16 +175,22 @@ int CardUtilities::getRedemptionReinforcements(Player * p)
 	return 0;
 }
 
-void CardUtilities::removeThreeInf(Player * p)
+void CardUtilities::removeThreeSimilar(Player * p, string s)
 {
-}
+	int counter = 3;
+	do
+	{
+		for (int i = 0; i != p->getCards().size(); i++)
+		{
+			if (p->getCards()[i]->getCardSuit() == s)
+			{
+				//TODO
+				//p->getCards()
+					counter--;
+			}
+		}
 
-void CardUtilities::removeThreeArt(Player * p)
-{
-}
-
-void CardUtilities::removeThreeCav(Player * p)
-{
+	} while (counter > 0);
 }
 
 void CardUtilities::removeThreeDiff(Player * p)

@@ -114,7 +114,7 @@ void Player::assignReinforcements()
 		do {
 			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
 			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
-		} while (selection < 0 || selection > (countries.size()-1));
+		} while (selection < 0 || selection > (countries.size() -1));
 
 		int armyToAdd{ 0 };
 		

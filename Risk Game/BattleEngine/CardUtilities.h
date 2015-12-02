@@ -25,9 +25,7 @@ public:
 	/*The number of reinforcements for a successful card redemption will
 	increase with every subsequent redemptions*/
 	static int getRedemptionReinforcements(Player* p);
-	static void removeThreeInf(Player* p);
-	static void removeThreeArt(Player* p);
-	static void removeThreeCav(Player* p);
+	static void removeThreeSimilar(Player* p, string s);
 	static void removeThreeDiff(Player* p);
 
 
