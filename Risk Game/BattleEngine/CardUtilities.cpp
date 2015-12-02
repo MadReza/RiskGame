@@ -41,6 +41,18 @@ bool CardUtilities::checkRedemption(Player * p)
 	
 }
 
+bool CardUtilities::mandatoryRedemption(Player * p)
+{
+	if (p->getCards().size() >= 5)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void CardUtilities::selectRedemption(Player * p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
@@ -180,21 +192,17 @@ void CardUtilities::removeThreeSimilar(Player * p, string s)
 	int counter = 3;
 	do
 	{
-		for (int i = 0; i != p->getCards().size(); i++)
-		{
-			if (p->getCards()[i]->getCardSuit() == s)
-			{
-				//TODO
-				//p->getCards()
-					counter--;
-			}
-		}
+		deleteSuit(p, s);
+		counter--;
 
 	} while (counter > 0);
 }
 
 void CardUtilities::removeThreeDiff(Player * p)
 {
+	deleteSuit(p,"INFANTRY");
+	deleteSuit(p, "ARTILLERY");
+	deleteSuit(p, "CAVALRY");
 }
 
 
@@ -202,4 +210,17 @@ void CardUtilities::removeThreeDiff(Player * p)
 CardUtilities::~CardUtilities()
 {
 
+}
+
+void CardUtilities::deleteSuit(Player *p,string suit)
+{
+		for (int i = 0; i != p->getCards().size(); i++)
+		{
+			if (p->getCards()[i]->getCardSuit() == suit)
+			{
+				p->getCards().erase(p->getCards().begin() + i);
+				break;
+			}
+		}
+	
 }

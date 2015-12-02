@@ -15,6 +15,7 @@ class CardUtilities{
 
 public:
 	static bool checkRedemption(Player* p);
+	static bool mandatoryRedemption(Player* p);
 	static void selectRedemption(Player* p);
 	static void displayPlayerCards(Player* p);
 	/*This method transfers all the cards from Player a to Player b.
@@ -27,10 +28,10 @@ public:
 	static int getRedemptionReinforcements(Player* p);
 	static void removeThreeSimilar(Player* p, string s);
 	static void removeThreeDiff(Player* p);
-
-
+	
 private:
 	CardUtilities();
 	~CardUtilities();
+	static void deleteSuit(Player *p, string suit);
 
 };
