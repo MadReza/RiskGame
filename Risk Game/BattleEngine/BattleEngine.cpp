@@ -1,24 +1,11 @@
 ﻿#include "BattleEngine.h"
-	
-BattleEngine::BattleEngine(Country *attacker, Country *defender){
 		
-	attackerCountry = attacker;
-	defenderCountry = defender;
-
-	attackerPlayer = attackerCountry->getOwner();
-	defenderPlayer = defenderCountry->getOwner();
-
-	attack();
-}
-
-BattleEngine::~BattleEngine(){
-
-}
-		
-void BattleEngine::attack() {
-	int* attackerRollsList = nullptr;;
+bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
+	int* attackerRollsList = nullptr;
 	int* defenderRollsList = nullptr;
-
+	Player *attackerPlayer = attackerCountry->getOwner();
+	Player *defenderPlayer = defenderCountry->getOwner();
+	bool countryConquered = false;
 
 	srand((unsigned)time(0)); //generate random number based on computer clocks
 
@@ -28,16 +15,16 @@ void BattleEngine::attack() {
 	system("cls");
 	cout << "\n\t*****Attacking*****\n\n";
 		
-	displayBattleInfo();
+	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 		
-	allInMode = isAllInMode();
+	allInMode = isAllInMode(attackerPlayer);
 
 	if (allInMode){
 		goto allIn;
 	}
 
 playerAttack:
-	attackerNumRoll = attackerRoll();
+	attackerNumRoll = attackerRoll(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	if (attackerNumRoll == 0) //User Cancelled
 		goto stop;
 	goto skipAllIn;
@@ -55,10 +42,10 @@ skipAllIn:
 
 	system("cls");
 	
-	compareRolls(attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
+	compareRolls(attackerCountry, defenderCountry,attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
 
 	cout << "\n\t*****RESULT*****\n\n";
-	displayBattleInfo();
+	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << endl;
 
 	//displaying attacker rolls
@@ -75,7 +62,7 @@ skipAllIn:
 	int num_ArmiesToSend;
 
 	//Defender Lost
-	if (defenderLost(attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){
+	if (defenderLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){
 		//Display
 		displayDefenderLost();
 		cout << endl;
@@ -85,7 +72,7 @@ skipAllIn:
 		//Process
 		attackerPlayer->setTurnVictory(true);
 		attackerPlayer->setBattlesWonTotal(attackerPlayer->getBattlesWonTotal() + 1);
-		num_ArmiesToSend = numberOfArmiesToSend(attackerNumRoll, attackerCountry->getNumArmies());
+		num_ArmiesToSend = numberOfArmiesToSend(attackerPlayer, attackerNumRoll, attackerCountry->getNumArmies());
 		defenderCountry->setOwner(attackerPlayer);
 		//Move Army from country to new country
 		attackerCountry->addArmies(-num_ArmiesToSend);
@@ -94,11 +81,12 @@ skipAllIn:
 		cout << attackerPlayer->getName() << " sent " << num_ArmiesToSend << " to " << defenderCountry->getName() << endl;
 		system("pause");
 		
+		countryConquered = true;
 		goto stop;
 	}
 
 	//Attacker Lost
-	if (attackerLost(attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){
+	if (attackerLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){	//TODO reformating: doesn't need to pass NumArmies
 		
 		displayAttackerLost();
 		cout << endl;
@@ -124,6 +112,7 @@ stop:
 		delete[]attackerRollsList;//Deallocate memory
 	if (defenderRollsList != nullptr)
 		delete[]defenderRollsList;//Deallocate memory
+	return countryConquered;
 }
 
 int* BattleEngine::generateDescSortedRollList(int size){
@@ -151,14 +140,14 @@ bool BattleEngine::isAttackOver(int attackerNum_armies, int defenderNum_armies){
 		return false;
 }
 
-bool BattleEngine::defenderLost(int attackerNum_armies, int defenderNum_armies)
+bool BattleEngine::defenderLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies)
 {
 	if (isAttackOver(attackerCountry->getNumArmies(), defenderCountry->getNumArmies()) && defenderCountry->getNumArmies() < 1)
 		return true;
 	return false;
 }
 
-bool BattleEngine::attackerLost(int attackerNum_armies, int defenderNum_armies)
+bool BattleEngine::attackerLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies)
 {
 	if (isAttackOver(attackerCountry->getNumArmies(), defenderCountry->getNumArmies()) && attackerCountry->getNumArmies() <= 1)
 		return true;
@@ -182,7 +171,7 @@ bool BattleEngine::isContinue(){
 /* All in Function uses the maximum number of dice on both sides and runs automatically until the attack results in either 
 	a) the defending country to be conquered and all armies of the conquering country are moved to the conquered country
 or  b) the attacking country runs out of armies and cannot attack anymore */
-bool BattleEngine::isAllInMode(){
+bool BattleEngine::isAllInMode(Player *attackerPlayer){
 
 	//Attacker is a computer player no need to ask anything 
 	if (!attackerPlayer->isHuman(*attackerPlayer))
@@ -204,14 +193,14 @@ bool BattleEngine::isAllInMode(){
 
 /*This function makes the attacking player place a number of armies in the conquered country which is greater or equal than the number of
 dice that was used in the attack that resulted in conquering the country*/
-int BattleEngine::numberOfArmiesToSend(int numberOfRolls, int attackerNumArmies){
+int BattleEngine::numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls, int attackerNumArmies){
 	int numArmtoSend, minimumTransArmy;
 	minimumTransArmy = numberOfRolls >= attackerNumArmies ? attackerNumArmies - 1 : numberOfRolls;
 
 	//Attacker Player is a computer? then randomize the # of armies to be send (
 	if (!attackerPlayer->isHuman(*attackerPlayer)) {
 		numArmtoSend = roll(minimumTransArmy, attackerNumArmies - minimumTransArmy); //return random number between (min trans armies and max armies -1)			
-		cout << "\n" << attackerPlayer->getName() << " returned " << numArmtoSend << " Army(ies)\n" << endl;	//TODO check formatting Kendy
+		cout << "\n" << attackerPlayer->getName() << " returned " << numArmtoSend << " Army(ies)\n" << endl;	//TODO check formatting Kendy, Sentence restructure
 		return numArmtoSend;
 	}
 	else{
@@ -225,13 +214,13 @@ int BattleEngine::numberOfArmiesToSend(int numberOfRolls, int attackerNumArmies)
 	}
 }
 
-int BattleEngine::attackerRoll()
+int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, Country *attackerCountry, Country *defenderCountry)
 {
 	start:
 	//Determine the # of armies the attacker will send
 	int sentArmies; 
 	system("cls");
-	displayBattleInfo();
+	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack? (Not more than " << attackerCountry->getNumArmies() - 1 << " )" << endl;
 	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
 	cin >> sentArmies;
@@ -247,7 +236,7 @@ int BattleEngine::attackerRoll()
 }
 
 //loop and verify the attacker and defender corresponding dices
-void BattleEngine::compareRolls(int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll)
+void BattleEngine::compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll)
 {
 	//Will return the minimum number of roll that we will compare (3,2 or 1)
 	int minNumOfRolls = std::min(attackerNumRoll, defenderNumRoll);
@@ -267,7 +256,7 @@ void BattleEngine::compareRolls(int* attackerRollsList, int* defenderRollsList, 
 }
 
 //Will display the Battle Information before the attack
-void BattleEngine::displayBattleInfo(){
+void BattleEngine::displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry){
 
 	cout << setfill(' ') << setw(29) << "Attacker" << setfill(' ') << setw(19) << "Defender" << endl;
 	cout << " " << setfill('#') << setw(54) << "";

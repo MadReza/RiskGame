@@ -88,6 +88,8 @@ public:
 	void assignAttack();
 
 	bool getAlive();
+	void setAlive(bool trueFalse);
+
 	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!
 
 	//Card Methods

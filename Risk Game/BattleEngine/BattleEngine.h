@@ -26,30 +26,25 @@ class Player;
 class BattleEngine
 {
 private:
-	Player *attackerPlayer;
-	Player *defenderPlayer;
-	Country *attackerCountry;
-	Country *defenderCountry;
 
-	int attackerRoll();
-	void displayBattleInfo();
-	bool isAttackOver(int attackerNum_armies, int defenderNum_armies);
-	bool defenderLost(int attackerNum_armies, int defenderNum_armies);
-	bool attackerLost(int attackerNum_armies, int defenderNum_armies);
-	void compareRolls(int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll);
-	int* generateDescSortedRollList(int size);
+	static int attackerRoll(Player* attackerPlayer, Player* defenderPlayer, Country *attackerCountry, Country *defenderCountry);
+	static bool isAttackOver(int attackerNum_armies, int defenderNum_armies);
+	static bool defenderLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies);
+	static bool attackerLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies);
+	static void compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll);
+	static int* generateDescSortedRollList(int size);
 
-	int roll(int min = 1, int max = 6);
-
-	void displayDefenderLost();
-	void displayAttackerLost();
-
-public:
-	BattleEngine(Country *attacker, Country *defender);
+	static int roll(int min = 1, int max = 6);
+	
+	static void displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry);
+	static void displayDefenderLost();
+	static void displayAttackerLost();
+	
+	BattleEngine();
 	~BattleEngine();
-
-	void attack(); 
-	bool isContinue();
-	bool isAllInMode();
-	int numberOfArmiesToSend(int numberOfRolls, int attackerNumArmies);
+public:
+	static bool attack(Country *attacker, Country *defender);
+	static bool isContinue();
+	static bool isAllInMode(Player *attackerPlayer);
+	static int numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls, int attackerNumArmies);
 };
