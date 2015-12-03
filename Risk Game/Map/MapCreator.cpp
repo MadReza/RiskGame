@@ -24,7 +24,7 @@ std::MapCreator::MapCreator()
 	int option = 0;
 	bool isComplete;
 
-	while (!std::vInteger(option, 0, 2)){
+	while (!std::validInteger(option, 0, 2)){
 		cout << "Sorry what was that? Enter > ";
 	}
 
@@ -44,7 +44,7 @@ std::MapCreator::MapCreator()
 		do{
 			cout << "1:  Yes , 0: No" << endl;
 			cout << "Would you like to save this map, " << name << "? Enter >";
-		} while (!std::vInteger(answer, 0, 1));
+		} while (!std::validInteger(answer, 0, 1));
 
 			switch (answer)
 			{
@@ -98,14 +98,14 @@ void std::MapCreator::create()
 	int numCountries;
 
 	cout << "How many countries are you creating? Enter > ";
-	while (!std::vInteger(numCountries, 4, 255))
+	while (!std::validInteger(numCountries, 4, 255))
 	{
 		cout << "Enter between 4 and 255, Please > ";
 	}
 
 	int numContinents;
 	cout << endl << "How many continent are you creating? Enter > ";
-	while (!std::vInteger(numContinents, 2, numCountries))
+	while (!std::validInteger(numContinents, 2, numCountries))
 	{
 		cout << "Enter between 2 and less then the number of countries. > ";
 	}

@@ -94,6 +94,7 @@
     <ClCompile Include="Map\UtilityMap.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="UI\PlayerView.cpp" />
+    <ClCompile Include="Validation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleEngine\Agressive.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="UI\PlayerView.h" />
+    <ClInclude Include="Validation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

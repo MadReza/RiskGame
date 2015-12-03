@@ -144,6 +144,9 @@
     <ClCompile Include="libs\PugiXML\pugixml.cpp">
       <Filter>libs\PugiXML\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Validation.cpp">
+      <Filter>Utilities\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="libs\PugiXML\pugixml.hpp">
       <Filter>libs\PugiXML\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Validation.h">
+      <Filter>Utilities\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
