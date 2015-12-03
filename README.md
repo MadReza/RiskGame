@@ -20,7 +20,7 @@
   - [ ] Nothing left ???
 - [ ] GameDriver
   - [ ] Add Winner Notification note: Player countries size == map countries size... DO SOMETHING
-  - [ ] 
+  
 ## GRADING TODO
 - [ ] Functional Requirements 35
   - [x] Map creation and editing 7
