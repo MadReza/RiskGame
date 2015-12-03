@@ -49,14 +49,17 @@ namespace std{
 		vector<UtilityCountry> getCountries() { return CountryList; }
 		void setCountries(vector<UtilityCountry> NewSetCountries) { CountryList = NewSetCountries; }
 
-		void print();
+		void printAllMap();
+		void printContinents();
+		void printCountries();
 		Map* getMapObject();
 		bool writeMapFile(string fileLocation);
 
 		bool isEmpty() { return CountryList.size() == 0; }
 		bool isValidMap(); 
 
-		void bufferMapFile(string fileLocation);
+		/*buffers data of a map file. returns false for wrong file extension*/
+		bool bufferMapFile(string fileLocation);
 		void bufferMapObject(Map &MapObject);
 
 		

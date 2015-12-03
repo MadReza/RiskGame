@@ -31,16 +31,25 @@ std::UtilityMap::UtilityMap(string fileLocation)
 	bufferMapFile(fileLocation);
 }
 
-void std::UtilityMap::print()
+void std::UtilityMap::printAllMap()
 {
 	cout << "Printing Map" << endl;
+	cout << "Map Name: " << name << endl;
+	cout << "Author Name: " << author << endl;
+	printContinents();
+	printCountries();
+}
+
+void std::UtilityMap::printContinents(){
 	cout << endl << "[Continents]" << endl;
 	for (unsigned int i = 0; i < ContinentList.size(); i++){
 		cout << ContinentList[i].getContinentName() << "=" << ContinentList[i].getBonus() << endl;
 	}
 	cout << endl;
+}
 
-	cout << endl << "[Territories]" << endl;					//GET NUM CONTUNRY***, WHERE IS
+void std::UtilityMap::printCountries(){
+	cout << endl << "[Territories]" << endl;					
 	for (unsigned int i = 0; i < CountryList.size(); i++) {
 		cout << CountryList[i].getCountryName()
 			<< "," << CountryList[i].getX()
@@ -79,9 +88,14 @@ void std::UtilityMap::bufferMapObject(Map &MapObject) {
 /*******************************
 Buffer from fileMapLocation
 *******************************/
-void std::UtilityMap::bufferMapFile(string fileLocation) {
+bool std::UtilityMap::bufferMapFile(string fileLocation) {
 
 	name = (fileLocation.substr(0, fileLocation.find('.')));
+
+	string file_extension = fileLocation.substr(fileLocation.find('.') + 1);
+
+	if (file_extension.compare("risk") != 0 && file_extension.compare("map") != 0)
+		return false;
 
 	fstream mapFile;
 	mapFile.open(fileLocation, ios::in);
@@ -92,19 +106,29 @@ void std::UtilityMap::bufferMapFile(string fileLocation) {
 	string name; //the property
 	string section; //section track
 
+	//for risk extension		
+	bool risk_ext = false;
+	if (file_extension.compare("risk") == 0)
+		risk_ext = true;
+	int risk_ext_section = 0;
+
 	while (!mapFile.eof()) {
 
 		getline(mapFile, line, '\n');
 
 		if (line.empty()) continue;
 
-		if (line[0] == '[') { //UPDATES SECTION DEPENDING ON WHERE IT IS
+		if (risk_ext && line[0] == '*'){//UPDATES SECTION DEPENDING ON WHERE IT IS
+			risk_ext_section++;		
+			continue;		
+		}		
+		else if (line[0] == '[') {//UPDATES SECTION DEPENDING ON WHERE IT IS
 			section = line.substr(1, line.length() - 2);
 			continue;
 		}
 
 		/*MAP FILE SETTINGS EXTRACTION*/
-		if (section.compare("Map") == 0) { //EXTRACTS MAP INFO
+		if (section.compare("Map") == 0 || (risk_ext_section == 0 && risk_ext)) { //EXTRACTS MAP INFO
 			int equalSign = line.find('=');
 			name = line.substr(0, equalSign);
 			value = line.substr(equalSign + 1, line.length() - 1);
@@ -118,7 +142,7 @@ void std::UtilityMap::bufferMapFile(string fileLocation) {
 		/*END OF MAP FILE SETTING*/
 
 		/*CONTINENT SECTION EXTRACTION*/
-		if (section.compare("Continents") == 0) { //EXTRACTS CONTINENTS
+		if (section.compare("Continents") == 0 || (risk_ext_section == 1 && risk_ext)) { //EXTRACTS CONTINENTS
 			int equalSign = line.find('=');
 			name = line.substr(0, equalSign);
 			value = line.substr(equalSign + 1, line.length() - 1);
@@ -130,7 +154,7 @@ void std::UtilityMap::bufferMapFile(string fileLocation) {
 		/*END OF CONTINENT SECTION EXTRACTION*/
 
 		/*TERRITORY SECTION EXTRACTION*/
-		if (section.compare("Territories") == 0) {
+		if (section.compare("Territories") == 0 || (risk_ext_section == 2 && risk_ext)) {
 			UtilityCountry temp;
 			vector<string> adjacentCountries;
 
@@ -177,7 +201,7 @@ void std::UtilityMap::bufferMapFile(string fileLocation) {
 		/*END OF TERRITORY SECTION EXTRACTION*/
 
 	} /*END OF FILE EXTRACTION*/
-
+	return true;
 }
 
 /*******************************
@@ -249,13 +273,20 @@ Map* std::UtilityMap::getMapObject(){
 Writes to from UtilityMap to File
 *******************************/
 bool std::UtilityMap::writeMapFile(string fileLocation) {
-	if (isEmpty())
-		throw InvalidMapObjectException;
+	string file_extension = fileLocation.substr(fileLocation.find(".") + 1);
+	if (file_extension.compare("risk") != 0 && file_extension.compare("map") != 0)
+		return false;
+
 	fstream mapFile;
 	mapFile.open(fileLocation, ios::out);
 
+	bool file_risk_ext = false;
+	if (file_extension.compare("risk") == 0)
+		file_risk_ext = true;
+
 	//MAP SETTINGS
-	mapFile << "[Map]" << endl;
+	if (!file_risk_ext)
+		mapFile << "[Map]" << endl;
 	string settings[5] = { "author=","image=","wrap=","scroll=","warn=" };
 	for (int i = 0; i < 5; i++) {
 		mapFile << settings[i];
@@ -268,14 +299,20 @@ bool std::UtilityMap::writeMapFile(string fileLocation) {
 	}
 
 	//FOR EACH CONTINENT..			
-	mapFile << endl << "[Continents]" << endl;
+	if (!file_risk_ext)
+		mapFile << endl << "[Continents]" << endl;		
+	else		
+		mapFile << "*****************************************" << endl;
 	for (unsigned int i = 0; i < ContinentList.size(); i++)
 	{
 		mapFile << ContinentList[i].getContinentName() << "=" << ContinentList[i].getBonus() << endl;
 	}
 
 	//EACH COUNTRY
-	mapFile << endl << "[Territories]" << endl;					//GET NUM CONTUNRY***, WHERE IS
+	if (!file_risk_ext)
+		mapFile << endl << "[Territories]" << endl;	
+	else
+		mapFile << "*****************************************" << endl;
 	for (unsigned int i = 0; i < CountryList.size(); i++) {
 		mapFile << CountryList[i].getCountryName()
 			<< "," << CountryList[i].getX()

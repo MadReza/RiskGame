@@ -293,7 +293,7 @@ int Instantiation::startOrLoad()
 	int selection;
 	cout << "Type 0: To Start a New Game" << endl;
 	cout << "Type 1: To Load a Game" << endl;
-	cout << "Type 2: To Create a Map" << endl;
+	cout << "Type 2: To Create or Edit a Map" << endl;
 	cout << "Selection: ";
 
 	while (!std::validInteger(selection, 0, 2))

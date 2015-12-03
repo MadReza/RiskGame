@@ -22,13 +22,13 @@ std::MapCreator::MapCreator()
 	cout << "Enter > ";
 
 	int option = 0;
-	bool isComplete;
 
 	while (!std::validInteger(option, 0, 2)){
 		cout << "Sorry what was that? Enter > ";
 	}
 
-	switch (option) {
+	switch (option) 
+	{
 		case 0: 
 			break;
 		case 1: 
@@ -39,32 +39,52 @@ std::MapCreator::MapCreator()
 			break;
 	}
 	system("cls");
-	if(!isEmpty() && isValidMap()){
+
+	if(!isEmpty() && isValidMap())
+	{
 		int answer;
-		do{
+
+		do
+		{
 			cout << "1:  Yes , 0: No" << endl;
 			cout << "Would you like to save this map, " << name << "? Enter >";
-		} while (!std::validInteger(answer, 0, 1));
 
-			switch (answer)
+ 		} while (!std::validInteger(answer, 0, 1));
+
+		if (answer == 0)
+		{
+			cout << "Are you sure? Work will be deleted!" << endl;
+			while (!std::validInteger(answer, 0, 1))
 			{
+				cout << "Error Try again... > ";
+			}
+		}
+
+		switch (answer)
+		{
 			case 1:
+
 				cout << "Saving map... " << endl; 
 				writeMapFile(name + ".map");
-				cout << "Success" << endl;
+				cout << "Success!" << endl;
+
+				system("pause");
 				system("cls");
 				break;
 			case 0:
-				cout << "Exiting..." << endl; system("cls");
 				break;
 			default:
 				break;
-			}
+		}
+
 	}
-	else {
+	else 
+	{
 		cout << "Looks like the map is empty or not valid?" << endl;
 	}
+
 	cout << "Exiting mapcreator.." << endl;
+	system("pause");
 }
 
 std::MapCreator::~MapCreator()
@@ -77,15 +97,11 @@ void std::MapCreator::create()
 	system("cls");
 	cout << "\n>>>>>>>>>>>Map Creation Mode<<<<<<<<<<<" << endl;
 	cout << ">>>>>>>>>>>>>>>>>>>>>1/5<<<<<<<<<<<<<<<<<" << endl;
-	/*
-		create
-		name, author
-		numcoutnry, num continent
-		country
-		contient
-		check
-		fix util connected.
-	*/
+	
+	cout << endl << "Welcome to Map Creation Mode:" << endl;
+	cout << endl << "INSTRUCTIONS: The map creator will guide you slowly into building your own beautiful map, however you must have a plan before doing so." << endl;
+	cout << "All data enter are case-sensitive. If you have entered the wrong info, it could be later on be corrected in the last process. Cheers! :)" << endl << endl;
+
 	cout << "What is the new map name? Enter > ";
 	cin >> name;
 	cout << "Who is the author? Enter > ";
@@ -95,6 +111,7 @@ void std::MapCreator::create()
 	cout << "\n>>>>>>>>>>>Map Creation Mode<<<<<<<<<<<" << endl;
 	cout << ">>>>>>>>>>>>>>>>>>>>>2/5<<<<<<<<<<<<<<<<<" << endl;
 	cout << "\nEnter more then 4 countries and 2 continents..\n" << endl;
+
 	int numCountries;
 
 	cout << "How many countries are you creating? Enter > ";
@@ -114,7 +131,9 @@ void std::MapCreator::create()
 	cout << "\n>>>>>>>>>>>Adding Continents<<<<<<<<<<<" << endl;
 	cout << ">>>>>>>>>>>>>>>>>>>>>3/5<<<<<<<<<<<<<<<<<" << endl;
 	cout << "RULE: Contienents must have more then 2 bonus points\n" << endl;
-	for (int i = 0; i < (int)numContinents; i++) {
+
+	for (int i = 0; i < (int)numContinents; i++) 
+	{
 		cout << endl;
 		cout << "For Continent " << i + 1 << endl;
 		addContinent();
@@ -124,10 +143,14 @@ void std::MapCreator::create()
 	cout << "\n>>>>>>>>>>>>Adding Countries<<<<<<<<<<<" << endl;
 	cout << ">>>>>>>>>>>>>>>>>>>>>4/5<<<<<<<<<<<<<<<<<" << endl;
 	cout << "\nHere are the current contients created" << endl;
-	for (int i = 0; i < (int)numContinents; i++){
+
+	for (int i = 0; i < (int)numContinents; i++)
+	{
 		cout << ContinentList[i].getContinentName() << " \n";
 	}
-	for (int i = 0; i < numCountries; i++) {
+
+	for (int i = 0; i < numCountries; i++) 
+	{
 		cout << endl;
 		cout << "For Country " << i + 1 << endl;
 		addCountry();
@@ -145,27 +168,28 @@ void std::MapCreator::addCountry()
 	string name, continent;
 	int x, y, numAdj;
 	vector<string> adjacentCountry;
-	cout << "What is its name? Enter > ";
+	cout << "What is the...: " << endl;
+	cout << "NAME? Enter > ";
 	cin >> name;
 
 	do {
-		cout << "What is the x cordinate? Enter > ";
+		cout << "X cordinate? Enter > ";
 	} while (!std::validInteger(x, 0, 9999));
 
 	do {
-		cout << "What is the y cordinate? Enter > ";
+		cout << "Y cordinate? Enter > ";
 	} while (!std::validInteger(y, 0, 9999));
 
-	cout << "What is the continent of '" << name << "'? Enter > ";
+	cout << "CONTINENT of '" << name << "'? Enter > ";
 	cin >> continent;
 
 	do {
-		cout << "What is the number of adjacent countries? Enter > ";
-	} while (!std::validInteger(numAdj, 0, 9999));
+		cout << "NUMBER of adjacent countries? Enter > ";
+	} while (!std::validInteger(numAdj, 1, 9999));
 
 	for (int i = 0; i < numAdj; i++) {
 		string temp;
-		cout << "What is the name of adjacent country? Enter > ";
+		cout << "NAME of that adjacent country? Enter > ";
 		cin >> temp;
 		adjacentCountry.push_back(temp);
 	}
@@ -190,10 +214,13 @@ void std::MapCreator::addContinent() {
 bool std::MapCreator::validate(){
 	int option;
 	cout << endl << "Checking...";
+
 	if (isEmpty())
 		return false;
-	while (!isValidMap()) {
-		print();
+
+	while (!isValidMap()) 
+	{
+		printAllMap();
 		cout << endl;
 		cout << "There was an error" << endl;
 		cout << "You must do one of the following to correct the problem: " << endl;
@@ -245,6 +272,7 @@ void std::MapCreator::edit(){
 	cout << "Where is the map file location located?" << endl;
 	string fileLocation;
 	cin >> fileLocation;
+
 	bufferMapFile(fileLocation);
 	if (!isValidMap()) {
 		cout << "MapFile Currupted!" << endl;
@@ -256,10 +284,10 @@ void std::MapCreator::edit(){
 	do {
 		system("cls");
 		cout << endl;
-		print();
+		printAllMap();
 		cout << endl;
 		int option;
-		cout << "0: exit (work may be lost!)" << endl;
+		cout << "0: save and exit" << endl;
 		cout << "1: edit map" << endl;
 		cout << "2: edit country" << endl;
 		cout << "3: edit continent" << endl;
@@ -288,16 +316,14 @@ void std::MapCreator::edit(){
 }
 
 //================================================================================Edit Country================================================================================
-void std::MapCreator::editCountry(){
+void std::MapCreator::editCountry()
+{
 	system("cls");
-	for (unsigned int i = 0; i < CountryList.size(); i++) {
-		cout << i << ": " << CountryList[i].getCountryName() << endl;
-	}
-	cout << endl;
+	printCountryList();
 
 	cout << "What would you like to do?" << endl;
 	cout << "0: exit " << endl;
-	cout << "1: change country name." << endl;
+	cout << "1: change country name. (updates entire map)" << endl;
 	cout << "2: change x point." << endl;
 	cout << "3: change y point." << endl;
 	cout << "4: change continent." << endl;
@@ -322,65 +348,87 @@ void std::MapCreator::editCountry(){
 	switch (option) {
 		case 1: {
 				string old = CountryList[targetCountry].getCountryName();
+
 				cout << "What is the new country name of '" << CountryList[targetCountry].getCountryName() << "' ?" << endl;
 				string newName;
 				cin >> newName;
+
 				CountryList[targetCountry].setCountryName(newName);
 				//update map with new country name
-				for (unsigned int i = 0; i < CountryList.size(); i++) {
-					for (unsigned int k = 0; k < CountryList[i].getAdjacentCountries().size(); k++) {
-						if (old.compare(CountryList[i].getAdjacentCountries()[k]) == 0)
+				for (unsigned int i = 0; i < CountryList.size(); i++) 
+				{
+					for (unsigned int k = 0; k < CountryList[i].getAdjacentCountries().size(); k++) 
+					{
+						if (old.compare(CountryList[i].getAdjacentCountries()[k]) == 0){
 							CountryList[i].getAdjacentCountries()[k] = newName;
+							break;
+						}
 					}
 				}
 			}		
 			break;
+
 		case 2:
 			cout << "What is the new x point of '" << CountryList[targetCountry].getCountryName() << "'?" << endl;
+
 			int xpoint;
 			while (!std::validInteger(xpoint, 0, 9999)){
 				cout << "Try again: " << endl;
  			}
 			CountryList[targetCountry].setX(xpoint);
 			break;
+
 		case 3:
 			cout << "What is the new y point of '" << CountryList[targetCountry].getCountryName() << "'?" << endl;
+
 			int ypoint;
 			while (!std::validInteger(ypoint, 0, 9999)){
 				cout << "Try again: " << endl;
 			}
 			CountryList[targetCountry].setY(ypoint);
 			break;
+
 		case 4: {
 				cout << "What is the new continent of '" << CountryList[targetCountry].getCountryName() << "'?" << endl;
 				cout << "\nHere are the current contients created" << endl;
+
 				for (unsigned int i = 0; i < ContinentList.size(); i++) {
 					cout << ContinentList[i].getContinentName() << " \n";
 				}
+
 				string newContinent;
 				cin >> newContinent;
 				CountryList[targetCountry].setContient(newContinent);
 			}
 			break;
+
 		case 5: {
 				cout <<"Here are the current adjacent countries of '" << CountryList[targetCountry].getCountryName() << "'..." << endl;
-				for (unsigned int i = 0; i < CountryList[targetCountry].getAdjacentCountries().size(); i++) {
+
+				for (unsigned int i = 0; i < CountryList[targetCountry].getAdjacentCountries().size(); i++) 
+				{
 					cout << i << CountryList[targetCountry].getAdjacentCountries()[i] << endl;
 				}
 				int option;
+
 				cout << "0: remove adjacency";
 				cout << "1: add adjacency";
-				while (!std::validInteger(option, 0, 1)){
+
+				while (!std::validInteger(option, 0, 1))
+				{
 					cout << "Try again: " << endl;
 				}
+
 				switch (option) {
 				case 0: {
 						cout << "which adjacent country would you like to remove? " << endl;
-						string remove; //TODO
+						string remove;
+						cin >> remove;
 						for (unsigned int i = 0; i < CountryList[targetCountry].getAdjacentCountries().size(); i++) {
 							if (remove.compare(CountryList[targetCountry].getAdjacentCountries()[i]) == 0)
 								CountryList[targetCountry].getAdjacentCountries().erase(CountryList[targetCountry].getAdjacentCountries().begin() + i);
 						}
+
 					}
 					break;
 				case 1: {
@@ -397,13 +445,12 @@ void std::MapCreator::editCountry(){
 	}
 }
 
-//================================================================================EditContinet================================================================================
-void std::MapCreator::editContinent(){
+//================================================================================EditContinent================================================================================
+void std::MapCreator::editContinent()
+{
 	system("cls");
-	for (unsigned int i = 0; i < ContinentList.size(); i++){
-		cout << i << ": " << ContinentList[i].getContinentName() << endl;
-	}
-	cout  << endl;
+	
+	printContientList();
 
 	cout << "What would you like to do?" << endl;
 	cout << "0: exit " << endl;
@@ -412,9 +459,9 @@ void std::MapCreator::editContinent(){
 
 	int option;
 	cout << "Enter > ";
-	do {
+	while (!std::validInteger(option, 0, 2)){
 		cout << "Try again > ";
-	} while (!std::validInteger(option, 0, 2));
+	}
 
 	if (option == 0)
 		return;
@@ -451,7 +498,8 @@ void std::MapCreator::editContinent(){
 	}
 }
 //================================================================================Edit Map Properties================================================================================
-void std::MapCreator::editMap(){
+void std::MapCreator::editMap()
+{
 	system("cls");
 	cout << "Name: " << name << endl;
 	cout << "Author: " << author << endl << endl;
@@ -481,35 +529,62 @@ void std::MapCreator::editMap(){
 }
 
 //================================================================================Remove Country================================================================================
-void std::MapCreator::removeCountry(){
-	print();
+void std::MapCreator::removeCountry()
+{
+	printCountryList();
+
 	string target;
 	cout << "Which country would you like to remove? Enter > ";
 	cin >> target;
 	cout << "Searching and destroying..." << endl;
 	for (unsigned int i = 0; i < CountryList.size(); i++) {
+
 		if (target.compare(CountryList[i].getCountryName()) == 0) {
 			cout << "Erased" << CountryList[i].getCountryName() << endl;
 			CountryList.erase(CountryList.begin() + i);
 			continue;
 		}
+
 		vector<string> temp = CountryList[i].getAdjacentCountries();
 		for (unsigned int k = 0; k < temp.size(); k++) {
 			if (target.compare(temp[k]) == 0)
 				temp.erase(temp.begin() + k);
 		}
+
+		bool foundOne = false;
+		do{
+			bool foundOne = false;
+			for (unsigned int k = 0; k < temp.size(); k++) {
+				if (target.compare(temp[k]) == 0){
+					temp.erase(temp.begin() + k);
+					foundOne = true;
+					break;
+				}
+			}
+		} while (foundOne);
+
 	}
 	system("pause");
 }
 
 //================================================================================Remove Continent================================================================================
-void std::MapCreator::removeContinent(){
-	print();
+void std::MapCreator::removeContinent()
+{
+	printContientList();
+
 	string target;
 	cout << "!!!!Attention removing continent will remove all the countries in it!!!!" << endl;
+
+	int ans;
+	cout << "Would you like to continue? N: 0 Y: 1 > ";
+	while (!std::validInteger(ans, 0, 1)){
+		cout << "Error. Try Again > ";
+	}
+
 	cout << "Which continent would you like to remove? Enter > ";
 	cin >> target;
 	cout << "Searching and destroying..." << endl;
+
 	int count = 0;
 	for (unsigned int i = 0; i < ContinentList.size(); i++) {
 		if (target.compare(ContinentList[i].getContinentName()) == 0) {
@@ -517,12 +592,43 @@ void std::MapCreator::removeContinent(){
 			break;
 		}
 	}
-	for (unsigned int i = 0; i < CountryList.size(); i++){
-		if (target.compare(CountryList[i].getContinent()) == 0) {
-			CountryList.erase(CountryList.begin() + i);
+
+	bool foundOne = false;
+	do{
+		bool foundOne = false;
+		for (unsigned int i = 0; i < CountryList.size(); i++){
+			if (target.compare(CountryList[i].getContinent()) == 0) {
+				CountryList.erase(CountryList.begin() + i);
+				foundOne = true;
+				break;
+			}
 		}
-	}
+	} while (foundOne);
+	
 	cout << "Erased " << count << " reoccurring." << endl;;
 	system("pause");
 }
 
+//********************************************UTILITES
+void std::MapCreator::printContientList()
+{
+	cout << endl << "[Continents]" << endl;
+	for (unsigned int i = 0; i < ContinentList.size(); i++){
+		cout << i << " : " << ContinentList[i].getContinentName() << "=" << ContinentList[i].getBonus() << endl;
+	}
+	cout << endl;
+}
+
+void std::MapCreator::printCountryList(){
+	cout << endl << "[Territories]" << endl;
+	for (unsigned int i = 0; i < CountryList.size(); i++) {
+		cout << i << " : " << CountryList[i].getCountryName()
+			<< "," << CountryList[i].getX()
+			<< "," << CountryList[i].getY()
+			<< "," << CountryList[i].getContinent();
+		for (unsigned int j = 0; j < CountryList[i].getAdjacentCountries().size(); j++) {
+			cout << "," << CountryList[i].getAdjacentCountries()[j];
+		}
+		cout << endl;
+	}
+}

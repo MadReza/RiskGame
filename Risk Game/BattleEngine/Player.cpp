@@ -166,17 +166,13 @@ void Player::assignReinforcements()
 		cout << "Assigning Countries" << endl;
 		cout << "===================" << endl;
 
-		for (unsigned int i = 0; i < countries.size(); i++)
-		{
-			cout << i << ": " << countries[i]->getName() << endl;
-		}
-		int selection{-1};
+		int selection;
 		
-		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
+		cout << endl << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };
 
 		cout << endl;
-		int armyToAdd{ 0 };		
+		int armyToAdd;		
 		do {
 			cout << countrySelection->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
 			/*cin >> armyToAdd;*/
@@ -202,7 +198,7 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 		}
 	}
 
-	if ((int)allAdjacentCountries.size() == 0) return NULL;
+	if ((int)enemyAdjacentCountries.size() == 0) return NULL; //LAURENDY
 
 	//Display Enemy Adjacent Countries to attack
 	for (int x = 0; x < (int)enemyAdjacentCountries.size(); x++)
@@ -231,7 +227,7 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 		}
 	}
 
-	if (eligibleCountries.size() < 0) return NULL; //Laurendy ADD
+	if (eligibleCountries.size() < 0) return NULL; //LAURENDY
 
 	for (int i = 0; i < (int)eligibleCountries.size(); i++)
 	{
@@ -312,9 +308,8 @@ void Player::assignAttack()
 	cout << "Select Country to attack from: " << endl; 
 	Country* attackingCountry(selectPlayerCountry(true,2)); 
 
-	if (attackingCountry == NULL){
-		cout << "Looks like there are no eligible coutries to attack with...";
-		system("pause");
+	if (attackingCountry == NULL){ //LAURENDY
+		cout << "Looks like there are no eligible coutries to attack with..." << endl;
 		return;
 	}
 
@@ -322,9 +317,8 @@ void Player::assignAttack()
 	cout << "Select Country to attack to: " << endl;
 	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry)); //returning elegible attacking adjacent country
 
-	if (targetCountry == NULL){
-		cout << "Looks like there are no enemies to attack...";
-		system("pause");
+	if (targetCountry == NULL){ //LAURENDY
+		cout << "Looks like there are no enemies near to attack..." << endl;
 		return;
 	}
 

@@ -5,8 +5,8 @@ namespace std
 	/*
 	HOWTO:
 
-	int answer 
-	while(!std::vInteger(anwer, lower, upper)){
+	int answer; 
+	while(!std::validInteger(answer, lower, upper)){
 		cout << "Error message here > ";
 	}
 
