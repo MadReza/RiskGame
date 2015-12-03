@@ -81,13 +81,13 @@ void Player::calculateTotalArmies()
 	{
 		_armiesTotal += country->getNumArmies();
 	}
-	notify();
+	//notify(); //TODO Commetted out for debugging game play
 }
 
 
 void Player::setBattlesWonTotal(int n) {
     _battlesWonTotal = n;
-    notify();
+    //notify(); //TODO Commetted out for debugging game play
 }
 
 int Player::getArmiesTotal() {
@@ -180,8 +180,10 @@ void Player::assignReinforcements()
 
 		countrySelection->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
+
+		system("cls");
 	}
-	system("cls"); //COMPLETED TODO: Done by Zack
+	 //COMPLETED TODO: Done by Zack, bumped up by LAURENDY
 }
 
 Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
@@ -314,7 +316,7 @@ void Player::assignAttack()
 	}
 
 	cout << endl;
-	cout << "Select Country to attack to: " << endl;
+	cout << "Select Country to attack: " << endl;
 	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry)); //returning elegible attacking adjacent country
 
 	if (targetCountry == NULL){ //LAURENDY

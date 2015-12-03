@@ -105,7 +105,7 @@ void GameDriver::attackPhase(Player* player)
 		if (answer == 'y' || answer == 'Y')
 			player->assignAttack();
 
-	} while (!std::validYesNo(answer)); //if not valid answer
+	} while (answer != 'n' && answer != 'N'); 
 
 	if (player->getTurnVictory())
 	{

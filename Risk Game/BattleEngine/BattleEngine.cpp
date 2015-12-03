@@ -55,7 +55,7 @@ skipAllIn:
 	for (int i = 0; i < defenderNumRoll; i++)
 		cout << defenderRollsList[i] << ", ";
 
-	//cout << endl;
+	cout << endl; //TODO Remove this comment.
 
 	int num_ArmiesToSend;
 
@@ -95,6 +95,7 @@ skipAllIn:
 
 	//Loop back if allin
 	if (allInMode){
+		system("pause");
 		goto allIn;
 	}
 	else{
