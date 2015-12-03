@@ -1,20 +1,26 @@
 # RiskGame
 
 ## TODO
+- [ ] 
 - [ ] Reinforcement
   - [ ] Feature: Continent Bonus needs to be used/implemented.
-  - [ ] Bug: Reinforcement message showing twice
+  - [x] Bug: Reinforcement message showing twice
   - [ ] Formatting: Clean user messages for reinforcement part
   - [ ] Formatting: Card part clean up message to user.
+  - [ ] Add: Card ASCII Art
+  - [ ] Change: Display All card 
   - [ ] Test: Card part at begenning of reinforcement.
   - [ ] Test: OverAll Reinforcement.
 - [ ] Attack
-  - [ ] Bug: no player countries available for attack... Check user output
-  - [ ] Bug: no enemy countries connected to our selected attacker country
+  - [x] Bug: no player countries available for attack... Check user output
+  - [x] Bug: no enemy countries connected to our selected attacker country
+  - [ ] Test/Bug: All countries lost when transferring cards after defeat
   - [ ] Bug: Allin skips country stats being shown.
 - [ ] Fortification
   - [ ] Nothing left ???
-
+- [ ] GameDriver
+  - [ ] Add Winner Notification note: Player countries size == map countries size... DO SOMETHING
+  - [ ] 
 ## GRADING TODO
 - [ ] Functional Requirements 35
   - [ ] Map creation and editing 7
@@ -25,17 +31,19 @@
     - [ ] Verification of map correctness upon saving / loading(at least 3 types of incorrect maps, including verification that the
           map is a connected graph, and that each continent is a connected graph) 2
   - [ ] Game driver 4
-    - [ ] Implementation of a round - robin loop for players’ turns / phases, identification of a winner and end of game, defeated
-          player is removed from the round - robin loop. 2
+    - [x] Implementation of a round - robin loop for players’ turns / phases, 
+    - [ ] identification of a winner and end of game, 
+    - [x] defeated player is removed from the round - robin loop. 2
     - [ ] Save / Load a game in progress using a Builder pattern(see individual assignment 3). 2
-  - [ ] Game display 8
+  - [ ] Game display 8 -- TOMORROW -- 
     - [ ] Player Observer that displays relevant information about a player(see individual assignment 2). 2
     - [ ] Map Observer that displays relevant information about the map(see individual assignment 2). 2
     - [ ] Game statistics Observer / Decorator that displays user - selected game statistics(see individual assignment 3). 2
     - [ ] Game log Observer / Decorator that displays logging of user - selected players / phases(see individual assignment 3). 2
   - [ ] Startup phase 5
-    - [ ] Game log and game statistics Observers are initially set to show user - selected parts(see individual assignment 3)
-    - [ ] using the Observer and Decorator patterns. 1
+    - [ ] Game log and game statistics Observers are initially set to show user - selected parts(see individual assignment 3) 
+          --Reza A3 has it done... needs to implement.
+    - [ ] using the Observer and Decorator patterns. 1 --- See Previous Line
     - [ ] User selection of a previously user - saved map, then load the map. 1
     - [ ] User chooses the number of players, all countries are randomly assigned. 1
     - [ ] Types of players are initially assigned and implemented using a Strategy pattern(see individual assignment 2).
