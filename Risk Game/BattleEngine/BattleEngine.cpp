@@ -7,8 +7,6 @@ bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
 	Player *defenderPlayer = defenderCountry->getOwner();
 	bool countryConquered = false;
 
-	srand((unsigned)time(0)); //generate random number based on computer clocks
-
 	int	attackerNumRoll, defenderNumRoll;
 	bool allInMode = false;
 	
@@ -129,7 +127,11 @@ int* BattleEngine::generateDescSortedRollList(int size){
 }
 
 int BattleEngine::roll(int min, int max){
-	return rand() % max + min;
+	
+	default_random_engine generator;
+	uniform_int_distribution<int> distribution(0, 1000);
+	return (distribution(generator) % max)+min;
+	//return rand() % max + min;
 }
 
 //Check if the attack is over. (Attack Phase is over when there's is no defending armies or attacker contains only 1 army).
