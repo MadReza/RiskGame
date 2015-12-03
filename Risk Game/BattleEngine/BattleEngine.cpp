@@ -38,10 +38,11 @@ skipAllIn:
 	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
 	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
 
-	//system("cls");
+	
 	
 	compareRolls(attackerCountry, defenderCountry,attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
 
+	system("cls");
 	cout << "\n\t*****RESULT*****\n\n";
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << endl;
@@ -49,13 +50,13 @@ skipAllIn:
 	//displaying attacker rolls
 	cout << " Attackers rolls :" << endl;
 	for (int i = 0; i < attackerNumRoll; i++)
-		cout << attackerRollsList[i] << ", ";
+		cout << attackerRollsList[i] << ", "; //TODO PRETTY THIS
 	//displaying Defender rolls
 	cout << "\n Defender rolls :" << endl;
 	for (int i = 0; i < defenderNumRoll; i++)
-		cout << defenderRollsList[i] << ", ";
+		cout << defenderRollsList[i] << ", "; //TODO PRETTY THIS
 
-	cout << endl; //TODO Remove this comment.
+	cout << endl; 
 
 	int num_ArmiesToSend;
 
@@ -106,7 +107,7 @@ skipAllIn:
 	//Attack phase is over
 stop:
 
-	//Clean
+ 	//Clean
 	if (attackerRollsList != nullptr)
 		delete[]attackerRollsList;//Deallocate memory
 	if (defenderRollsList != nullptr)

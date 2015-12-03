@@ -229,7 +229,7 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 		}
 	}
 
-	if (eligibleCountries.size() < 0) return NULL; //LAURENDY
+	if (eligibleCountries.size() == 0) return NULL; //LAURENDY
 
 	for (int i = 0; i < (int)eligibleCountries.size(); i++)
 	{

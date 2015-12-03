@@ -99,7 +99,7 @@ void GameDriver::attackPhase(Player* player)
 
 	do
 	{
-		cout << "Would you like to attack a country (y,n): ";
+		cout << endl << "Would you like to attack a country (y,n): ";
 		cin >> answer;
 
 		if (answer == 'y' || answer == 'Y')
