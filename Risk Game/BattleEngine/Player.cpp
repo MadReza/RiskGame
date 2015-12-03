@@ -135,13 +135,17 @@ int Player::getCardReinforcementTotal()
 
 		cout << "Do you want to redeem a set of cards (y,n): ";
 		cin >> answer;	//TODO validate this
+		while (!std::validYesNo(answer)){
+			cout << "Try again > ";
+			cin >> answer;
+		}
 
 		if (answer == 'y' || answer == 'Y')
 		{
 			cardReinforcement += CardUtilities::selectRedemption(this);
 		}
 
-	} while (CardUtilities::mandatoryRedemption(this) && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y');
+	} while (CardUtilities::mandatoryRedemption(this)/* && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y'*/);
 
 	return cardReinforcement;
 }
@@ -160,8 +164,8 @@ void Player::assignReinforcements()
 		
 		do {
 			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
-			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
-		} while (selection < 0 || selection > (countries.size() -1));
+			/*cin >> selection;*/	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
+		} while (!std::validInteger(selection, 0, countries.size() - 1)/*selection < 0 || selection > (countries.size() -1)*/);
 
 		cout << endl;
 		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
@@ -247,6 +251,11 @@ bool Player::getAlive()
 	return alive;
 }
 
+void Player::setAlive(bool trueFalse)
+{
+	alive = trueFalse;
+}
+
 void Player::addCountry(Country* country)
 {
 	countries.push_back(country);
@@ -255,6 +264,10 @@ void Player::addCountry(Country* country)
 void Player::removeCountry(Country* country)	//TODO TEST
 {
 	countries.erase(std::remove(countries.begin(), countries.end(), country), countries.end());
+	if (countries.size() == 0)
+	{
+		setAlive(false);
+	}
 }
 
 void Player::addContinent(Continent* continent)	//TODO TEST
@@ -294,8 +307,13 @@ void Player::assignAttack()
 	cout << "Select Country to attack to: " << endl;
 	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry));
 
-	BattleEngine(attackingCountry, targetCountry);
+	Player* defender = targetCountry->getOwner();
+	bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
 
+	if (countryConquered && !defender->getAlive())	
+	{
+		CardUtilities::takePlayerCards(defender, this);
+	}
 }
 
 void Player::setTurnVictory(bool trueFalse)

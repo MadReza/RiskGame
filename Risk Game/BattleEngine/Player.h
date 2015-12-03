@@ -4,6 +4,7 @@
 #include "../Map/Country.h"
 #include "../Subject.h"
 #include "CardUtilities.h"
+#include "../Validation.h"
 
 #include <vector>
 #include <string>
@@ -87,6 +88,8 @@ public:
 	void assignAttack();
 
 	bool getAlive();
+	void setAlive(bool trueFalse);
+
 	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!
 
 	//Card Methods

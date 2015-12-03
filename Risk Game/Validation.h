@@ -3,6 +3,6 @@
 
 namespace std
 {
-	bool vInteger(int& integer, const int& lower, const int& upper);
-	bool vY_N(char &answer);
+	bool validInteger(int& integer, const int& lower, const int& upper);
+	bool validYesNo(char &answer);
 }

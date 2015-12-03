@@ -11,7 +11,7 @@ namespace std
 	}
 
 	*/
-	bool vInteger(int& integer, const int& lower, const int& upper)
+	bool validInteger(int& integer, const int& lower, const int& upper)
 	{
 		integer = 0;
 		std::cin >> integer;
@@ -23,7 +23,7 @@ namespace std
 		return true;
 	}
 
-	bool vY_N(char &answer)
+	bool validYesNo(char &answer)
 	{
 		if (answer == 'y' || answer == 'n' || answer == 'Y' || answer == 'N')
 			return true;
