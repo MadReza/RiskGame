@@ -86,7 +86,15 @@ int CardUtilities::selectRedemption(Player * p)
 		cout << "\tEnter 'q' to quit redemption" << endl;
 
 		cout << "Please enter your selection from the above choices: ";
-		cin >> selection;	//TODO VALIDATION
+		cin >> selection;	//VALIDATION DONE, BELOW
+
+		while (!std::cin >> selection){
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Try Again > ";
+				cin >> selection;
+		}
+
 	} while (selection != 'i' && selection != 'c' && selection != 'a' && selection != 'd' && selection != 'q');
 
 	switch (selection)

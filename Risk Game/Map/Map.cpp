@@ -198,7 +198,7 @@ void Map::distributePlayers(vector<Player*> player_vector)
 
 void Map::assignCountriesToPlayer(Player* player, int continent_index, vector<int> countries_indices)
 {
-	for (int i = 0; i < countries_indices.size(); i++)
+	for (int i = 0; i < (int)countries_indices.size(); i++)
 	{
 		if (continents[continent_index]->getContinentVector()[(countries_indices[i])]->checkIfOwned() == false)
 		{

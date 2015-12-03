@@ -208,8 +208,8 @@ int BattleEngine::numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls
 		do{
 			cout << endl;
 			cout << "How many armies do you wish to send to your new country (" << minimumTransArmy << " to " << attackerNumArmies - 1 << "): ";
-			cin >> numArmtoSend;
-		} while (numArmtoSend < minimumTransArmy || numArmtoSend >= attackerNumArmies);
+			/*cin >> numArmtoSend;*/
+		} while (!std::validInteger(numArmtoSend, minimumTransArmy, attackerNumArmies - 1)/*numArmtoSend < minimumTransArmy || numArmtoSend >= attackerNumArmies*/);
 		return numArmtoSend;
 	}
 }
@@ -223,10 +223,11 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack? (Not more than " << attackerCountry->getNumArmies() - 1 << " )" << endl;
 	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
-	cin >> sentArmies;
+
+	/*cin >> sentArmies; INFO: validInteger Takes Care*/ 
 
 	//if Users input an invalid number return to start 
-	if (sentArmies > attackerCountry->getNumArmies() - 1 || sentArmies < 0)
+	if (!std::validInteger(sentArmies, 0, attackerCountry->getNumArmies() - 1)/*sentArmies > attackerCountry->getNumArmies() - 1 || sentArmies < 0*/)
 		goto start;
 
 	//Will determine how many rolls the Attacker have (3,2 or 1)

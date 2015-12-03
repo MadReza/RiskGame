@@ -66,7 +66,7 @@ void GameDriver::play()
 bool GameDriver::checkWinCondition()
 {
 	int playersAlive = 0;
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < (int)players.size(); i++)
 	{
 		if (players[i]->getAlive())
 			playersAlive++;
@@ -103,7 +103,7 @@ void GameDriver::attackPhase(Player* player)
 		if (answer == 'y' || answer == 'Y')
 			player->assignAttack();
 
-	} while (answer != 'n' && answer != 'N');
+	} while (!std::validYesNo(answer)); //if not valid answer
 
 	if (player->getTurnVictory())
 	{
@@ -141,7 +141,8 @@ void GameDriver::fortifcationPhase(Player* player)
 
 		do{
 			cout << "Select Which country to transfer from(must have more than 1 army): ";
-			cin >> selectionFrom;
+			/*cin >> selectionFrom;*/
+			std::validInteger(selectionFrom, 0, 0);  //just tries to validate the cin >> selection
 
 			if (selectionFrom == -1)	//End Fortification
 			{
@@ -151,7 +152,7 @@ void GameDriver::fortifcationPhase(Player* player)
 				return;
 			}
 
-		} while (selectionFrom < 0 || playerCountries[selectionFrom]->getNumArmies() <= 1);
+		} while (!std::validInteger(selectionFrom, 0, playerCountries[selectionFrom]->getNumArmies() - 1)/*selectionFrom < 0 || playerCountries[selectionFrom]->getNumArmies() <= 1*/);
 
 		displayCountriesWithArmy(playerCountries);
 		cout << "Type -1 to End fortification at any time." << endl;
@@ -159,7 +160,8 @@ void GameDriver::fortifcationPhase(Player* player)
 		do
 		{
 			cout << "Select Which country to transfer To ";
-			cin >> selectionTo;
+			/*cin >> selectionTo;*/
+			std::validInteger(selectionTo, 0, 0); //just tries to validate the cin >> selection
 
 			if (selectionFrom == -1)	//End Fortification
 			{
@@ -181,8 +183,8 @@ void GameDriver::fortifcationPhase(Player* player)
 				cout << playerCountries[selectionTo]->getName() << " has army size of " << playerCountries[selectionTo]->getNumArmies() << endl;
 
 				cout << "How many army would you like to transfer from " << playerCountries[selectionFrom]->getName() << " between (0 to " << playerCountries[selectionFrom]->getNumArmies() - 1 << endl;
-				cin >> armyTransfer;
-			} while (armyTransfer < 0 || armyTransfer >= playerCountries[selectionFrom]->getNumArmies());
+				/*cin >> armyTransfer;*/
+			} while (!std::validInteger(armyTransfer, 0, playerCountries[selectionFrom]->getNumArmies() - 1)/*armyTransfer < 0 || armyTransfer >= playerCountries[selectionFrom]->getNumArmies()*/);
 
 			if (armyTransfer != 0)
 			{
@@ -205,7 +207,7 @@ void GameDriver::fortifcationPhase(Player* player)
 
 void GameDriver::displayCountriesWithArmy(vector<Country*> countries)
 {
-	for (int i = 0; i < countries.size(); i++)
+	for (int i = 0; i < (int)countries.size(); i++)
 	{
 		cout << i << ": " << countries[i]->getName() << " army: " << countries[i]->getNumArmies() << endl;
 	}
