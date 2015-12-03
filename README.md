@@ -1,4 +1,4 @@
-# RiskGame
+﻿# RiskGame
 
 ## TODO
 - [ ] 
@@ -7,7 +7,7 @@
   - [x] Bug: Reinforcement message showing twice
   - [ ] Formatting: Clean user messages for reinforcement part
   - [ ] Formatting: Card part clean up message to user.
-  - [ ] Add: Card ASCII Art
+  - [x] Add: Card ASCII Art
   - [ ] Change: Display All card 
   - [ ] Test: Card part at begenning of reinforcement.
   - [ ] Test: OverAll Reinforcement.
@@ -15,7 +15,8 @@
   - [x] Bug: no player countries available for attack... Check user output
   - [x] Bug: no enemy countries connected to our selected attacker country
   - [ ] Test/Bug: All countries lost when transferring cards after defeat
-  - [ ] Bug: All In mode skips country stats being shown every step ... System("pause")
+  - [x] Bug: All In mode skips country stats being shown every step ... System("pause")
+  - [ ] Bug: Dice Rolls always show 4.	
 - [ ] Fortification
   - [ ] Nothing left ???
 - [ ] GameDriver
@@ -39,6 +40,7 @@
     - [ ] Player Observer that displays relevant information about a player(see individual assignment 2). 2
     - [ ] Map Observer that displays relevant information about the map(see individual assignment 2). 2
     - [ ] Game statistics Observer / Decorator that displays user - selected game statistics(see individual assignment 3). 2
+		--CHRIS has this done but it is buggy and crap, it Update() doesn't work for more than two decorators
     - [ ] Game log Observer / Decorator that displays logging of user - selected players / phases(see individual assignment 3). 2
   - [ ] Startup phase 5
     - [ ] Game log and game statistics Observers are initially set to show user - selected parts(see individual assignment 3) 
