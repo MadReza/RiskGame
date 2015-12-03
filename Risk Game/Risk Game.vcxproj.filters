@@ -147,6 +147,9 @@
     <ClCompile Include="Validation.cpp">
       <Filter>Utilities\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Utilities\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="UI\PlayerViewDecorator.h">
       <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Utilities\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -92,6 +92,7 @@
     <ClCompile Include="Map\MapCreator.cpp" />
     <ClCompile Include="Map\Map_View.cpp" />
     <ClCompile Include="Map\UtilityMap.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="UI\PlayerView.cpp" />
     <ClCompile Include="Validation.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Map\Map_View.h" />
     <ClInclude Include="Map\UtilityMap.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="UI\PlayerView.h" />
     <ClInclude Include="UI\PlayerViewDecorator.h" />
