@@ -19,6 +19,7 @@
   - [ ] Bug: Dice Rolls always show 4.	
 - [ ] Fortification
   - [ ] Nothing left ???
+  - [ ] Bug: Exiting fortification with -1 results in "vector subscript out of range" bug
 - [ ] GameDriver
   - [ ] Add Winner Notification note: Player countries size == map countries size... DO SOMETHING
   
