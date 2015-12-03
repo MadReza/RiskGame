@@ -1,0 +1,31 @@
+<save>
+	<map>0</map>
+	<players>
+		<player name="John" type="human">
+			<continents>
+				<continent index="1" name="North America">
+					<countries>
+						<country index="0" name="Canada" armies="3"></country>
+						<country index="1" name="US" armies="1"></country>
+					</countries>
+				</continent>
+			</continents>
+		</player>
+		<player name="Zack" type="human">
+			<continents>
+				<continent index="3" name="Asia">
+					<countries>
+						<country index="0" name="China" armies="1"></country>
+						<country index="1" name="India" armies="1"></country>
+					</countries>
+				</continent>
+				<continent index="2" name="Europe">
+					<countries>
+						<country index="0" name="France" armies="1"></country>
+						<country index="1" name="Spain" armies="1"></country>
+					</countries>
+				</continent>
+			</continents>
+		</player>
+	</players>
+</save>

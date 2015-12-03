@@ -52,6 +52,27 @@
     <Filter Include="Utilities\Source Files">
       <UniqueIdentifier>{2e125fed-b7ef-4dd2-b1ff-4e384a6ea6d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameState">
+      <UniqueIdentifier>{a416c5a4-b735-433a-b32f-e1f2196197f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState\Header Files">
+      <UniqueIdentifier>{4dd450c6-6034-4662-af2c-15ff3b7f5a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState\Source Files">
+      <UniqueIdentifier>{20b9fc0e-6f78-4c19-b59b-ce471d7cc461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{daab1f71-0e0b-4773-ac6e-cd4eb29e7989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\PugiXML">
+      <UniqueIdentifier>{0762fcae-ef67-40a0-9fac-0f0aa7d2f4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\PugiXML\Header Files">
+      <UniqueIdentifier>{c5048456-d527-4b82-b437-87d50938ca66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\PugiXML\Source Files">
+      <UniqueIdentifier>{f311d62c-7852-4080-8e10-1b62e1d96e88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameDriver.cpp">
@@ -113,6 +134,15 @@
     </ClCompile>
     <ClCompile Include="BattleEngine\CardUtilities.cpp">
       <Filter>BattleEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\GameBuilder.cpp">
+      <Filter>GameState\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\GameDirector.cpp">
+      <Filter>GameState\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\PugiXML\pugixml.cpp">
+      <Filter>libs\PugiXML\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +220,18 @@
     </ClInclude>
     <ClInclude Include="BattleEngine\CardUtilities.h">
       <Filter>BattleEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\GameBuilder.h">
+      <Filter>GameState\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\GameDirector.h">
+      <Filter>GameState\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\PugiXML\pugiconfig.hpp">
+      <Filter>libs\PugiXML\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\PugiXML\pugixml.hpp">
+      <Filter>libs\PugiXML\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

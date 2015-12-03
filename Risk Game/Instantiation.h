@@ -6,6 +6,7 @@
 #include "Map\UtilityMap.h"
 #include "Map\MapCreator.h"
 #include "GameDriver.h"
+#include "libs/PugiXML/pugixml.hpp"
 
 #include <iostream>
 #include <string>

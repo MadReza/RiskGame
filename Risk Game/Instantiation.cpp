@@ -63,12 +63,142 @@ void Instantiation::newGame()
 
 void Instantiation::loadGame()
 {
+	system("cls");
 	//TODO LOAD FROM FILE HERE. OR FROM GAME DRIVER
-	cout << "Game is loading...." << endl;
+	//cout << "Game is loading...." << endl;
 	isNewGame = false;
 	totalPlayers = 3;
 	mapPath = 1;
+	//return;
+
+	// load xml file
+	//*
+	//open the main file
+	string savesDir = "GameSaves/";
+	string savesPath = savesDir + "saves.xml";
+	char* source = new char[savesPath.length() + 1];
+	strcpy_s(source, savesPath.length() + 1, savesPath.c_str());
+
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file(source);
+
+	if (result)
+	{
+		// DISPLAY MENU TO USER
+		pugi::xml_node saves = doc.child("saves");
+		cout << "Please select which save you would like to load:" << endl;
+		int i = 0;
+		vector<string> filenames;
+		for (pugi::xml_node save = saves.child("save"); save; save = save.next_sibling("save"))
+		{
+			cout << i << " - " << save.attribute("name").value() << endl;
+			filenames.push_back(save.attribute("filename").value());
+			i++;
+		}
+
+		//	USER SELECTS THE SAVE FILE
+		int choice;
+		do {
+			cout << "Your choice: ";
+			cin >> choice;
+		} while (choice < 0 || choice >= i);
+
+		// SAVE FILE GETTING LOADED
+		char* filename = new char[(savesDir + filenames[choice]).length() + 1];
+		strcpy_s(filename, (savesDir + filenames[choice]).length() + 1, (savesDir + filenames[choice]).c_str());
+
+		pugi::xml_parse_result result = doc.load_file(filename);
+
+		if (result)
+		{
+			// SAVE FILE LOADED CORRECTLY
+			pugi::xml_node save = doc.child("save");
+			
+			//	GET THE MAP
+			pugi::xml_node map = save.child("map");
+
+			// GET THE PLAYERS
+			pugi::xml_node players = save.child("players");
+			for (pugi::xml_node player = players.child("player"); player; player = player.next_sibling("player"))
+			{
+				//	CREATE THE PLAYER
+				Player* p;
+
+				Player::Type type;
+				if (player.attribute("type").value() == "human")
+					type = Player::Human;
+				else
+					type = Player::Computer;
+
+				string name = player.attribute("name").value();
+				
+				p = new Player(name, type);
+				this->players.push_back(p);
+
+				//	GET THE CONTINENTS
+				
+				pugi::xml_node continents = player.child("continents");
+				for (pugi::xml_node continent = continents.child("continent"); continent; continent = continent.next_sibling("continent"))
+				{
+					int continent_index = continent.attribute("index").as_int();
+					
+					vector<int> countries_indices;
+					pugi::xml_node countries = continent.child("countries");
+					for (pugi::xml_node country = countries.child("country"); country; country = country.next_sibling("country"))
+					{
+						countries_indices.push_back(country.attribute("index").as_int());
+					}
+
+					this->map->assignCountriesToPlayer(p, continent_index, countries_indices);
+				}
+				//cout << player.attribute("name").value() << " is a " <<  << " player" << endl;
+			}
+		}
+		else
+		{
+			//	SAVE FILE DID NOT LOAD CORRECTLY
+			cout << "Save file did not load correctly." << endl;
+			cout << "XML [" << source << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
+			cout << "Error description: " << result.description() << "\n";
+			cout << "Error offset: " << result.offset << " (error at [..." << (source + result.offset) << "]\n\n";
+		}
+	}
+	else
+	{
+		//	SAVES LIST FILE DID NOT LOAD CORRECTLY
+		cout << "Saves list file did not load correctly." << endl;
+		cout << "XML [" << source << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
+		cout << "Error description: " << result.description() << "\n";
+		cout << "Error offset: " << result.offset << " (error at [..." << (source + result.offset) << "]\n\n";
+	}
+
 	return;
+	/*
+	display a menu to user
+	cout << "Select which save you would like to load:" << endl;
+
+	user select which save to load
+	store the loaded xml file in a string
+	//*/
+
+	// XML parser
+	//xml_document<> doc;    // character type defaults to char
+	//doc.parse<0>(text);    // 0 means default parse flags
+
+	// get the map id
+
+	// get the player names & types
+
+	// get 
+
+
+
+
+
+
+
+
+
 	// map creation
 	string str(Directory::GetCurrentWorkingDirectory());
 	const char* cd = str.c_str();
