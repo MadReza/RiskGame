@@ -135,8 +135,9 @@ int Player::getCardReinforcementTotal()
 
 		cout << "Do you want to redeem a set of cards (y,n): ";
 		cin >> answer;	//TODO validate this
-		while (!std::validYes_No(answer)){
+		while (!std::validYesNo(answer)){
 			cout << "Try again > ";
+			cin >> answer;
 		}
 
 		if (answer == 'y' || answer == 'Y')
@@ -144,7 +145,7 @@ int Player::getCardReinforcementTotal()
 			cardReinforcement += CardUtilities::selectRedemption(this);
 		}
 
-	} while (CardUtilities::mandatoryRedemption(this) && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y');
+	} while (CardUtilities::mandatoryRedemption(this)/* && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y'*/);
 
 	return cardReinforcement;
 }
