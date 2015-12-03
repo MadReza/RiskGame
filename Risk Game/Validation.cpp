@@ -23,7 +23,7 @@ namespace std
 		return true;
 	}
 
-	bool vY_N(char &answer)
+	bool validYesNo(char &answer)
 	{
 		if (answer == 'y' || answer == 'n' || answer == 'Y' || answer == 'N')
 			return true;

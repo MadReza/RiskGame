@@ -135,6 +135,9 @@ int Player::getCardReinforcementTotal()
 
 		cout << "Do you want to redeem a set of cards (y,n): ";
 		cin >> answer;	//TODO validate this
+		while (!std::validYes_No(answer)){
+			cout << "Try again > ";
+		}
 
 		if (answer == 'y' || answer == 'Y')
 		{
@@ -160,8 +163,8 @@ void Player::assignReinforcements()
 		
 		do {
 			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
-			cin >> selection;	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
-		} while (selection < 0 || selection > (countries.size() -1));
+			/*cin >> selection;*/	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
+		} while (!std::validInteger(selection, 0, countries.size() - 1)/*selection < 0 || selection > (countries.size() -1)*/);
 
 		cout << endl;
 		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;

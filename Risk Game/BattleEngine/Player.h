@@ -4,6 +4,7 @@
 #include "../Map/Country.h"
 #include "../Subject.h"
 #include "CardUtilities.h"
+#include "../Validation.h"
 
 #include <vector>
 #include <string>

@@ -100,8 +100,7 @@ void Instantiation::loadGame()
 		int choice;
 		do {
 			cout << "Your choice: ";
-			cin >> choice;
-		} while (choice < 0 || choice >= i);
+		} while (!std::validInteger(choice, 0, i - 1));
 
 		// SAVE FILE GETTING LOADED
 		char* filename = new char[(savesDir + filenames[choice]).length() + 1];
@@ -265,14 +264,14 @@ void Instantiation::createPlayers()
 	do
 	{
 		cout << "Total amount of Players(2 to " << map->getMaxPlayers() << "): ";
-		cin >> totalPlayers;
-	} while (totalPlayers <= 1 || totalPlayers > map->getMaxPlayers());
+		//OLD cin >> totalPlayers;
+	} while (!std::validInteger(totalPlayers, 2, map->getMaxPlayers()) /*OLD totalPlayers <= 1 || totalPlayers > map->getMaxPlayers()*/);
 
 	do
 	{
 		cout << "How many Human Players(0 to " << totalPlayers << "): ";
-		cin >> totalHumanPlayers;
-	} while (totalHumanPlayers < 0 || totalHumanPlayers > totalPlayers);
+		//OLD cin >> totalHumanPlayers;
+	} while (!std::validInteger(totalHumanPlayers, 0, totalPlayers) /*OLD totalHumanPlayers < 0 || totalHumanPlayers > totalPlayers*/);
 
 	createHumanPlayers();
 	createCompPlayers();
@@ -317,8 +316,8 @@ void Instantiation::mapSelection()
 			cout << i << ": " << maps[i] << endl;
 		}
 		cout << "Select Map Number: ";			
-		cin >> selection;
-	} while (selection < 0 || selection >= size);
+		//OLD cin >> selection;
+	} while (!std::validInteger(selection, 0, size - 1)/*OLD selection < 0 || selection >= size*/);
 
 	mapPath = path + "\\" + maps[selection];
 	UtilityMap m(mapPath);
@@ -333,17 +332,15 @@ void Instantiation::assignCountriesToPlayer()
 
 int Instantiation::startOrLoad()
 {
-	int selection(-1);
+	int selection;
 	cout << "Type 0: To Start a New Game" << endl;
 	cout << "Type 1: To Load a Game" << endl;
 	cout << "Type 2: To Create a Map" << endl;
 	cout << "Selection: ";
-	cin >> selection;
 
-	while (selection < 0 || selection > 2)
+	while (!std::validInteger(selection, 0, 2))
 	{
 		cout << "Only allowed options are 0, 1, 2: ";
-		cin >> selection;
 	}
 	return selection;
 }

@@ -147,26 +147,29 @@ void std::MapCreator::addCountry()
 	vector<string> adjacentCountry;
 	cout << "What is its name? Enter > ";
 	cin >> name;
+
 	do {
 		cout << "What is the x cordinate? Enter > ";
-		cin >> x;
-	} while (x < 0);
+	} while (!std::validInteger(x, 0, 9999));
+
 	do {
 		cout << "What is the y cordinate? Enter > ";
-		cin >> y;
-	} while (y < 0);
+	} while (!std::validInteger(y, 0, 9999));
+
 	cout << "What is the continent of '" << name << "'? Enter > ";
 	cin >> continent;
+
 	do {
 		cout << "What is the number of adjacent countries? Enter > ";
-		cin >> numAdj;
-	} while (numAdj < 0);
+	} while (!std::validInteger(numAdj, 0, 9999));
+
 	for (int i = 0; i < numAdj; i++) {
 		string temp;
 		cout << "What is the name of adjacent country? Enter > ";
 		cin >> temp;
 		adjacentCountry.push_back(temp);
 	}
+
 	CountryList.push_back(UtilityCountry(name, x, y, continent, adjacentCountry));
 }
 
@@ -175,10 +178,11 @@ void std::MapCreator::addContinent() {
 	string name; int bonus;
 	cout << "What is its name? Enter > ";
 	cin >> name;
+
 	do {
 		cout << "What is the bonus? Enter > ";
-		cin >> bonus;
-	} while (bonus < 2 || bonus > 20);
+	} while (!std::validInteger(bonus, 2, 20));
+
 	ContinentList.push_back(UtilityContinent(name, bonus));
 }
 
@@ -202,14 +206,10 @@ bool std::MapCreator::validate(){
 		cout << "6: edit country" << endl;
 		cout << "Enter > ";
 
-		bool isComplete;
-		do {
-			isComplete = true;
-			cin >> option;
-			if (option  < 0 || option > 4) {
-				cout << "What did you say? Enter > ";
-			}
-		} while (!isComplete);
+		while (!std::validInteger(option, 0, 6)){
+			cout << "Sorry wrong answer. Try Again > ";
+		}
+
 		switch (option) {
 			system("cls");
 			case 0:
@@ -267,8 +267,7 @@ void std::MapCreator::edit(){
 		cout << "5: add continent" << endl;
 		do {
 			cout << "What would you like to do? Enter > ";
-			cin >> option;
-		} while (option < 0 || option > 5);
+		} while (!std::validInteger(option, 0, 5));
 
 		switch (option) {
 			case 0: return;
@@ -307,8 +306,7 @@ void std::MapCreator::editCountry(){
 	int option;
 	do {
 		cout << "Enter > ";
-		cin >> option;
-	} while (option < 0 || option > 5);
+	} while (!std::validInteger(option, 0, 5));
 
 	if (option == 0)
 		return;
@@ -318,7 +316,7 @@ void std::MapCreator::editCountry(){
 	do {
 		cout << "Which country would you like to edit? Enter Index > ";
 		cin >> targetCountry;
-	} while (targetCountry < 0 || targetCountry > (int)CountryList.size());
+	} while (!std::validInteger(targetCountry, 0, (int)CountryList.size() - 1));
 
 
 	switch (option) {
@@ -340,13 +338,17 @@ void std::MapCreator::editCountry(){
 		case 2:
 			cout << "What is the new x point of '" << CountryList[targetCountry].getCountryName() << "'?" << endl;
 			int xpoint;
-			cin >> xpoint;
+			while (!std::validInteger(xpoint, 0, 9999)){
+				cout << "Try again: " << endl;
+ 			}
 			CountryList[targetCountry].setX(xpoint);
 			break;
 		case 3:
 			cout << "What is the new y point of '" << CountryList[targetCountry].getCountryName() << "'?" << endl;
 			int ypoint;
-			cin >> ypoint;
+			while (!std::validInteger(ypoint, 0, 9999)){
+				cout << "Try again: " << endl;
+			}
 			CountryList[targetCountry].setY(ypoint);
 			break;
 		case 4: {
@@ -368,13 +370,13 @@ void std::MapCreator::editCountry(){
 				int option;
 				cout << "0: remove adjacency";
 				cout << "1: add adjacency";
-				do {
-					cin >> option;
-				} while (option < 0 || option > 1);
+				while (!std::validInteger(option, 0, 1)){
+					cout << "Try again: " << endl;
+				}
 				switch (option) {
 				case 0: {
 						cout << "which adjacent country would you like to remove? " << endl;
-						string remove;
+						string remove; //TODO
 						for (unsigned int i = 0; i < CountryList[targetCountry].getAdjacentCountries().size(); i++) {
 							if (remove.compare(CountryList[targetCountry].getAdjacentCountries()[i]) == 0)
 								CountryList[targetCountry].getAdjacentCountries().erase(CountryList[targetCountry].getAdjacentCountries().begin() + i);
@@ -409,19 +411,20 @@ void std::MapCreator::editContinent(){
 	cout << "2: change bonus amount." << endl;
 
 	int option;
+	cout << "Enter > ";
 	do {
-		cout << "Enter > ";
-		cin >> option;
-	} while (option < 0 || option > 2);
+		cout << "Try again > ";
+	} while (!std::validInteger(option, 0, 2));
 
 	if (option == 0)
 		return;
 
 	int targetContinent;
+
 	do {
 		cout << "Which continent would you like to edit? (index?) Enter > ";
-		cin >> targetContinent;
-	} while (targetContinent < 0 || targetContinent > (int)ContinentList.size());
+	} while (!std::validInteger(targetContinent, 0, (int)ContinentList.size() - 1));
+
 	switch(option) {
 		case 1: {
 				string old = ContinentList[targetContinent].getContinentName();
@@ -438,8 +441,12 @@ void std::MapCreator::editContinent(){
 		case 2:
 			cout << "What is the new bonus, before '" << ContinentList[targetContinent].getBonus() << "'?" << endl;
 			int newBonus;
-			cin >> newBonus;
-				ContinentList[targetContinent].setBonus(newBonus);
+
+			while (!std::validInteger(newBonus, 2, 20)){
+				cout << "Enter bonus greater then 2 > ";
+			}
+
+			ContinentList[targetContinent].setBonus(newBonus);
 			break;
 	}
 }
@@ -455,10 +462,10 @@ void std::MapCreator::editMap(){
 	cout << "2: change author name" << endl;
 
 	int option;
+
 	do {
 		cout << "Enter > ";
-		cin >> option;
-	} while (option < 0 || option > 2);
+	} while (!std::validInteger(option, 0, 2));
 
 	switch (option) {
 		case 0:	return;
