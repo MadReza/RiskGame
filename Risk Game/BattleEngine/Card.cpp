@@ -28,6 +28,11 @@ Card::Card()
 	num_cards_dealt++;	//Maybe do Card::num_cards_dealt++; 
 }
 
+Card::Card(CardType type)
+{
+	this->suit = type;
+}
+
 
 Card::~Card()
 {
@@ -36,4 +41,24 @@ Card::~Card()
 CardType Card::getCardSuit()
 {
 	return suit;
+}
+
+string Card::getImgFileLocation()
+{
+	string filename;
+
+	switch (this->suit)
+	{
+		case Infantry:
+			filename = "infantry.jpg";	//TODO
+			break;
+		case Artillery:
+			filename = "artillery.jpg";	//TODO
+			break;
+		case Cavalry:
+			filename = "cavalry.jpg";	//TODO
+			break;
+	}
+
+	return filename;
 }

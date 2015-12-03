@@ -35,6 +35,7 @@
 				</continent>
 			</continents>
 			<cards>
+				<card type="infantry"></card>
 			</cards>
 		</player>
 		<player name="P2"
@@ -64,6 +65,9 @@
 					</countries>
 				</continent>
 			</continents>
+			<cards>
+				<card type="cavalry"></card>
+			</cards>
 		</player>
 	</players>
 </save>

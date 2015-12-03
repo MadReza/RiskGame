@@ -16,8 +16,10 @@ class Card
 
 public:
 	Card();
+	Card(CardType type);
 	~Card();
 	CardType getCardSuit();
+	string getImgFileLocation();
 
 private:
 	CardType suit;
