@@ -4,7 +4,7 @@ bool CardUtilities::checkRedemption(Player *p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
 
-	if (p->getCards().size() >= MAX_REDEMPTION_HAND_SIZE)
+	if (p->getCards()->size() >= MAX_REDEMPTION_HAND_SIZE)
 	{
 		return true;
 	}
@@ -28,9 +28,9 @@ bool CardUtilities::checkRedemption(Player *p)
 
 void CardUtilities::getTotalOfEachCard(Player *p, int &infantry, int &artillery, int &cavalry)
 {
-	for (int i = 0; i != p->getCards().size(); i++)
+	for (int i = 0; i != p->getCards()->size(); i++)
 	{
-		switch (p->getCards()[i]->getCardSuit())
+		switch ((*p->getCards())[i]->getCardSuit())
 		{
 		case Infantry:
 			infantry++;
@@ -50,7 +50,7 @@ void CardUtilities::getTotalOfEachCard(Player *p, int &infantry, int &artillery,
 
 bool CardUtilities::mandatoryRedemption(Player * p)
 {
-	if (p->getCards().size() >= MAX_REDEMPTION_HAND_SIZE)
+	if (p->getCards()->size() >= MAX_REDEMPTION_HAND_SIZE)
 	{
 		return true;
 	}	
@@ -119,10 +119,10 @@ void CardUtilities::displayPlayerCards(Player * p)
 {
 	cout << "Player: " << p->getName()
 		<< ", has the following card hand sequence: ";
-	
-	for (int i = 0; i != p->getCards().size(); i++)
+
+	for (int i = 0; i != p->getCards()->size(); i++)
 	{
-		cout << p->getCards()[i]->getCardSuit() << ", ";
+		cout << (*p->getCards())[i]->getCardSuit() << ", ";
 	}
 
 	//TODO: @chris Add Emptry Drawing....
@@ -132,10 +132,10 @@ void CardUtilities::displayPlayerCards(Player * p)
 
 void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 {
-	while (loser->getCards().size() != 0)
+	while (loser->getCards()->size() != 0)
 	{
-		winner->getCards().push_back(loser->getCards().back());
-		loser->getCards().pop_back();
+		winner->getCards()->push_back(loser->getCards()->back());
+		loser->getCards()->pop_back();
 	}
 
 	cout << "All of Player: " << loser->getName() << "'s cards have been moved to "
@@ -144,7 +144,7 @@ void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 
 void CardUtilities::getVictoryCard(Player * p)
 {
-	p->getCards().push_back(new Card());
+	p->getCards()->push_back(new Card());
 }
 
 /*This return sequence is according to official Hasbro Risk rules
@@ -209,11 +209,11 @@ CardUtilities::~CardUtilities()
 
 void CardUtilities::deleteSuit(Player *p, CardType suit)
 {
-	for (int i = 0; i != p->getCards().size(); i++)
+	for (int i = 0; i != p->getCards()->size(); i++)
 	{
-		if (p->getCards()[i]->getCardSuit() == suit)
+		if ((*p->getCards())[i]->getCardSuit() == suit)
 		{
-			p->getCards().erase(p->getCards().begin() + i);
+			p->getCards()->erase(p->getCards()->begin() + i);
 			return;
 		}
 	}
