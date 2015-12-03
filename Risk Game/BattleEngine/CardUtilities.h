@@ -46,4 +46,5 @@ private:
 	static void printInfantry();
 	static void printArtillery();
 	static void printCavalry();
+	static void printBlank();
 };
