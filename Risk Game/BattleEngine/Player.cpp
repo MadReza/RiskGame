@@ -247,6 +247,11 @@ bool Player::getAlive()
 	return alive;
 }
 
+void Player::setAlive(bool trueFalse)
+{
+	alive = trueFalse;
+}
+
 void Player::addCountry(Country* country)
 {
 	countries.push_back(country);
@@ -255,6 +260,10 @@ void Player::addCountry(Country* country)
 void Player::removeCountry(Country* country)	//TODO TEST
 {
 	countries.erase(std::remove(countries.begin(), countries.end(), country), countries.end());
+	if (countries.size() == 0)
+	{
+		setAlive(false);
+	}
 }
 
 void Player::addContinent(Continent* continent)	//TODO TEST
@@ -294,8 +303,13 @@ void Player::assignAttack()
 	cout << "Select Country to attack to: " << endl;
 	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry));
 
-	BattleEngine(attackingCountry, targetCountry);
+	Player* defender = targetCountry->getOwner();
+	bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
 
+	if (countryConquered && !defender->getAlive())	
+	{
+		CardUtilities::takePlayerCards(defender, this);
+	}
 }
 
 void Player::setTurnVictory(bool trueFalse)
