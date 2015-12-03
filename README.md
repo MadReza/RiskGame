@@ -15,7 +15,7 @@
   - [x] Bug: no player countries available for attack... Check user output
   - [x] Bug: no enemy countries connected to our selected attacker country
   - [ ] Test/Bug: All countries lost when transferring cards after defeat
-  - [ ] Bug: Allin skips country stats being shown.
+  - [ ] Bug: All In mode skips country stats being shown every step ... System("pause")
 - [ ] Fortification
   - [ ] Nothing left ???
 - [ ] GameDriver
@@ -45,19 +45,19 @@
           --Reza A3 has it done... needs to implement.
     - [ ] using the Observer and Decorator patterns. 1 --- See Previous Line
     - [ ] User selection of a previously user - saved map, then load the map. 1
-    - [ ] User chooses the number of players, all countries are randomly assigned. 1
+    - [x] User chooses the number of players, all countries are randomly assigned. 1
     - [ ] Types of players are initially assigned and implemented using a Strategy pattern(see individual assignment 2).
           Types of players can be changed at any time during play. 2
   - [ ] Reinforcement phase 4
-    - [ ] Calculation of correct number of reinforcement armies and placement of armies on the map. 1
-    - [ ] Correct implementation of cards and their additional reinforcements. 3
+    - [ ] Calculation of correct number of reinforcement armies and placement of armies on the map. 1 @CHRIS TEST
+    - [ ] Correct implementation of cards and their additional reinforcements. 3 @CHRIS TEST 
   - [ ] Attack phase 6
-    - [ ] Correct identification of valid attacking / attacked country. 1
-    - [ ] Correct implementation of an attack using the Risk battle model. 3
-    - [ ] Correct implementation of the post - battle movement after a victory. 1
-    - [ ] A victory gives a card, eliminating a player transfers all the defeated player’s cards. 1
+    - [x] Correct identification of valid attacking / attacked country. 1
+    - [ ] Correct implementation of an attack using the Risk battle model. 3 @Kendy Semi done... check and test...
+    - [x] Correct implementation of the post - battle movement after a victory. 1
+    - [ ] A victory gives a card, eliminating a player transfers all the defeated player’s cards. 1 @CHRIS test
   - [ ] Fortification phase 1
-    - [ ] Implementation of a single valid move according to the Risk rules. 1
+    - [ ] Implementation of a single valid move according to the Risk rules. 1 @CHRIS do we do more than one move ?
     
 Graduation stuff....
 Graduate attributes—skills 15
