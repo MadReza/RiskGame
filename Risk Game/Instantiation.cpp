@@ -64,7 +64,8 @@ void Instantiation::newGame()
 void Instantiation::loadGame()
 {
 	system("cls");
-	isNewGame = false;
+	this->isNewGame = false;
+	// TODO @zack : Assign Continent bonus to players who own complete continents
 
 	// LOAD THE SAVES.XML FILE
 	string savesDir = "GameSaves/";
@@ -91,7 +92,8 @@ void Instantiation::loadGame()
 
 		//	USER SELECTS THE SAVE FILE
 		int choice;
-		do {
+		do
+		{
 			cout << "Your choice: ";
 		} while (!std::validInteger(choice, 0, i - 1));
 

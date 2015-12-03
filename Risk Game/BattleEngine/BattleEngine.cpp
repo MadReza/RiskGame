@@ -7,8 +7,6 @@ bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
 	Player *defenderPlayer = defenderCountry->getOwner();
 	bool countryConquered = false;
 
-	srand((unsigned)time(0)); //generate random number based on computer clocks
-
 	int	attackerNumRoll, defenderNumRoll;
 	bool allInMode = false;
 	
@@ -40,7 +38,7 @@ skipAllIn:
 	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
 	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
 
-	system("cls");
+	//system("cls");
 	
 	compareRolls(attackerCountry, defenderCountry,attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
 
@@ -129,7 +127,11 @@ int* BattleEngine::generateDescSortedRollList(int size){
 }
 
 int BattleEngine::roll(int min, int max){
-	return rand() % max + min;
+	
+	default_random_engine generator;
+	uniform_int_distribution<int> distribution(0, 1000);
+	return (distribution(generator) % max)+min;
+	//return rand() % max + min;
 }
 
 //Check if the attack is over. (Attack Phase is over when there's is no defending armies or attacker contains only 1 army).
@@ -221,7 +223,7 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 	int sentArmies; 
 	system("cls");
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
-	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack? (Not more than " << attackerCountry->getNumArmies() - 1 << " )" << endl;
+	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack?";
 	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
 
 	/*cin >> sentArmies; INFO: validInteger Takes Care*/ 
@@ -290,6 +292,7 @@ void BattleEngine::displayBattleInfo(Player* attackerPlayer, Player* defenderPla
 
 void BattleEngine::displayDefenderLost()
 {
+	system("pause");
 	system("cls");
 	cout << "______ ___________ _____ _   _______ ___________   _     _____ _____ _____ " << endl;
 	cout << "|  _  \\  ___|  ___|  ___| \\ | |  _  \\  ___| ___ \\ | |   |  _  /  ___|_   _|" << endl;
@@ -301,8 +304,8 @@ void BattleEngine::displayDefenderLost()
 
 void BattleEngine::displayAttackerLost()
 {
+	system("pause");
 	system("cls");
-
 	cout << "  ___ _____ _____ ___  _____  _   __ ___________   _     _____ _____ _____ " << endl;
 	cout << " / _ \\_   _|_   _/ _ \\/  __ \\| | / /|  ___| ___ \\ | |   |  _  /  ___|_   _|" << endl;
 	cout << "/ /_\\ \\| |   | |/ /_\\ \\ /  \\/| |/ / | |__ | |_/ / | |   | | | \\ `--.  | |  " << endl;

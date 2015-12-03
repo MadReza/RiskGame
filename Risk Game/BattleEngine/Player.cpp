@@ -94,6 +94,12 @@ int Player::getArmiesTotal() {
     return _armiesTotal;
 }
 
+//	TODO @zack for reinforcement total calculation
+//bool Player::checkContinentOwnership(Continent* c)
+//{
+
+//} 
+
 int Player::getReinforcementTotal() {
 	int reinforcement{0};
 	reinforcement += countries.size() / 3;
@@ -166,12 +172,6 @@ void Player::assignReinforcements()
 		}
 		int selection{-1};
 		
-		do {
-			cout << "Select the country number from 0 to " << countries.size()-1 << ": ";			//COMPLETED TODO CLEAN THIS FUNCTION e.g.:Boundry // Done: Zack
-			/*cin >> selection;*/	//COMPLETED Todo: currently assuming boundry is met. // Done: Zack
-		} while (!std::validInteger(selection, 0, countries.size() - 1)/*selection < 0 || selection > (countries.size() -1)*/);
-
-		cout << endl;
 		cout << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };
 

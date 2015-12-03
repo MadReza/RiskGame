@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 #include "../UI/PlayerView.h"
 #include "../Map/Country.h"
 
@@ -21,9 +21,9 @@ class PlayerViewDecorator : public PlayerView{
 
 public:
 
-	PlayerViewDecorator(Player &p) : PlayerView(p){
+	PlayerViewDecorator(Player *p) : PlayerView(*p){
 		//pass reference to a player object
-		Player *a_Player(&p);
+		Player *a_Player(p);
 
 		cout << "\n" << a_Player->getName() << " Owned Countries : " << endl;
 		vector<Country*> playerCountries = a_Player->getCountries();
@@ -43,15 +43,15 @@ class CompletePlayerView : public PlayerViewDecorator {
 
 public:
 	//Decorate the already existing Playerview Decorator
-	CompletePlayerView(Player &p) : PlayerViewDecorator(p){
+	CompletePlayerView(Player *p) : PlayerViewDecorator(p){
 
-		Player *a_Player(&p);//pass reference to a player object
+		Player *a_Player(p);//pass reference to a player object
 
-		//vector<Card*> playerCards = a_Player->getCards();
+		vector<Card*> playerCards = *a_Player->getCards();
 
-		/*cout << "\t\t\tCards owned (Display Nothing if no cards has been assigned)\n" << endl;
+		cout << "\tCards owned (Display Nothing if no cards has been assigned)\n" << endl;
 		for (vector<Card*>::iterator it = playerCards.begin(); it != playerCards.end(); ++it){
-			cout << (*it)->getCardSuit() << endl; */
+			cout << (*it)->getCardSuit() << endl; 
 		}
 	}
 };

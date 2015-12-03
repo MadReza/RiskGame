@@ -15,7 +15,7 @@ void PlayerView::update(){
 
     //Lets print on console just to test the working
     std::cout << "The view was updated for "<< _player->getName() <<" :"<< std::endl;
-    std::cout << " - Number of armies is now "<< _armiesTotal << std::endl;
-    std::cout << " - Number of reinforcement is now "<< _reinforcementTotal << std::endl;
-    std::cout << " - Number of battles won is now "<< _battlesWonTotal << std::endl << std::endl;
+    std::cout << " - Total Number of armies is now "<< _armiesTotal << std::endl;
+    std::cout << " - Total Number of reinforcement is now "<< _reinforcementTotal << std::endl;
+    std::cout << " - Total Number of battles won is now "<< _battlesWonTotal << std::endl << std::endl;
 }

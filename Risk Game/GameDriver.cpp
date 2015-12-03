@@ -95,6 +95,8 @@ void GameDriver::attackPhase(Player* player)
 	cout << "\n****Attack Phase:: ****" << endl << endl;
 	char answer;
 
+	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
+
 	do
 	{
 		cout << "Would you like to attack a country (y,n): ";

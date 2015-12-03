@@ -11,6 +11,7 @@
 #include <ctime>
 #include <algorithm>	//sort algorithm used
 #include <functional>
+#include <random>
 
 using std::cout;
 using std::wcout;
