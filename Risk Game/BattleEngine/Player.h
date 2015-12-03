@@ -45,7 +45,7 @@ private:
 	bool turnVictory;
 
 	// Attributes related to cards
-	vector<Card*> cards;
+	vector<Card*>* cards = nullptr;
 	int _cardRedemptionsTotal = 0;
 	bool redeemThisTurn;	//TODO @chris maybe rename this ?? 
 	
@@ -93,7 +93,8 @@ public:
 	vector<Country*> getCountries();	//TODO restrict access to countries.... !!!
 
 	//Card Methods
-	vector<Card*> getCards();
+	vector<Card*>* getCards();	//TODO create pointers and what not...
+
 	void incrementCardRedemptionsTotal();
 	int getCardRedemptionsTotal();
 };

@@ -5,6 +5,7 @@
 #include "Map\Map.h"
 #include "Instantiation.h"
 #include "BattleEngine\CardUtilities.h"
+#include "Validation.h"
 
 #include <iostream>
 #include <thread>

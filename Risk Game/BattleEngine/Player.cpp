@@ -24,9 +24,9 @@ Player::~Player()
 {
 	delete Astrategy;
 
-	for (int i = 0; i != cards.size(); i++)
+	for (int i = 0; i != cards->size(); i++)
 	{
-		delete cards[i];
+		delete (*cards)[i];
 	}
 }
 
@@ -35,6 +35,7 @@ void Player::initialize()
     _armiesTotal = 0;
     _battlesWonTotal = 0;
     _reinforcementTotal = 0;
+	cards = new vector<Card*>();
 	resetRoundVariables();
 }
 
@@ -140,7 +141,7 @@ int Player::getCardReinforcementTotal()
 		}
 
 		cout << "Do you want to redeem a set of cards (y,n): ";
-		cin >> answer;	//TODO validate this
+		cin >> answer;	//TODO validate this DONE
 		while (!std::validYesNo(answer)){
 			cout << "Try again > ";
 			cin >> answer;
@@ -181,8 +182,8 @@ void Player::assignReinforcements()
 		int armyToAdd{ 0 };		
 		do {
 			cout << countrySelection->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
-			cin >> armyToAdd;
-		} while (armyToAdd < 0 || armyToAdd > armyToAssign);
+			/*cin >> armyToAdd;*/
+		} while (!std::validInteger(armyToAdd, 0, armyToAssign)/*armyToAdd < 0 || armyToAdd > armyToAssign*/);
 
 		countrySelection->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
@@ -196,7 +197,7 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 	vector<Country*> enemyAdjacentCountries;
 
 	//Get Enemy Adjacent countries
-	for (int x = 0; x < allAdjacentCountries.size(); x++)
+	for (int x = 0; x < (int)allAdjacentCountries.size(); x++)
 	{
 		if (allAdjacentCountries[x]->getOwner() != this)
 		{
@@ -205,7 +206,7 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 	}
 
 	//Display Enemy Adjacent Countries to attack
-	for (int x = 0; x < enemyAdjacentCountries.size(); x++)
+	for (int x = 0; x < (int)enemyAdjacentCountries.size(); x++)
 	{
 		cout << x << ": " << enemyAdjacentCountries[x]->getName() << ", Army Size: " << enemyAdjacentCountries[x]->getNumArmies() << endl;
 	}
@@ -213,8 +214,8 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 
 	do {
 		cout << "Select the country number from 0 to " << enemyAdjacentCountries.size() - 1 << ": ";
-		cin >> selection;
-	} while (selection < 0 || selection >(enemyAdjacentCountries.size() - 1));
+		/*cin >> selection;*/
+	} while (!std::validInteger(selection, 0, enemyAdjacentCountries.size() - 1)/*selection < 0 || selection >((int)enemyAdjacentCountries.size() - 1)*/);
 
 	return enemyAdjacentCountries[selection];
 }
@@ -223,7 +224,7 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 {
 	vector<Country*> eligibleCountries;
 
-	for (int i = 0; i < countries.size(); i++)
+	for (int i = 0; i < (int)countries.size(); i++)
 	{
 		if (countries[i]->getNumArmies() >= showWithMinArmy)
 		{
@@ -231,19 +232,19 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 		}
 	}
 
-	for (int i = 0; i < eligibleCountries.size(); i++)
+	for (int i = 0; i < (int)eligibleCountries.size(); i++)
 	{
 		cout << i << ": " << eligibleCountries[i]->getName();
 		if (showArmy)
 			cout << " Army Size: " << eligibleCountries[i]->getNumArmies();
 		cout << endl;
 	}
-	int selection{ -1 };
+	int selection;
 
 	do {
 		cout << "Select the country number from 0 to " << eligibleCountries.size() - 1 << ": ";
-		cin >> selection;
-	} while (selection < 0 || selection >(eligibleCountries.size() - 1));
+		/*cin >> selection;*/
+	} while (!std::validInteger(selection, 0, eligibleCountries.size() - 1)/*selection < 0 || selection >((int)eligibleCountries.size() - 1)*/);
 
 	return eligibleCountries[selection];
 }
@@ -290,7 +291,7 @@ vector<Country*> Player::getCountries()
 	return countries;
 }
 
-vector<Card*> Player::getCards()
+vector<Card*>* Player::getCards()
 {
 	return cards;
 }
@@ -315,9 +316,25 @@ void Player::assignAttack()
 
 	Player* defender = targetCountry->getOwner();
 	bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
 
-	if (countryConquered && !defender->getAlive())	
+	if (!defender->getAlive())	
 	{
+		//TODO @Chris test your randomness
+		/*defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());*/
 		CardUtilities::takePlayerCards(defender, this);
 	}
 }
