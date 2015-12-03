@@ -42,11 +42,11 @@ private:
 	vector<Country*> countries;	
 	vector<Continent*> continents;
 	bool turnVictory;
-	bool redeemThisTurn;
 
 	// Attributes related to cards
 	vector<Card*> cards;
 	int _cardRedemptionsTotal = 0;
+	bool redeemThisTurn;	//TODO @chris maybe rename this ?? 
 	
 	void initialize();
 	Country* selectPlayerCountry(bool showArmy = false, int showWithMinArmy = 0);

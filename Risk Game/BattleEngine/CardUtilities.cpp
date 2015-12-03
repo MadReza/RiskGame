@@ -1,29 +1,15 @@
 #include "CardUtilities.h"
 
-bool CardUtilities::checkRedemption(Player * p)
+bool CardUtilities::checkRedemption(Player *p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
 
-	if (p->getCards().size() >= 5)
+	if (p->getCards().size() >= MAX_REDEMPTION_HAND_SIZE)
 	{
 		return true;
 	}
 
-	for (int i = 0; i != p->getCards().size(); i++)
-	{
-		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
-		{
-			infantry_count++;
-		}
-		if (p->getCards()[i]->getCardSuit() == "ARTILLERY")
-		{
-			artillery_count++;
-		}
-		if (p->getCards()[i]->getCardSuit() == "CAVALRY")
-		{
-			cavalry_count++;
-		}
-	}
+	getTotalOfEachCard(p, infantry_count, artillery_count, cavalry_count);
 
 	//if there is 3 of a kind of any suit return true
 	if (infantry_count >= 3 || artillery_count >= 3 || cavalry_count >= 3)
@@ -37,8 +23,29 @@ bool CardUtilities::checkRedemption(Player * p)
 		return true;
 	}
 	
-	return false;
-	
+	return false;	
+}
+
+void CardUtilities::getTotalOfEachCard(Player *p, int &infantry, int &artillery, int &cavalry)
+{
+	for (int i = 0; i != p->getCards().size(); i++)
+	{
+		switch (p->getCards()[i]->getCardSuit())
+		{
+		case Infantry:
+			infantry++;
+			break;
+		case Artillery:
+			artillery++;
+			break;
+		case Cavalry:
+			cavalry++;
+			break;
+		default:
+			//TODO error if other types...
+			break;
+		}
+	}
 }
 
 bool CardUtilities::mandatoryRedemption(Player * p)
@@ -46,32 +53,15 @@ bool CardUtilities::mandatoryRedemption(Player * p)
 	if (p->getCards().size() >= MAX_REDEMPTION_HAND_SIZE)
 	{
 		return true;
-	}
-	else
-	{
-		return false;
-	}
+	}	
+	return false;
 }
 
 int CardUtilities::selectRedemption(Player * p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
 
-	for (int i=0; i != p->getCards().size(); i++)
-	{		
-		if (p->getCards()[i]->getCardSuit() == "INFANTRY")
-		{
-			infantry_count++;
-		}
-		if (p->getCards()[i]->getCardSuit() == "ARTILLERY")
-		{
-			artillery_count++;
-		}
-		if (p->getCards()[i]->getCardSuit() == "CAVALRY")
-		{
-			cavalry_count++;
-		}
-	}
+	getTotalOfEachCard(p, infantry_count, artillery_count, cavalry_count);
 
 	char selection;
 	do
@@ -79,19 +69,19 @@ int CardUtilities::selectRedemption(Player * p)
 		cout << "The following redemptions are possible: " << endl;
 		if (infantry_count >= 3)
 		{
-			cout << "\tEnter 'i'. Redeem three INFANTRY cards." << endl;
+			cout << "\tEnter 'i'. Redeem three " << Infantry << " cards." << endl;
 		}
 		if (cavalry_count >= 3)
 		{
-			cout << "\tEnter 'c'. Redeem three CAVALRY cards." << endl;
+			cout << "\tEnter 'c'. Redeem three " << Cavalry << " cards." << endl;
 		}
 		if (artillery_count >= 3)
 		{
-			cout << "\tEnter 'a'. Redeem three ARTILLERY cards." << endl;
+			cout << "\tEnter 'a'. Redeem three " << Artillery << " cards." << endl;
 		}
 		if (artillery_count >= 1 && cavalry_count >= 1 && infantry_count >= 1)
 		{
-			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 INFANTRY, 1 ARTILLERY, 1 CAVALRY)." << endl;
+			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 " << Infantry << ", 1 " << Artillery << ", 1" << Cavalry << ")." << endl;
 		}
 		cout << "\tEnter 'q' to quit redemption" << endl;
 
@@ -99,26 +89,26 @@ int CardUtilities::selectRedemption(Player * p)
 		cin >> selection;	//TODO VALIDATION
 	} while (selection != 'i' && selection != 'c' && selection != 'a' && selection != 'd' && selection != 'q');
 
-	if (selection == 'q')
+	switch (selection)
 	{
+	case 'q':
 		cout << "Exiting card redemption..." << endl;
 		return 0;
-	}	
-	else if (selection == 'c')
-	{
-		removeThreeSimilar(p, "CAVALRY");
-	}
-	else if (selection == 'a')
-	{
-		removeThreeSimilar(p, "ARTILLERY");
-	}
-	else if (selection == 'd')
-	{
+	case 'c':
+		removeThreeSimilar(p, Cavalry);
+		break;
+	case 'a':
+		removeThreeSimilar(p, Artillery);
+		break;
+	case 'd':
 		removeThreeDiff(p);
-	}
-	else if (selection == 'i')
-	{
-		removeThreeSimilar(p, "INFANTRY");
+		break;
+	case 'i':
+		removeThreeSimilar(p, Infantry);
+		break;
+	default:
+		//TODO unknown case found..
+		break;
 	}
 
 	p->incrementCardRedemptionsTotal();
@@ -135,7 +125,7 @@ void CardUtilities::displayPlayerCards(Player * p)
 		cout << p->getCards()[i]->getCardSuit() << ", ";
 	}
 
-	//TODO: Add Emptry Drawing....
+	//TODO: @chris Add Emptry Drawing....
 
 	cout << endl;
 }
@@ -156,6 +146,7 @@ void CardUtilities::getVictoryCard(Player * p)
 {
 	p->getCards().push_back(new Card());
 }
+
 /*This return sequence is according to official Hasbro Risk rules
 from: http://www.hasbro.com/common/instruct/risk.pdf*/
 int CardUtilities::getRedemptionReinforcements(Player * p)
@@ -193,7 +184,7 @@ int CardUtilities::getRedemptionReinforcements(Player * p)
 	}
 }
 
-void CardUtilities::removeThreeSimilar(Player * p, string s)
+void CardUtilities::removeThreeSimilar(Player * p, CardType s)
 {
 	int counter = 3;
 	do
@@ -206,9 +197,9 @@ void CardUtilities::removeThreeSimilar(Player * p, string s)
 
 void CardUtilities::removeThreeDiff(Player * p)
 {
-	deleteSuit(p,"INFANTRY");
-	deleteSuit(p, "ARTILLERY");
-	deleteSuit(p, "CAVALRY");
+	deleteSuit(p,Infantry);
+	deleteSuit(p, Artillery);
+	deleteSuit(p, Cavalry);
 }
 
 CardUtilities::~CardUtilities()
@@ -216,7 +207,7 @@ CardUtilities::~CardUtilities()
 
 }
 
-void CardUtilities::deleteSuit(Player *p, string suit)
+void CardUtilities::deleteSuit(Player *p, CardType suit)
 {
 	for (int i = 0; i != p->getCards().size(); i++)
 	{
@@ -227,4 +218,168 @@ void CardUtilities::deleteSuit(Player *p, string suit)
 		}
 	}
 
+}
+
+void CardUtilities::print(CardType card)
+{
+	switch (card)
+	{
+	case Infantry:
+		printInfantry();
+		break;
+	case Artillery:
+		printArtillery();
+		break;
+	case Cavalry:
+		printCavalry();
+		break;
+	default:
+		//TODO ERROR NOT IMPLEMENTED HERE
+		break;
+	}
+}
+
+void CardUtilities::printInfantry()
+{	  
+	cout << "             =~~+                                                      " << endl;     
+	cout << "            7~::~:~7                                                   " << endl;     
+	cout << "           7,~,,I:~~                                                   " << endl;     
+	cout << "        ~:,,,.7,:::~                                                   " << endl;     
+	cout << "        ~,,,,,~.:,~:                                                   " << endl;     
+	cout << "         7,,,,,,:I.~7                                                  " << endl;     
+	cout << "          ~,,,,+:,:,:                                                  " << endl;     
+	cout << "           ,,,,.=,:+::                                                 " << endl;     
+	cout << "            :....,,:~.7                                                " << endl;     
+	cout << "             :.=:::,~?7                                                " << endl;     
+	cout << "              ~=+=+~==?                                           7I+7 " << endl;     
+	cout << "               :~=7=:=::====7=~  7     +   7++====~,=???++=+=========  " << endl;     
+	cout << "           7 7 ?+=+??~~~==~??,:,:,::~~,:::::~::~===,~===+I7            " << endl;     
+	cout << "     ==:~+=:????+==:~+::~::~++,,:::::,,:~=:7    7                      " << endl;     
+	cout << " ::::~~:77:,+++++?==~.::~:++?:+:+::+7=+7                               " << endl;     
+	cout << ":~:::: ~~~~,,,=+++:~~:7I=,,+====,:~ ?I                                 " << endl;     
+	cout << " ::::,::~~~~:,,:I???+,7?I:,::=~~~~=7I                                  " << endl;     
+	cout << "  :::,,,,=~+??II,I,I++?7?,:~~~:~:~??                                   " << endl;     
+	cout << "    77 ~:,:~?I?+~:~7+,,~I+:,~~~~~I?                                    " << endl;     
+	cout << "          ~:III+II??,:,,7??:,~~~I~~I                                   " << endl;     
+	cout << "          ~,I~:III~.:,,,.7I7777===~                                    " << endl;     
+	cout << "          =::I+IIII::,,,,I?.:=:::~                                     " << endl;     
+	cout << "         7+.,I+III7::,,,,,?I,,~~                                       " << endl;     
+	cout << "          ?+IIIII+,.,,,,,:=?:,~~                                       " << endl;     
+	cout << "        ?+=~II7III,.,,,:::.~~:,                                        " << endl;     
+	cout << "        I7:=IIIII+:,,,,,:~.                                            " << endl;     
+	cout << "        II.:7I7II?::,,,:::                                             " << endl;     
+	cout << "         :,7III===~:,::::~:7                                           " << endl;     
+	cout << "         ,.7777777=77II++I~:                                           " << endl;     
+	cout << "         :,777+777IIII77?=I~                                           " << endl;     
+	cout << "         :,777I777II7777I+II                                           " << endl;     
+	cout << "         :,777?777I7II7777~I=                                          " << endl;     
+	cout << "         :=I77=7777?777777I=I                                          " << endl;     
+	cout << "         :,777777?I77I7I777~7                                          " << endl;     
+	cout << "          77I7I++777?I77777=7                                          " << endl;     
+	cout << "          .II?77+77777777777                                           " << endl;     
+	cout << "          :?II???777I7I7777                                            " << endl;     
+	cout << "          :7+7?I?~7IIIII777                                            " << endl;     
+	cout << "           77I?7I?777?77I77                                            " << endl;     
+	cout << "           77??I??7777II777                                            " << endl;     
+	cout << "           I7?I7???77777II7                                            " << endl;     
+	cout << "           ?=?+===?7777I?I7                                            " << endl;     
+	cout << "            ::,,,,: II?~+?~                                            " << endl;     
+	cout << "            :::,,,: :::::::7                                           " << endl;     
+	cout << "            ::,,,,: ::,::::                                            " << endl;     
+	cout << "            :::,,,: :::,::~                                            " << endl;     
+	cout << "            +:,,,,: :::,:::                                            " << endl;     
+	cout << "            7:,:,,: ~::,:::                                            " << endl;     
+	cout << "             :,,,,~  ::,,::                                            " << endl;     
+	cout << "             ~:,,,   :,,,:~                                            " << endl;     
+	cout << "             =,:,:   ::,::,                                            " << endl;     
+	cout << "             ::,,:7  7:::,:7                                           " << endl;     
+	cout << "            :~::,,:   :,,,:                                            " << endl;     
+	cout << "           ~,,::,::   :::~:7                                           " << endl;     
+	cout << "      ?,.~:~,,..,.:   ~:,,,,                                           " << endl;     
+	cout << "   ~7,:,:,,,,,,:,.:,,,,:,,:::                                          " << endl;     
+	cout << "  ~:~::,~~,::~::::~..:.:::::,.,,:,.:                                   " << endl;     
+	cout << "  =~~=::~=~:~:~:~:~.~::,..,:.:~:,:,.~7                                 " << endl;     
+	cout << "  ~~~~~~:~,=:,~:~:::.~~::~,~,::::.~.+:                                 " << endl;     
+	cout << "    ?:?===:=+=:,~::=~,~~~::,:,~.===:~~7                                " << endl;     
+	cout << "         ~~::~~:::~::::,:~:=~~:~,=~                                    " << endl;     
+}	  
+void CardUtilities::printArtillery()
+{
+	cout << "	                              +=:::::::=                                     " << endl;   
+	cout << "                           +:~:~?77777~~:~:7                                    " << endl;
+	cout << "                        ~:~:7 ?:         +~::77++I???7                          " << endl;
+	cout << "                       :::7    :        +7+:::~~~:=~~~~:~=                      " << endl;
+	cout << "                     =:~7      ~7     7=::::::~:       ~~~~~                    " << endl;
+	cout << "                    ~::         ?   +=:::=  :7~~7        :~:~~7                 " << endl;
+	cout << "                   =::          :77~:::7    :~ =:       ~:  ~~~7                " << endl;
+	cout << "                  ?::::7        7=::::::7    : ~~=++==7+~=+  ::~7               " << endl;
+	cout << "                  ::7   ~:7   ~==::~~~:,:==:~,:~~==++?I=7+7?  ,~~               " << endl;
+	cout << "                 =~++=+====~~~~=:::~:==,I77??:?++===~~=:,:++   ~~7              " << endl;
+	cout << "+=~~==~~~++:~~~~~=+==II?777I+I,:,~,~,:,.::,I:,~~::~::=:~~~:    :~=              " << endl;
+	cout << "~7=7I+7II?~II??==:~~~:::,,,=:?,:,:,,,:::~==:~~,~:====~::=~~7    ~:7             " << endl;
+	cout << "+~:~:~::::~~=+====~==~====~,:~,~=~~::~::=~~++=:=+==?=:::====:77==~7             " << endl;
+	cout << " ::=+====+==I77  ~~7   7::=:,,==~~:~~~:~====~=::==,==~:~===~~==7:=7             " << endl;
+	cout << " ?=+=            +:7::?   ~:,,~~~~==~:.:::,~~~:::,~7 7:~~7=+=+==:=7             " << endl;
+	cout << "                  :~      7:,7~7   ?7   ~,::+:~:?~~~~7~7,,=======~              " << endl;
+	cout << "                  +:,     =::~7     :    77::~:=~+:.:    I:~===:~===++==        " << endl;
+	cout << "                   ~:,    =,:+      :7    +~~,::,::=~7     ::~=,====+=~= =      " << endl;
+	cout << "                    =:~   =::        ~ ~~=~~7:=:=~~,~~       ::::=+=++==,:~7++7 " << endl;
+	cout << "                      ~~~7=::      +~?=~~:  :~77~7=~  I=~7    :=:=+=++++==+++++ " << endl;
+	cout << "                        =:=,:~=:~I~~~:~7   =~7  :7        ~:7:==   +======+++I  " << endl;
+	cout << "                          7~~~~~~=~77      =7   ~~          ==~7    7======7    " << endl;
+	cout << "                           =~~            =7    7~         :=~7                 " << endl;
+	cout << "                            ==7          =7      ~        :==7                  " << endl;
+	cout << "                            7~~7        =7       ~7     :~==7                   " << endl;
+	cout << "                             =~=~      =7        ~7   ::==7                     " << endl;
+	cout << "                               +==7   +7          ~ :==~?                       " << endl;
+	cout << "                                =====:=         7~~==?7                         " << endl;
+	cout << "                                  ==~====~~~~+=:=~I=                            " << endl;
+	cout << "                                     7=======+==                                " << endl;
+}
+void CardUtilities::printCavalry()
+{
+	cout << "..................................................................,,.~:........." << endl;
+	cout << ".................................................................~,.~,.........." << endl;
+	cout << "............................................................~,,,:,,,,,~........." << endl;
+	cout << "........................................................:,,,,,,::::,,,,........." << endl;
+	cout << ".....................................................,,,,,,,.~~=~~~~~~~:........" << endl;
+	cout << "..................................................,,,,,,,~==+=~~=:,,:~~:........" << endl;
+	cout << "................................................,,,,,.~==+=~~:~====~:=::........" << endl;
+	cout << ".............................................,.,..:~==++=::~::==++~~==~:........" << endl;
+	cout << "............,~~~~~~:......................::::::~:===+=~::::~:~~=~:~~~:~~......." << endl;
+	cout << ".........::~~=======~~~~:~.............~~~~:::~~~~~+==~~~::::,~:::~~~:~::,......" << endl;
+	cout << ".......,~~=+II??+++======~~~~~~~~~~~========~~~==~~=+===~:::,.....::::,:~,......" << endl;
+	cout << "....,,~~=+??+==~==+++======+==========+++++++===~~+====~~::,........,.,,.,......" << endl;
+	cout << "....,===++===~~~~~================++++=======+==+:=+=~~~::,...........,,........" << endl;
+	cout << "..,,~=======~~~:~~~~=~~================~~~=~~=~~~~:~=~::,,......................" << endl;
+	cout << "..,,~~~~~~~~~~~~~~~~~~~~~===============~~=~=~~~=~~:~::,,......................." << endl;
+	cout << ".:,::~~~:::~=~~~~~:::::~~~~~~~~~=~~~~~~~~~~:~~~~==::::,,........................" << endl;
+	cout << ".,,,::~~~::~~~~:::,,:,,::::::~~~~:~:::::::~~~~~~~=:::::,........................" << endl;
+	cout << ".,,,::::~=~~~~:::,,,,,,,,,,,:::::::::::::~~~~~~~~::::::,........................" << endl;
+	cout << ".,,,:::::~~~:::,:,,.,,:,,,,,,,::,,,,,,,,,:~~~~=~~:::::~,........................" << endl;
+	cout << ".,,,.:::::~~~~:,,,,,,,,,,,,,,,,,,,,,,,,,,,:~~==~~:,,,::........................." << endl;
+	cout << ".,,,.:::::::::,,,,....,,,,,,,,,,,,,,,,,,,,::~~=~:,,,::,........................." << endl;
+	cout << ":,,,,,,:::,,,,,,,......,.,,,,,,,,,,,,,,,,,,,,:::~~,,,,.........................." << endl;
+	cout << ":,,,,,,:::,,,,,,.............,,,,,,,,,,,,...:,~:::,,:..........................." << endl;
+	cout << ".,,,,,.:~~::,,,............................,::~~::,,............................" << endl;
+	cout << ",,,,,,.~~~:,,,............................,,:::~~:,............................." << endl;
+	cout << ".,,,,,.::,,,,,............................,,,:~:~:,............................." << endl;
+	cout << ":,,,,::::,,,,,............................,,,:~:~,,............................." << endl;
+	cout << ":,,,,,~~,,,,,,............................,,,::,:,.............................." << endl;
+	cout << ".,,,.,,,~,.,,,...........................:,,,:~:,,.............................." << endl;
+	cout << ".,,,.,~,,,.,.............................,~,,:~:,..............................." << endl;
+	cout << ".,,..,,~,~.,.............................,,:.:,,,..............................." << endl;
+	cout << ".,,,.,,~..,.,............................,,..:,,,..............................." << endl;
+	cout << ".,.,.,,:..,,,...........................,,,..~,,................................" << endl;
+	cout << ".~.,,,,:...,,,..........................,,...,,,................................" << endl;
+	cout << "..,,,,,,....,,..........................::...,,................................." << endl;
+	cout << "...,.~,,....:,.........................,,:..~,,................................." << endl;
+	cout << "..,,::,,....,,,........................,,,..,,,................................." << endl;
+	cout << ".:...,.,....,,,,.......................,::...,,................................." << endl;
+	cout << "......::,.....,:........................:,...:,,................................" << endl;
+	cout << "...,,..,,...............................,,,...,.,.............,................." << endl;
+	cout << ",............................................,.,,..............,................" << endl;
+	cout << "...,,..........................................,,,,,,..........................." << endl;
+	cout << "................................................................................" << endl;
+	cout << "................................................................................" << endl;
 }

@@ -11,9 +11,14 @@ TODO:
 #include "Card.h"
 #include "Player.h"
 
+class Card;
+
+enum CardType { Infantry, Artillery, Cavalry };
+
 class CardUtilities{
 
 public:
+
 	static const int MAX_REDEMPTION_HAND_SIZE = 5;
 	
 	static bool checkRedemption(Player* p);
@@ -26,13 +31,19 @@ public:
 	/* If the player wins a battle, add one card to his hand */
 	static void getVictoryCard(Player* p);
 
+	static void print(CardType card);
 private:
 	CardUtilities();
 	~CardUtilities();
-	static void deleteSuit(Player *p, string suit);
-	static void removeThreeSimilar(Player* p, string s);
+	static void deleteSuit(Player *p, CardType suit);
+	static void removeThreeSimilar(Player* p, CardType s);
 	static void removeThreeDiff(Player* p);
 	/*The number of reinforcements for a successful card redemption will
-	increase with every subsequent redemptions*/
+	increase with every subsequent redemptions & return total reinforcement*/
 	static int getRedemptionReinforcements(Player* p);
+	static void getTotalOfEachCard(Player *p, int &infantry, int &artillery, int &cavalry);	//TODO @chris maybe rename this ??
+
+	static void printInfantry();
+	static void printArtillery();
+	static void printCavalry();
 };
