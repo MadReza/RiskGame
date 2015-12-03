@@ -24,9 +24,9 @@ Player::~Player()
 {
 	delete Astrategy;
 
-	for (int i = 0; i != cards.size(); i++)
+	for (int i = 0; i != cards->size(); i++)
 	{
-		delete cards[i];
+		delete (*cards)[i];
 	}
 }
 
@@ -35,6 +35,7 @@ void Player::initialize()
     _armiesTotal = 0;
     _battlesWonTotal = 0;
     _reinforcementTotal = 0;
+	cards = new vector<Card*>();
 	resetRoundVariables();
 }
 
@@ -284,7 +285,7 @@ vector<Country*> Player::getCountries()
 	return countries;
 }
 
-vector<Card*> Player::getCards()
+vector<Card*>* Player::getCards()
 {
 	return cards;
 }
@@ -309,9 +310,25 @@ void Player::assignAttack()
 
 	Player* defender = targetCountry->getOwner();
 	bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
+	defender->countries[0]->setOwner(this);
 
-	if (countryConquered && !defender->getAlive())	
+	if (!defender->getAlive())	
 	{
+		//TODO @Chris test your randomness
+		/*defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());
+		system("pause");
+		defender->getCards()->push_back(new Card());*/
 		CardUtilities::takePlayerCards(defender, this);
 	}
 }

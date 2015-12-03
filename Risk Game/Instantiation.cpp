@@ -64,16 +64,9 @@ void Instantiation::newGame()
 void Instantiation::loadGame()
 {
 	system("cls");
-	//TODO LOAD FROM FILE HERE. OR FROM GAME DRIVER
-	//cout << "Game is loading...." << endl;
 	isNewGame = false;
-	totalPlayers = 3;
-	mapPath = 1;
-	//return;
 
-	// load xml file
-	//*
-	//open the main file
+	// LOAD THE SAVES.XML FILE
 	string savesDir = "GameSaves/";
 	string savesPath = savesDir + "saves.xml";
 	char* source = new char[savesPath.length() + 1];
@@ -116,6 +109,14 @@ void Instantiation::loadGame()
 			//	GET THE MAP
 			pugi::xml_node map = save.child("map");
 
+			//	CREATE THE MAP
+			string str(Directory::GetCurrentWorkingDirectory());
+			const char* cd = str.c_str();
+			string path = Directory::CombinePaths(2, cd, "Mapfiles");
+			this->mapPath = path + "\\" + map.child_value();
+			UtilityMap m(this->mapPath);
+			this->map = m.getMapObject();
+
 			// GET THE PLAYERS
 			pugi::xml_node players = save.child("players");
 			for (pugi::xml_node player = players.child("player"); player; player = player.next_sibling("player"))
@@ -124,33 +125,44 @@ void Instantiation::loadGame()
 				Player* p;
 
 				Player::Type type;
-				if (player.attribute("type").value() == "human")
+				if (player.attribute("type").value() == "human") 
+				{
 					type = Player::Human;
-				else
+					this->totalHumanPlayers++;
+				}
+				else 
+				{
 					type = Player::Computer;
+					this->totalCompPlayers++;
+				}
 
 				string name = player.attribute("name").value();
 				
 				p = new Player(name, type);
 				this->players.push_back(p);
 
+				// INCREMENT THE NUMBER OF PLAYERS
+				this->totalPlayers++;
+
 				//	GET THE CONTINENTS
-				
 				pugi::xml_node continents = player.child("continents");
 				for (pugi::xml_node continent = continents.child("continent"); continent; continent = continent.next_sibling("continent"))
 				{
 					int continent_index = continent.attribute("index").as_int();
 					
+					//	GET THE COUNTRIES
 					vector<int> countries_indices;
+					vector<int> armies;
 					pugi::xml_node countries = continent.child("countries");
 					for (pugi::xml_node country = countries.child("country"); country; country = country.next_sibling("country"))
 					{
 						countries_indices.push_back(country.attribute("index").as_int());
+						armies.push_back(country.attribute("armies").as_int());
 					}
 
-					this->map->assignCountriesToPlayer(p, continent_index, countries_indices);
+					//	ASSIGN COUNTRIES TO PLAYER
+					this->map->assignCountriesToPlayer(p, continent_index, countries_indices, armies);
 				}
-				//cout << player.attribute("name").value() << " is a " <<  << " player" << endl;
 			}
 		}
 		else
@@ -171,69 +183,12 @@ void Instantiation::loadGame()
 		cout << "Error offset: " << result.offset << " (error at [..." << (source + result.offset) << "]\n\n";
 	}
 
-	return;
-	/*
-	display a menu to user
-	cout << "Select which save you would like to load:" << endl;
+	//return;
 
-	user select which save to load
-	store the loaded xml file in a string
-	//*/
-
-	// XML parser
-	//xml_document<> doc;    // character type defaults to char
-	//doc.parse<0>(text);    // 0 means default parse flags
-
-	// get the map id
-
-	// get the player names & types
-
-	// get 
-
-
-
-
-
-
-
-
-
-	// map creation
-	string str(Directory::GetCurrentWorkingDirectory());
-	const char* cd = str.c_str();
-	string path = Directory::CombinePaths(2, cd, "Mapfiles");
-	vector<string> maps(Directory::GetFilesNamesFrom(path));
-	mapPath = path + "\\" + maps[2];
-	UtilityMap m(mapPath);
-	map = m.getMapObject();
-
-	// players creation
-	players.push_back(new Player("p1", Player::Human));
-	players.push_back(new Player("p2", Player::Human));
-	players.push_back(new Player("p3", Player::Human));
-
-	// countries assignation to players
-	//map->distributePlayers(players); this is random distribution
-	/*
-	TODO: Assign countries to players
-	foreach player
-		vector<int> continents_indices; // load continent indices
-		continents_indices.push_back(1);
-		continents_indices.push_back(3);
-		continents_indices.push_back(4);
-
-		foreach continent
-			vector<int> countries_indices; // load country indices in continent
-			countries_indices.push_back(1);
-			countries_indices.push_back(3);
-			countries_indices.push_back(4);
-			foreach country
-				map->assignCountryToPlayer(player, continent_index, countries_indices) // assign country to player
-	*/
 	_game = GameDriver::getInstance();
-	_game->setTotalPlayers(3);
-	_game->setPlayers(getPlayers());
-	_game->setSelectedMap(getMap());
+	_game->setTotalPlayers(this->getTotalPlayers());
+	_game->setPlayers(this->getPlayers());
+	_game->setSelectedMap(this->getMap());
 
 	/*
 	TODO by @zack : load serialized game from file and build the game using the GameBuilder
