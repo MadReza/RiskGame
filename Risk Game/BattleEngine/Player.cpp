@@ -94,6 +94,12 @@ int Player::getArmiesTotal() {
     return _armiesTotal;
 }
 
+//	TODO @zack for reinforcement total calculation
+//bool Player::checkContinentOwnership(Continent* c)
+//{
+
+//} 
+
 int Player::getReinforcementTotal() {
 	int reinforcement{0};
 	reinforcement += countries.size() / 3;

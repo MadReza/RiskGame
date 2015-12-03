@@ -5,8 +5,8 @@ int Card::num_cards_dealt = 0;
 Card::Card()
 {
 	default_random_engine generator;
-	uniform_int_distribution<int> distribution(0, 2);
-	int random_int = distribution(generator);
+	uniform_int_distribution<int> distribution(0, 1000);
+	int random_int = distribution(generator) % 3;
 
 	switch (random_int)
 	{
