@@ -283,6 +283,7 @@ void Instantiation::mapSelection()
 void Instantiation::assignCountriesToPlayer()
 {
 	map->distributePlayers(players);
+	system("pause");
 }
 
 int Instantiation::startOrLoad()

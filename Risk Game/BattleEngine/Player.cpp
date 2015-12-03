@@ -152,11 +152,14 @@ int Player::getCardReinforcementTotal()
 }
 
 void Player::assignReinforcements()
-{
+{	
 	int armyToAssign{getReinforcementTotal()};
 
 	while (armyToAssign > 0)
 	{
+		cout << "Assigning Countries" << endl;
+		cout << "===================" << endl;
+
 		for (unsigned int i = 0; i < countries.size(); i++)
 		{
 			cout << i << ": " << countries[i]->getName() << endl;
@@ -199,6 +202,8 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 		}
 	}
 
+	if ((int)allAdjacentCountries.size() == 0) return NULL;
+
 	//Display Enemy Adjacent Countries to attack
 	for (int x = 0; x < (int)enemyAdjacentCountries.size(); x++)
 	{
@@ -225,6 +230,8 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 			eligibleCountries.push_back(countries[i]);
 		}
 	}
+
+	if (eligibleCountries.size() < 0) return NULL; //Laurendy ADD
 
 	for (int i = 0; i < (int)eligibleCountries.size(); i++)
 	{
@@ -302,11 +309,24 @@ int Player::getCardRedemptionsTotal()
 
 void Player::assignAttack()
 {
-	cout << "Select Country to attack from: " << endl;
-	Country* attackingCountry(selectPlayerCountry(true,2));					
+	cout << "Select Country to attack from: " << endl; 
+	Country* attackingCountry(selectPlayerCountry(true,2)); 
+
+	if (attackingCountry == NULL){
+		cout << "Looks like there are no eligible coutries to attack with...";
+		system("pause");
+		return;
+	}
+
 	cout << endl;
 	cout << "Select Country to attack to: " << endl;
-	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry));
+	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry)); //returning elegible attacking adjacent country
+
+	if (targetCountry == NULL){
+		cout << "Looks like there are no enemies to attack...";
+		system("pause");
+		return;
+	}
 
 	Player* defender = targetCountry->getOwner();
 	bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);

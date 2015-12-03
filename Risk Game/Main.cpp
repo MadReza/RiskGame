@@ -27,7 +27,7 @@ int main()
 		);
 	/*cout << "TESTING COLORS !" << endl;
 	system("pause");
-
+Select the country number 
 	system("Color 1A");
 	CardUtilities::print(Artillery);
 	system("pause");
