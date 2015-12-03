@@ -35,6 +35,13 @@ void Player::initialize()
     _armiesTotal = 0;
     _battlesWonTotal = 0;
     _reinforcementTotal = 0;
+	resetRoundVariables();
+}
+
+void Player::resetRoundVariables()
+{
+	turnVictory = false;
+	redeemThisTurn = false;
 }
 
 Player::Type Player::getType()
@@ -95,8 +102,48 @@ int Player::getReinforcementTotal() {
 		reinforcement += continent->getOccupationValue();
 		cout << "Bonus From Continent: " << continent->getContinentName() << " is " << continent->getOccupationValue() << endl;	
 	}
-	cout << "Total Reinforcement with lower limit of 3: " << max(reinforcement, MIN_REINFORCEMENT) << endl;
-	return max(reinforcement, MIN_REINFORCEMENT);
+	cout << "Total Reinforcement from Countries with lower limit of 3: " << max(reinforcement, MIN_REINFORCEMENT) << endl;
+
+	reinforcement = max(reinforcement, MIN_REINFORCEMENT);
+	reinforcement += getCardReinforcementTotal();
+
+	return reinforcement;
+}
+
+int Player::getCardReinforcementTotal()
+{
+	char answer;
+	int cardReinforcement = 0;
+	do {
+		system("cls");
+
+		CardUtilities::displayPlayerCards(this);
+		cout << "You have redeemed " << getCardRedemptionsTotal() << " times." << endl;
+		if (CardUtilities::mandatoryRedemption(this))
+		{
+			cout << "You have more than or equal to the maximum " << CardUtilities::MAX_REDEMPTION_HAND_SIZE << " cards allowed." << endl;
+			cout << "You must redeem below " << CardUtilities::MAX_REDEMPTION_HAND_SIZE << " cards." << endl;
+		}
+
+		if (!CardUtilities::checkRedemption(this))	//Nothing to Redeem
+		{
+			cout << "Nothing to redeem" << endl;
+			system("pause");
+			system("cls");
+			return 0;
+		}
+
+		cout << "Do you want to redeem a set of cards (y,n): ";
+		cin >> answer;	//TODO validate this
+
+		if (answer == 'y' || answer == 'Y')
+		{
+			cardReinforcement += CardUtilities::selectRedemption(this);
+		}
+
+	} while (CardUtilities::mandatoryRedemption(this) && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y');
+
+	return cardReinforcement;
 }
 
 void Player::assignReinforcements()
@@ -249,4 +296,23 @@ void Player::assignAttack()
 
 	BattleEngine(attackingCountry, targetCountry);
 
+}
+
+void Player::setTurnVictory(bool trueFalse)
+{
+	turnVictory = trueFalse;
+}
+
+bool Player::getTurnVictory()
+{
+	return turnVictory;
+}
+
+void Player::setRedeemThisTurn(bool trueFalse)
+{
+	redeemThisTurn = trueFalse;
+}
+bool Player::getRedeemThisTurn()
+{
+	return redeemThisTurn;
 }

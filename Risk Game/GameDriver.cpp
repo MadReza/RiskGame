@@ -86,6 +86,7 @@ void GameDriver::reinforcePhase(Player* player)
 void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 {
 	cout << "\tPlayer: " << player->getName() << " Adding Units to Countries." << endl;
+	player->resetRoundVariables();
 	player->assignReinforcements();
 }
 
@@ -103,6 +104,12 @@ void GameDriver::attackPhase(Player* player)
 			player->assignAttack();
 
 	} while (answer != 'n' && answer != 'N');
+
+	if (player->getTurnVictory())
+	{
+		player->setTurnVictory(false);
+		CardUtilities::getVictoryCard(player);
+	}
 
 	system("pause");
 	system("cls");

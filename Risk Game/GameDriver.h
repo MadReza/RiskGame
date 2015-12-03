@@ -4,6 +4,7 @@
 #include "BattleEngine\Player.h"
 #include "Map\Map.h"
 #include "Instantiation.h"
+#include "BattleEngine\CardUtilities.h"
 
 #include <iostream>
 #include <thread>

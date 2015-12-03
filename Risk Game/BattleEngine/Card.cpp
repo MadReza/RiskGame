@@ -8,24 +8,23 @@ Card::Card()
 	uniform_int_distribution<int> distribution(0, 2);
 	int random_int = distribution(generator);
 
-	if (random_int == 0)
+	switch (random_int)
 	{
-		suit = "INFANTRY";
+	case 0:
+		suit = Infantry;
 		IMG_FILE_LOCATION = "infantry.jpg";	//TODO
-	}
-
-	if (random_int == 1)
-	{
-		suit = "ARTILLERY";
+		break;
+	case 1:
+		suit = Artillery;
 		IMG_FILE_LOCATION = "artillery.jpg";	//TODO
-	}
-
-	if (random_int == 2)
-	{
-		suit = "CAVALRY";
+		break;
+	case 2:
+		suit = Cavalry;
 		IMG_FILE_LOCATION = "cavalry.jpg";	//TODO
+		break;
+	default:
+		break;
 	}
-
 	num_cards_dealt++;	//Maybe do Card::num_cards_dealt++; 
 }
 
@@ -34,13 +33,7 @@ Card::~Card()
 {
 }
 
-string Card::getCardSuit()
+CardType Card::getCardSuit()
 {
 	return suit;
 }
-
-
-
-
-
-

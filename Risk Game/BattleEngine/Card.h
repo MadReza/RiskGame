@@ -1,8 +1,15 @@
 #pragma once
-using namespace std;
+
+#include "CardUtilities.h"
+
 #include <iostream>
 #include <string>
 #include <random>
+
+using std::string;
+
+class CardUtilities;
+enum CardType;
 
 class Card
 {
@@ -10,10 +17,10 @@ class Card
 public:
 	Card();
 	~Card();
-	string getCardSuit();
+	CardType getCardSuit();
 
 private:
-	string suit;
+	CardType suit;
 	string IMG_FILE_LOCATION; //TODO: we need to select files and how we will implement in GUI
 	static int num_cards_dealt; //tracks total number of cards dealt, incremented upon each instantiation
 };
