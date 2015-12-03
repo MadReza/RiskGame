@@ -62,3 +62,4 @@ string Card::getImgFileLocation()
 
 	return filename;
 }
+

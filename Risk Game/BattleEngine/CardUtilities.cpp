@@ -134,6 +134,10 @@ void CardUtilities::displayPlayerCards(Player * p)
 	}
 
 	//TODO: @chris Add Emptry Drawing....
+	//Reza wants something similar to BattleEngine::displayBattleInfo
+	//Cavalry X5
+	//Infantry X3
+	//Artillery X2
 
 	cout << endl;
 }
