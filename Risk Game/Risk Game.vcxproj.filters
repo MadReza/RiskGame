@@ -239,5 +239,8 @@
     <ClInclude Include="Validation.h">
       <Filter>Utilities\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UI\PlayerViewDecorator.h">
+      <Filter>UI\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "Instantiation.h"
 #include "BattleEngine\CardUtilities.h"
 #include "Validation.h"
+#include "UI\PlayerViewDecorator.h"
 
 #include <iostream>
 #include <thread>

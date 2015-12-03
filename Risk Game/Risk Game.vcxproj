@@ -126,6 +126,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="UI\PlayerView.h" />
+    <ClInclude Include="UI\PlayerViewDecorator.h" />
     <ClInclude Include="Validation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
