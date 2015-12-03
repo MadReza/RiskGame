@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "../Map/Country.h"
+#include "../Validation.h"
 
 #include <iostream> 
 #include <iomanip>
