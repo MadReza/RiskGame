@@ -17,6 +17,7 @@ class Card;
 class Country;
 class Continent;
 
+
 class Player : public Subject 
 {
 public :

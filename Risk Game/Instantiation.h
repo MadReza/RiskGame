@@ -8,6 +8,9 @@
 #include "GameDriver.h"
 #include "libs/PugiXML/pugixml.hpp"
 #include "Validation.h"
+#include "BattleEngine\Agressive.h"
+#include "BattleEngine\Defensive.h"
+#include "BattleEngine\Random.h"
 
 #include <iostream>
 #include <string>
@@ -57,6 +60,7 @@ private:
 	void createHumanPlayers();
 	void createCompPlayers();
 	void randomizePlayerOrder();
+	int  chooseCompStrategy(int computerNumber);
 };
 
 #endif

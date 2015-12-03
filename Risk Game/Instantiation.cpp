@@ -250,9 +250,26 @@ void Instantiation::createCompPlayers()
 	totalCompPlayers = totalPlayers - totalHumanPlayers;
 	for (int i = 0; i < totalCompPlayers; i++)
 	{
-		string name("Comp ");
-		name += (i+1);
-		players.push_back(new Player(name, Player::Computer));
+
+		int selection(chooseCompStrategy(i + 1));
+		string name = "Comp " + (i + 1);
+
+		switch (selection)
+		{
+		case 0:
+			players.push_back(new Player(name, new Agressive()));
+			break;
+		case 1:
+			name = (i + 1);
+			players.push_back(new Player(name, new Defensive()));
+			break;
+		case 2:
+			name = (i + 1);
+			players.push_back(new Player(name, new Random()));
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -347,4 +364,22 @@ void Instantiation::randomizePlayerOrder()
 		}
 	}
 	players = newOrder;
+}
+
+int Instantiation::chooseCompStrategy(int computerNumber)
+{
+	int selection;
+	cout << "\nPlease choose the strategy of the computer player " << computerNumber << "  " << endl ;
+	cout << "Type 0: Agressive Strategy" << endl;
+	cout << "Type 1: Defensive Strategy" << endl;
+	cout << "Type 2: Random Strategy" << endl;
+	
+	cout << "Selection: ";
+
+	while (!std::validInteger(selection, 0, 2))
+	{
+		cout << "Only allowed options are 0, 1, 2: ";
+	}
+	return selection;
+
 }

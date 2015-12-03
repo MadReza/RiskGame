@@ -1,13 +1,9 @@
 #pragma once
 #include "BattleEngine.h"
-#include "Player.h"
 #include "../Map/Country.h"
-#include "map"
 #include <vector>
 
 class Country;
-
-using namespace std;
 
 //Base class
 class Strategy {

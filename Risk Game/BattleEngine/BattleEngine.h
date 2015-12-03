@@ -27,6 +27,7 @@ class Player;
 
 class BattleEngine
 {
+
 private:
 
 	static int attackerRoll(Player* attackerPlayer, Player* defenderPlayer, Country *attackerCountry, Country *defenderCountry);
@@ -41,9 +42,7 @@ private:
 	static void displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry);
 	static void displayDefenderLost();
 	static void displayAttackerLost();
-	
-	BattleEngine();
-	~BattleEngine();
+
 public:
 	static bool attack(Country *attacker, Country *defender);
 	static bool isContinue();

@@ -10,6 +10,8 @@ using namespace std;
 
 class Continent; //forward declaration
 class Player;
+class Strategy;
+class Agressive;
 
 class Country
 {

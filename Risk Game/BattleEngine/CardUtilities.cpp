@@ -291,12 +291,12 @@ void CardUtilities::printCavalry()
 void CardUtilities::printBlank()
 {
 	    cout<<"+=============+"<<endl;
-		cout<<"|/\/\/\/\/\/\/|"<<endl;
-		cout<<"|\/\/\/\/\/\/\|"<<endl;
-		cout<<"|/\/\/\/\/\/\/|"<<endl;
+		cout<<"|/\\/\\/\\/\\/\\/\\/|"<<endl;
+		cout<<"|\\/\\/\\/\\/\\/\\/\\|"<<endl;
+		cout<<"|/\\/\\/\\/\\/\\/\\/|"<<endl;
 		cout<<"|==RISK 345===|"<<endl;
-		cout<<"|\/\/\/\/\/\/\|"<<endl;
-		cout<<"|/\/\/\/\/\/\/|"<<endl;
-		cout<<"|\/\/\/\/\/\/\|"<<endl;
+		cout<<"|\\/\\/\\/\\/\\/\\/\\|"<<endl;
+		cout<<"|/\\/\\/\\/\\/\\/\\/|"<<endl;
+		cout<<"|\\/\\/\\/\\/\\/\\/\\|"<<endl;
 		cout<<"+=============+"<<endl;
 }
