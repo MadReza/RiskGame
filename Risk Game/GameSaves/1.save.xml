@@ -1,28 +1,48 @@
 <save>
 	<map>Small.map</map>
 	<players>
-		<player name="John" type="human">
+		<player name="P1" type="human">
 			<continents>
-				<continent index="1" name="North America">
+				<continent index="3" name="Top and Bottom">
 					<countries>
-						<country index="0" name="Canada" armies="3"></country>
-						<country index="1" name="US" armies="1"></country>
+						<country index="0" name="7TB" armies="1"></country>
+						<country index="1" name="10TB" armies="1"></country>
+					</countries>
+				</continent>
+				<continent index="4" name="Right Side">
+					<countries>
+						<country index="0" name="5RS" armies="1"></country>
+						<country index="1" name="6RS" armies="1"></country>
+					</countries>
+				</continent>
+				<continent index="2" name="Left Side">
+					<countries>
+						<country index="1" name="9LS" armies="3"></country>
+					</countries>
+				</continent>
+				<continent index="0" name="Linkin">
+					<countries>
+						<country index="0" name="1L" armies="1"></country>
 					</countries>
 				</continent>
 			</continents>
 		</player>
-		<player name="Zack" type="human">
+		<player name="P2" type="human">
 			<continents>
-				<continent index="3" name="Asia">
+				<continent index="0" name="Linkin">
 					<countries>
-						<country index="0" name="China" armies="1"></country>
-						<country index="1" name="India" armies="1"></country>
+						<country index="1" name="2L" armies="1"></country>
 					</countries>
 				</continent>
-				<continent index="2" name="Europe">
+				<continent index="1" name="Park">
 					<countries>
-						<country index="0" name="France" armies="1"></country>
-						<country index="1" name="Spain" armies="1"></country>
+						<country index="0" name="3P" armies="2"></country>
+						<country index="1" name="4P" armies="1"></country>
+					</countries>
+				</continent>
+				<continent index="2" name="Left Side">
+					<countries>
+						<country index="0" name="8LS" armies="3"></country>
 					</countries>
 				</continent>
 			</continents>
