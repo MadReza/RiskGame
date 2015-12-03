@@ -1,7 +1,9 @@
 #include "MapCreator.h"
+
 #include <iostream>
 
-std::MapCreator::MapCreator(){
+std::MapCreator::MapCreator()
+{
 	system("cls");
 	cout << "\nWELCOME TO" << endl; 
 	cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
@@ -19,16 +21,12 @@ std::MapCreator::MapCreator(){
 	cout << "2: create" << endl;
 	cout << "Enter > ";
 
-	int option;
+	int option = 0;
 	bool isComplete;
-	do {
-		isComplete = true;
-		cin >> option;
-		if (option < 0 || option > 2){
-			cout << "Sorry what was that? Enter > ";
-			isComplete = false;
-		}
-	} while (!isComplete);
+
+	while (!std::vInteger(option, 0, 2)){
+		cout << "Sorry what was that? Enter > ";
+	}
 
 	switch (option) {
 		case 0: 
@@ -46,8 +44,8 @@ std::MapCreator::MapCreator(){
 		do{
 			cout << "1:  Yes , 0: No" << endl;
 			cout << "Would you like to save this map, " << name << "? Enter >";
-			cin >> answer;
-		} while (answer < 0 || answer > 1);
+		} while (!std::vInteger(answer, 0, 1));
+
 			switch (answer)
 			{
 			case 1:
@@ -74,7 +72,8 @@ std::MapCreator::~MapCreator()
 }
 
 //================================================================================MAP CREATIION================================================================================
-void std::MapCreator::create(){
+void std::MapCreator::create()
+{
 	system("cls");
 	cout << "\n>>>>>>>>>>>Map Creation Mode<<<<<<<<<<<" << endl;
 	cout << ">>>>>>>>>>>>>>>>>>>>>1/5<<<<<<<<<<<<<<<<<" << endl;
@@ -97,16 +96,19 @@ void std::MapCreator::create(){
 	cout << ">>>>>>>>>>>>>>>>>>>>>2/5<<<<<<<<<<<<<<<<<" << endl;
 	cout << "\nEnter more then 4 countries and 2 continents..\n" << endl;
 	int numCountries;
-	do {
-		cout << "How many countries are you creating? Enter > ";
-		cin >> numCountries;
-	} while (numCountries < 4 || numCountries > 256);
+
+	cout << "How many countries are you creating? Enter > ";
+	while (!std::vInteger(numCountries, 4, 255))
+	{
+		cout << "Enter between 4 and 255, Please > ";
+	}
 
 	int numContinents;
-	do {
-		cout << "How many continent are you creating? Enter > ";
-		cin >> numContinents;
-	} while (numContinents < 2 || numContinents > 256);
+	cout << endl << "How many continent are you creating? Enter > ";
+	while (!std::vInteger(numContinents, 2, numCountries))
+	{
+		cout << "Enter between 2 and less then the number of countries. > ";
+	}
 
 	system("cls");
 	cout << "\n>>>>>>>>>>>Adding Continents<<<<<<<<<<<" << endl;
@@ -138,7 +140,8 @@ void std::MapCreator::create(){
 }
 
 //================================================================================AddCountry================================================================================
-void std::MapCreator::addCountry() {
+void std::MapCreator::addCountry() 
+{
 	string name, continent;
 	int x, y, numAdj;
 	vector<string> adjacentCountry;
