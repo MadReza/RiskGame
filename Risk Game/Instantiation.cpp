@@ -116,6 +116,12 @@ void Instantiation::loadGame()
 			
 			//	GET THE MAP
 			pugi::xml_node map = save.child("map");
+			string str(Directory::GetCurrentWorkingDirectory());
+			const char* cd = str.c_str();
+			string path = Directory::CombinePaths(2, cd, "Mapfiles");
+			mapPath = path + "\\" + map.child_value();
+			UtilityMap m(mapPath);
+			this->map = m.getMapObject();
 
 			// GET THE PLAYERS
 			pugi::xml_node players = save.child("players");
@@ -136,12 +142,12 @@ void Instantiation::loadGame()
 				this->players.push_back(p);
 
 				//	GET THE CONTINENTS
-				
 				pugi::xml_node continents = player.child("continents");
 				for (pugi::xml_node continent = continents.child("continent"); continent; continent = continent.next_sibling("continent"))
 				{
 					int continent_index = continent.attribute("index").as_int();
 					
+					//	GET THE COUNTRIES
 					vector<int> countries_indices;
 					pugi::xml_node countries = continent.child("countries");
 					for (pugi::xml_node country = countries.child("country"); country; country = country.next_sibling("country"))
@@ -149,6 +155,7 @@ void Instantiation::loadGame()
 						countries_indices.push_back(country.attribute("index").as_int());
 					}
 
+					//	ASSIGN COUNTRIES TO PLAYER
 					this->map->assignCountriesToPlayer(p, continent_index, countries_indices);
 				}
 				//cout << player.attribute("name").value() << " is a " <<  << " player" << endl;
