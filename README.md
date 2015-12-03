@@ -23,12 +23,12 @@
   - [ ] 
 ## GRADING TODO
 - [ ] Functional Requirements 35
-  - [ ] Map creation and editing 7
-    - [ ] User - driven creation of map elements, such as country, continent, and connectivity between countries. 1
-    - [ ] Saving a map to a file exactly as edited 1
-    - [ ] Loading a map from an existing file, then editing the map 1
-    - [ ] Use of the Adapter pattern to save / load from two different map file formats(see individual assignment 3). 2
-    - [ ] Verification of map correctness upon saving / loading(at least 3 types of incorrect maps, including verification that the
+  - [x] Map creation and editing 7
+    - [x] User - driven creation of map elements, such as country, continent, and connectivity between countries. 1
+    - [x] Saving a map to a file exactly as edited 1
+    - [x] Loading a map from an existing file, then editing the map 1
+    - [x] Use of the Adapter pattern to save / load from two different map file formats(see individual assignment 3). 2
+    - [x] Verification of map correctness upon saving / loading(at least 3 types of incorrect maps, including verification that the
           map is a connected graph, and that each continent is a connected graph) 2
   - [ ] Game driver 4
     - [x] Implementation of a round - robin loop for players’ turns / phases, 
