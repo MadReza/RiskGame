@@ -1,7 +1,15 @@
 <save>
 	<map>Small.map</map>
 	<players>
-		<player name="P1" type="human">
+		<player name="P1"
+				type="human"
+				color="red"
+				alive="true"
+				reinforcementTotal="0"
+				armiesTotal="8"
+				battlesWonTotal="0"
+				cardRedemptionsTotal="0"
+				redeemThisTurn="false">
 			<continents>
 				<continent index="3" name="Top and Bottom">
 					<countries>
@@ -26,8 +34,18 @@
 					</countries>
 				</continent>
 			</continents>
+			<cards>
+			</cards>
 		</player>
-		<player name="P2" type="human">
+		<player name="P2"
+				type="human"
+				color="green"
+				alive="true"
+				reinforcementTotal="0"
+				armiesTotal="7"
+				battlesWonTotal="0"
+				cardRedemptionsTotal="0"
+				redeemThisTurn="false">
 			<continents>
 				<continent index="0" name="Linkin">
 					<countries>

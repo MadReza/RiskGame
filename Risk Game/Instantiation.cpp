@@ -66,7 +66,7 @@ void Instantiation::loadGame()
 	system("cls");
 	isNewGame = false;
 
-	// LOAD THE SAVES XML FILE
+	// LOAD THE SAVES.XML FILE
 	string savesDir = "GameSaves/";
 	string savesPath = savesDir + "saves.xml";
 	char* source = new char[savesPath.length() + 1];
