@@ -67,8 +67,8 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
-	clsGame();
-	cout << "\n****Reinforcment Phase:: ****" << endl << endl;
+	risk::clsGame();
+	cout << "****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
 
@@ -81,15 +81,16 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
-	clsGame();
-	cout << "\n****Attack Phase:: ****" << endl << endl;
+	risk::clsGame();
+	cout << "****Attack Phase:: ****" << endl << endl << endl;
 	char answer;
 
 	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
 	delete playerInfo;	//To Clean screen stuff...
+
 	do
 	{
-		cout << endl << "Would you like to attack a country (y,n): ";
+		cout << "Would you like to attack a country (y,n): ";
 		cin >> answer;
 
 		if (answer == 'y' || answer == 'Y')
@@ -110,7 +111,7 @@ void GameDriver::attackPhase(Player* player)
 
 void GameDriver::fortifcationPhase(Player* player)
 {
-	cout << "\n****Fortification Phase:: ****" << endl;
+	cout << "****Fortification Phase:: ****" << endl;
 	cout << "\tFor all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
 
 	vector<Country*> playerCountries = player->getCountries();

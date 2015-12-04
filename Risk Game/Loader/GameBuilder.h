@@ -5,7 +5,6 @@
 #include "../Instantiation.h"
 #include "../BattleEngine/Player.h"
 
-using namespace std;
 
 class GameBuilder {
 private:

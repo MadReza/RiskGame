@@ -30,7 +30,7 @@ public:
 			risk::obsDisplaying = true;
 			startedScreenOutput = true;
 			gameCursorCoordinates = risk::getCursorPosition();
-			clsObserver();
+			risk::clsObserver();
 		}
 		
 		//pass reference to a player object
@@ -72,17 +72,10 @@ public:
 			risk::obsDisplaying = true;
 			startedScreenOutput = true;
 			gameCursorCoordinates = risk::getCursorPosition();
-			clsObserver();
+			risk::clsObserver();
 		}
 
-		Player *a_Player(p);//pass reference to a player object
-
-		vector<Card*> playerCards = *a_Player->getCards();
-
-		cout << "\tCards owned (Display Nothing if no cards has been assigned)\n" << endl;
-		for (vector<Card*>::iterator it = playerCards.begin(); it != playerCards.end(); ++it){
-			cout << (*it)->getCardSuit() << endl; 
-		}
+		CardUtilities::displayPlayerCards(p);
 	}
 
 	~CompletePlayerView(){

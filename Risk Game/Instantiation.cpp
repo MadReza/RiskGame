@@ -48,7 +48,7 @@ bool Instantiation::getIsNewGame() const
 
 void Instantiation::newGame()
 {
-	clsGame();
+	risk::clsGame();
 	isNewGame = true;
 	mapSelection();
 	createPlayers();
@@ -63,7 +63,7 @@ void Instantiation::newGame()
 
 void Instantiation::loadGame()
 {
-	clsGame();
+	risk::clsGame();
 	this->isNewGame = false;
 	// TODO @zack : Assign Continent bonus to players who own complete continents
 
@@ -218,7 +218,7 @@ void Instantiation::createMap()
 void Instantiation::createPlayers()
 {	
 	//TODO: maybe Add Design at observer area of the screen.
-	clsGame();
+	risk::clsGame();
 	do
 	{
 		cout << "Total amount of Players(2 to " << map->getMaxPlayers() << "): ";
@@ -276,7 +276,7 @@ void Instantiation::createCompPlayers()
 
 void Instantiation::mapSelection()
 {
-	clsGame();
+	risk::clsGame();
 	string str(Directory::GetCurrentWorkingDirectory());
 	const char* cd = str.c_str();
 	string path = Directory::CombinePaths(2, cd, "Mapfiles");
@@ -299,18 +299,18 @@ void Instantiation::mapSelection()
 	mapPath = path + "\\" + maps[selection];
 	UtilityMap m(mapPath);
 	map = m.getMapObject();
-	pause();
+	risk::pause();
 }
 
 void Instantiation::assignCountriesToPlayer()
 {
 	map->distributePlayers(players);
-	pause();
+	risk::pause();
 }
 
 int Instantiation::startOrLoad()
 {
-	setCursorPosition(COORD_INI_GAME_SCREEN);
+	risk::setCursorPosition(risk::COORD_INI_GAME_SCREEN);
 	int selection;
 	cout << "Type 0: To Start a New Game" << endl;
 	cout << "Type 1: To Load a Game" << endl;

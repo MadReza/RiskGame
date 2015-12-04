@@ -12,7 +12,6 @@
 
 #include "Screen.h"
 
-using namespace risk;
 
 int main()
 {
@@ -65,7 +64,7 @@ int main()
 
 	//Loading/Preparing Risk To be Played
 	std::cout << "Preparing Game for your Enjoyment!" << std::endl;
-	while (!checkConsoleSize(200, 300))
+	while (!risk::checkConsoleSize(200, 300))
 	{
 		std::cout << "Console buffer needs to be set to the following settings: " << std::endl;
 		std::cout << "Screen Buffer Size: " << std::endl;
@@ -79,7 +78,7 @@ int main()
 
 	std::cout << "Game prepared! Enjoy!" << endl;
 	system("pause");
-	cls();
+	risk::cls();
 
 	/************************COLOR PART **********************************/
 	//http://stackoverflow.com/a/20725888

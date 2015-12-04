@@ -11,7 +11,9 @@
 #include <string>
 #include <algorithm>
 
-using namespace std;
+using std::vector;
+using std::string;
+using std::set;
 
 //forward declarations
 class Card;
@@ -64,7 +66,7 @@ public:
 	void setName(string name);
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
-	bool isHuman(Player p);
+	bool isHuman();
 	void setTurnVictory(bool trueFalse);
 	bool getTurnVictory();
 	void setRedeemThisTurn(bool trueFalse);
