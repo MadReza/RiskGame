@@ -73,6 +73,12 @@ skipAllIn:
 	//Defender Lost
 	if (defenderLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){
 		//Display
+
+		if (attackerRollsList != nullptr)
+			delete[]attackerRollsList;//Deallocate memory
+		if (defenderRollsList != nullptr)
+			delete[]defenderRollsList;//Deallocate memory
+
 		displayDefenderLost();
 		cout << endl;
 		cout << "Defender lost his country" << endl;
@@ -97,6 +103,12 @@ skipAllIn:
 	//Attacker Lost
 	if (attackerLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){	//TODO reformating: doesn't need to pass NumArmies
 		
+
+		if (attackerRollsList != nullptr)
+			delete[]attackerRollsList;//Deallocate memory
+		if (defenderRollsList != nullptr)
+			delete[]defenderRollsList;//Deallocate memory
+
 		displayAttackerLost();
 		cout << endl;
 		cout << "\n\t\tAttacker ran out of armies\n";
@@ -118,10 +130,6 @@ skipAllIn:
 stop:
 
  	//Clean
-	if (attackerRollsList != nullptr)
-		delete[]attackerRollsList;//Deallocate memory
-	if (defenderRollsList != nullptr)
-		delete[]defenderRollsList;//Deallocate memory
 	return countryConquered;
 }
 
