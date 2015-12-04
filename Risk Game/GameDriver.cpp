@@ -27,19 +27,7 @@ GameDriver::~GameDriver()
 
 void GameDriver::startGame()
 {
-	Instantiation start;
-	/*
-	if (start.getIsNewGame())
-	{
-		totalPlayers = start.getTotalPlayers();
-		players = start.getPlayers();
-		selectedMap = start.getMap();
-	}
-	else
-	{
-		*this = *(start.getGameDriver());
-	}
-	//*/
+	Instantiation start;	//Initializes all components then sends to GameDriver.
 	
 	play();
 }

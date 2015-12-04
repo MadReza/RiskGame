@@ -2,6 +2,10 @@
 #define SCREEN_H
 
 #include <Windows.h>
+#include <conio.h>
+#include <iostream>
+
+using std::cin;
 
 namespace risk
 {
@@ -15,7 +19,10 @@ namespace risk
 	const COORD COORD_INI_GAME_SCREEN = { 0, 27 };    
 
 	/*Change Cursor position */
-	void changeCursorPosition(COORD coordinates);
+	void setCursorPosition(COORD coordinates);
+
+	/*Get Current Cursor position*/
+	COORD getCursorPosition();
 
 	/*Clear a specfici part of the screens */
 	void cls(COORD startPosition, SHORT length, SHORT height);
@@ -25,6 +32,12 @@ namespace risk
 	void clsObserver();	
 	/*Clear Part of the screen dedicated to the Game*/
 	void clsGame();
+
+	/*Wait for Input to continue*/
+	void pause();
+
+	/*Make sure the console is set to the correct size */
+	bool checkConsoleSize(int width, int height);
 }
 
 #endif //SCREEN_H

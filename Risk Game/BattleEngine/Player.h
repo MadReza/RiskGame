@@ -70,6 +70,9 @@ public:
 	bool getRedeemThisTurn();
 	void resetRoundVariables();
 
+	int getContinentReinforcements();
+	int getCountryReinforcements();
+
 	void doStrategy(Country* country){
 		Astrategy->doStrategy(country);
 	}

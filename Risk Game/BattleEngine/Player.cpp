@@ -100,10 +100,26 @@ int Player::getArmiesTotal() {
 
 //} 
 
+int Player::getCountryReinforcements()
+{
+	return countries.size() / 3;
+}
+
+int Player::getContinentReinforcements()
+{
+	int reinforcement{ 0 };
+	for each (Continent* continent in continents)
+	{
+		reinforcement += continent->getOccupationValue();
+		cout << "Bonus From Continent: " << continent->getContinentName() << " is " << continent->getOccupationValue() << endl;
+	}
+	return reinforcement;
+}
+
 int Player::getReinforcementTotal() {
 	int reinforcement{0};
-	reinforcement += countries.size() / 3;
-	cout << "Bonus From Countries: " << reinforcement << endl;;
+	reinforcement += getCountryReinforcements();
+	cout << "Bonus From Countries: " << reinforcement << endl;
 	for each (Continent* continent in continents)
 	{
 		reinforcement += continent->getOccupationValue();
