@@ -86,8 +86,12 @@ int CardUtilities::selectRedemption(Player * p)
 			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 " << CardUtilities::cardTypes[Infantry] << ", 1 " << CardUtilities::cardTypes[Artillery] << ", 1" << CardUtilities::cardTypes[Cavalry] << ")." << endl;
 		}
 		cout << "\tEnter 'q' to quit redemption" << endl;
-
+		
 		cout << "Please enter your selection from the above choices: ";
+		if (!p->isHuman()){
+			selection = 'i';
+			cout << endl << p->getName() << " Chose " << CardUtilities::cardTypes[Infantry] << " card\n";
+		}
 		cin >> selection;	//VALIDATION DONE, BELOW
 
 	} while (selection != 'i' && selection != 'c' && selection != 'a' && selection != 'd' && selection != 'q');

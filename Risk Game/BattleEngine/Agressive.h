@@ -26,8 +26,7 @@ public:
 				risk::pause();
 
 				bool countryConquered = BattleEngine::attack(c1, (*it));
-				Country* targetCountry = (*it);
-				Player* defender = targetCountry->getOwner();
+				Player* defender = (*it)->getOwner();
 				if (!defender->getAlive())
 				{
 					CardUtilities::takePlayerCards(defender, c1->getOwner());

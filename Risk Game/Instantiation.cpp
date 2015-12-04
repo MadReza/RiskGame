@@ -260,9 +260,10 @@ void Instantiation::createCompPlayers()
 	totalCompPlayers = totalPlayers - totalHumanPlayers;
 	for (int i = 0; i < totalCompPlayers; i++)
 	{
+		vector<string> computerNames = { "Dell", "Inspiron", "Compaq", "Mac", "Asus", "Intel" };
 
 		int selection(chooseCompStrategy(i + 1));
-		string name = "Comp " + (i + 1);
+		string name = computerNames[i];
 
 		switch (selection)
 		{

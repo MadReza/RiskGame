@@ -34,6 +34,11 @@ public:
 			risk::pause();
 
 			bool countryConquered = BattleEngine::attack(c1, vectorcountry[r]);
+			Player* defender = vectorcountry[r]->getOwner();
+			if (!defender->getAlive())
+			{
+				CardUtilities::takePlayerCards(defender, c1->getOwner());
+			}
 		}
 
 		cout << "\t computer turns end" << endl;

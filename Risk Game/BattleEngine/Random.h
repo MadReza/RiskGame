@@ -26,6 +26,11 @@ public:
 					cout << "Attacking from " << c1->getName() << " to " << (*it)->getName() << endl;
 					risk::pause();
 					bool countryConquered = BattleEngine::attack(c1, (*it));
+					Player* defender = (*it)->getOwner();
+					if (!defender->getAlive())
+					{
+						CardUtilities::takePlayerCards(defender, c1->getOwner());
+					}
 					break;
 				}//Random number between 1 and 2. if 2 it will attack
 			}
