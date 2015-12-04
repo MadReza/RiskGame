@@ -7,11 +7,11 @@
 #include <iostream> 
 #include <iomanip>
 #include <string>
-#include <cstdlib>		//Random Generator
-#include <ctime>
 #include <algorithm>	//sort algorithm used
 #include <functional>
-#include <random>
+
+#include <random> //random
+#include <ctime> //random
 
 using std::cout;
 using std::wcout;
@@ -37,7 +37,7 @@ private:
 	static void compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll);
 	static int* generateDescSortedRollList(int size);
 
-	static int roll(int min = 1, int max = 6);
+	static int roll(int min, int max);
 	
 	static void displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry);
 	static void displayDefenderLost();

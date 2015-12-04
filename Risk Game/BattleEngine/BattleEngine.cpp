@@ -38,24 +38,34 @@ skipAllIn:
 	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
 	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
 
-	//system("cls");
+	
 	
 	compareRolls(attackerCountry, defenderCountry,attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
 
+	system("cls");
 	cout << "\n\t*****RESULT*****\n\n";
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << endl;
 
 	//displaying attacker rolls
 	cout << " Attackers rolls :" << endl;
-	for (int i = 0; i < attackerNumRoll; i++)
-		cout << attackerRollsList[i] << ", ";
+	for (int i = 0; i < attackerNumRoll; i++){
+		if (i == attackerNumRoll - 1){
+			cout << "\t" << attackerRollsList[i];
+			continue;
+		}
+		cout << "\t" << attackerRollsList[i] << ", "; //LAURENDY
+	}
 	//displaying Defender rolls
 	cout << "\n Defender rolls :" << endl;
-	for (int i = 0; i < defenderNumRoll; i++)
-		cout << defenderRollsList[i] << ", ";
+	for (int i = 0; i < defenderNumRoll; i++){
+		if (i == defenderNumRoll - 1){
+			cout << "\t" << defenderRollsList[i] << ", ";
+		}
+		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
+	}
 
-	cout << endl; //TODO Remove this comment.
+	cout << endl; 
 
 	int num_ArmiesToSend;
 
@@ -106,7 +116,7 @@ skipAllIn:
 	//Attack phase is over
 stop:
 
-	//Clean
+ 	//Clean
 	if (attackerRollsList != nullptr)
 		delete[]attackerRollsList;//Deallocate memory
 	if (defenderRollsList != nullptr)
@@ -118,7 +128,7 @@ int* BattleEngine::generateDescSortedRollList(int size){
 	int* rollList = new int[size];
 
 	for (int i = 0; i < size; i++){
-		rollList[i] = roll();
+		rollList[i] = roll(1, 6); //Inclusive
 	}
 
 	//Sort Descending
@@ -129,10 +139,9 @@ int* BattleEngine::generateDescSortedRollList(int size){
 
 int BattleEngine::roll(int min, int max){
 	
-	default_random_engine generator;
-	uniform_int_distribution<int> distribution(0, 1000);
-	return (distribution(generator) % max)+min;
-	//return rand() % max + min;
+	srand(time(NULL));
+	int temp = (rand() % max) + min;
+	return temp;
 }
 
 //Check if the attack is over. (Attack Phase is over when there's is no defending armies or attacker contains only 1 army).
