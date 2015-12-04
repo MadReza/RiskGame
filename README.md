@@ -37,7 +37,7 @@
     - [x] Implementation of a round - robin loop for players’ turns / phases, 
     - [x] identification of a winner and end of game, *DONE* See comment above on GameDriver::checkWinCondition()
     - [x] defeated player is removed from the round - robin loop. 2
-    - [ ] Save / Load a game in progress using a Builder pattern(see individual assignment 3). 2
+    - [x] Save / Load a game in progress using a Builder pattern(see individual assignment 3). 2
   - [ ] Game display 8 -- TOMORROW -- 
     - [ ] Player Observer that displays relevant information about a player(see individual assignment 2). 2
     - [ ] Map Observer that displays relevant information about the map(see individual assignment 2). 2
