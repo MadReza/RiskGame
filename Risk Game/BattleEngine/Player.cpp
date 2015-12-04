@@ -109,7 +109,8 @@ bool Player::ownsContinent(Continent* continent)
 			return false;
 	}
 	return true;
-} 
+}
+
 
 int Player::getCountryReinforcements()
 {

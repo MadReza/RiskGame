@@ -95,6 +95,7 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="UI\PlayerView.cpp" />
+    <ClCompile Include="UI\StatsObserver.cpp" />
     <ClCompile Include="Validation.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,7 @@
     <ClInclude Include="Subject.h" />
     <ClInclude Include="UI\PlayerView.h" />
     <ClInclude Include="UI\PlayerViewDecorator.h" />
+    <ClInclude Include="UI\StatsObserver.h" />
     <ClInclude Include="Validation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

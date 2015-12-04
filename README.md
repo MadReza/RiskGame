@@ -4,13 +4,13 @@
 - [ ] Reinforcement
   - [x] Feature: Continent Bonus needs to be used/implemented.
   - [x] Bug: Reinforcement message showing twice
-  - [ ] Formatting: Clean user messages for reinforcement part
-  - [ ] Formatting: Card part clean up message to user.
+  - [x] Formatting: Clean user messages for reinforcement part
+  - [x] Formatting: Card part clean up message to user.
   - [X] Bug: Card redemption message showing up before and after reinforcements are assigned to countries*DONE* was being called in PlayerView at beginning of attack phase.
   - [x] Add: Card ASCII Art
-  - [ ] Change: Display All card 
-  - [ ] Test: Card part at begenning of reinforcement.
-  - [ ] Test: OverAll Reinforcement.
+  - [x] Change: Display All card 
+  - [x] Test: Card part at begenning of reinforcement.
+  - [x] Test: OverAll Reinforcement.
 - [ ] Attack
   - [x] Bug: no player countries available for attack... Check user output
   - [x] Bug: no enemy countries connected to our selected attacker country
@@ -22,7 +22,8 @@
   - [x] Bug: Exiting fortification with -1 results in "vector subscript out of range" bug *DONE* Laurendy filters out -1 with a break
 - [x] GameDriver
   - [x] Add Winner Notification note: Player countries size == map countries size...*DONE* Added congratz msg to GameDriver::checkWinCondition()
-  
+- [ ] Cards
+  - [ ] Input from i a c q needs to be validated to only the available options.
 ## GRADING TODO
 - [ ] Functional Requirements 35
   - [x] Map creation and editing 7

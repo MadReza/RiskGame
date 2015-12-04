@@ -150,6 +150,9 @@
     <ClCompile Include="GameState\GameDirector.cpp">
       <Filter>GameState\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UI\StatsObserver.cpp">
+      <Filter>UI\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameDriver.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="GameState\GameDirector.h">
       <Filter>GameState\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\StatsObserver.h">
+      <Filter>UI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
