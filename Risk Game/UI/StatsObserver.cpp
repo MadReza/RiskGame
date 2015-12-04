@@ -1,5 +1,11 @@
 #include "StatsObserver.h"
-
+StatsObserver::~StatsObserver() 
+{
+	for (int i = 0; i != Stats_Vector.size(); i++)
+	{
+		delete Stats_Vector[i];
+	}
+}
 StatsObserver::StatsObserver(vector<Player*> p, int mapcountrycount)
 {
 	countrycount = mapcountrycount;

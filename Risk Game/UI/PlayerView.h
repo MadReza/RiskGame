@@ -22,6 +22,7 @@ private:
 
 public:
 	PlayerView();
+	~PlayerView();
     PlayerView(Player &p);
     void update();
 };

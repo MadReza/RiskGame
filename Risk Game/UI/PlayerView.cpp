@@ -1,7 +1,8 @@
 #include "PlayerView.h"
 
-PlayerView::PlayerView()
+PlayerView::~PlayerView()
 {
+	_player->detach(this);
 }
 
 PlayerView::PlayerView(Player &p) {
