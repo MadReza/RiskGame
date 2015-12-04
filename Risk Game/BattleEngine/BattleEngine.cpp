@@ -53,7 +53,7 @@ skipAllIn:
 	cout << " Defender rolls :" << endl;
 	displayRolls(defenderRollsList, defenderNumRoll);
 
-	cout << endl;
+	cout << endl; 
 
 	risk::pause();
 
@@ -64,7 +64,7 @@ skipAllIn:
 
 		displayDefenderLost();
 		risk::clsGame();
-		cout << "Defender lost his country" << endl;
+		cout << "Defender lost his country. :D" << endl;
 		cout << attackerPlayer->getName() << " now owns " << defenderCountry->getName() << endl;
 
 		//Process
@@ -89,7 +89,7 @@ skipAllIn:
 
 		displayAttackerLost();
 		risk::clsGame();
-		cout << "\t\tAttacker ran out of armies\n";
+		cout << "Attacker ran out of armies... ):" << endl; //LAURENDY
 		defenderPlayer->setBattlesWonTotal(defenderPlayer->getBattlesWonTotal() + 1);//Add 1 to the number of Battle won
 		goto stop;
 	}
@@ -227,13 +227,13 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 	int sentArmies; 
 	risk::clsGame(); 
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
-	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack?";
-	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
+	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack?" << endl;
+	cout << "Not more than " << attackerCountry->getNumArmies() - 1 << ", 0 to cancel > "; // LAURENDY
 
 	/*cin >> sentArmies; INFO: validInteger Takes Care*/ 
 
 	//if Users input an invalid number return to start 
-	if (!std::validInteger(sentArmies, 0, attackerCountry->getNumArmies() - 1)/*sentArmies > attackerCountry->getNumArmies() - 1 || sentArmies < 0*/)
+	if (!std::validInteger(sentArmies, 0, attackerCountry->getNumArmies() - 1))
 		goto start;
 
 	//Will determine how many rolls the Attacker have (3,2 or 1)
