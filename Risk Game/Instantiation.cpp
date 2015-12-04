@@ -371,7 +371,7 @@ void Instantiation::randomizePlayerOrder()
 int Instantiation::chooseCompStrategy(int computerNumber)
 {
 	int selection;
-	cout << "\nPlease choose the strategy of the computer player " << computerNumber << "  " << endl ;
+	cout << "\nPlease choose the strategy of the Computer Player " << computerNumber << "  " << endl ;
 	cout << "Type 0: Agressive Strategy" << endl;
 	cout << "Type 1: Defensive Strategy" << endl;
 	cout << "Type 2: Random Strategy" << endl;

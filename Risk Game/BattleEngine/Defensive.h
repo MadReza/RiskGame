@@ -25,7 +25,7 @@ public:
 
 		if (isgonna_attack){
 			int r = rand() % vectorcountry.size();
-			BattleEngine::attack(c1, vectorcountry[r]);
+			bool countryConquered = BattleEngine::attack(c1, vectorcountry[r]);
 		}
 
 		cout << "\t computer turns end" << endl;

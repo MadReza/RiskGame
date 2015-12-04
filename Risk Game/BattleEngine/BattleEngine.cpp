@@ -1,5 +1,6 @@
 ﻿#include "BattleEngine.h"
-		
+#include "../Screen.h"	
+
 bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
 	int* attackerRollsList = nullptr;
 	int* defenderRollsList = nullptr;
@@ -28,7 +29,6 @@ playerAttack:
 	goto skipAllIn;
 
 allIn:
-
 	attackerNumRoll = attackerCountry->getNumArmies() > 2 ? 3 : 2;
 
 skipAllIn:
@@ -62,6 +62,7 @@ skipAllIn:
 	for (int i = 0; i < defenderNumRoll; i++){
 		if (i == defenderNumRoll - 1){
 			cout << "\t" << defenderRollsList[i] << ", ";
+			continue;//added Kendy
 		}
 		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
 	}
@@ -254,7 +255,7 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 void BattleEngine::compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll)
 {
 	//Will return the minimum number of roll that we will compare (3,2 or 1)
-	int minNumOfRolls = std::min(attackerNumRoll, defenderNumRoll);
+	int minNumOfRolls = min(attackerNumRoll, defenderNumRoll);
 
 	for (int i = 0; i < minNumOfRolls; i++){
 		if (attackerRollsList[i] > defenderRollsList[i]){

@@ -17,7 +17,7 @@ public:
 		for (vector<Country*>::iterator it = VectorCountry.begin(); it != VectorCountry.end(); ++it){
 			if (c1->getNumArmies() > (*it)->getNumArmies()){
 				if ((rand() % 2) + 1 == 2){
-					BattleEngine::attack(c1, *it);
+					bool countryConquered = BattleEngine::attack(c1, (*it));
 					break;
 				}//Random number between 1 and 2. if 2 it will attack
 			}

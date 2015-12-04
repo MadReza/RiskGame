@@ -10,6 +10,7 @@
 #include <set>
 #include <string>
 #include <algorithm>
+#include <time.h>
 
 using namespace std;
 
@@ -64,6 +65,7 @@ public:
 	void setName(string name);
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
+	Strategy* getPlayerStrategy();
 	bool isHuman(Player p);
 	void setTurnVictory(bool trueFalse);
 	bool getTurnVictory();

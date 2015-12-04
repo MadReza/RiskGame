@@ -84,9 +84,15 @@ void GameDriver::attackPhase(Player* player)
 	char answer;
 
 	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
+	
 
 	do
 	{
+		if (!player->isHuman(*player))
+		{
+			player->assignAttack();
+			break;
+		}
 		cout << endl << "Would you like to attack a country (y,n): ";
 		cin >> answer;
 

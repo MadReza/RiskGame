@@ -7,7 +7,7 @@
 #include <iostream> 
 #include <iomanip>
 #include <string>
-#include <algorithm>	//sort algorithm used
+#include <algorithm>
 #include <functional>
 #include <random>
 
@@ -17,6 +17,7 @@ using std::cin;
 using std::endl;
 using std::setw;
 using std::sort;
+using std::min;
 using std::greater;
 using std::string;
 

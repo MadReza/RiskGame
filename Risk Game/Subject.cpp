@@ -4,7 +4,7 @@ Subject::~Subject()
 {
 	for each (Observer* observer in observers)
 	{
-		delete observer;
+		//delete observer;
 	}
 }
 
