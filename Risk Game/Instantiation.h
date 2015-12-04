@@ -48,6 +48,8 @@ public:
 	int getTotalCompPlayers();
 	void setTotalCompPlayers(int n);
 	void setTotalPlayers(int n);
+	
+	void setMapFilename(string filename);
 
 	void displayTitleScreen();
 	void gameSelection();
@@ -60,6 +62,7 @@ private:
 	int totalCompPlayers;
 	string mapPath;
 	Map *map;
+	string mapFilename;
 	bool isNewGame;
 
 	void intro();

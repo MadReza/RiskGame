@@ -24,6 +24,7 @@ void GameBuilder::buildMap() {
 		string path = Directory::CombinePaths(2, cd, "Mapfiles");
 		string mapPath = path + "\\" + map.child_value();
 		_game->setMapPath(mapPath);
+		_game->setMapFilename(map.child_value());
 		UtilityMap m(mapPath);
 		_game->setMap(m.getMapObject());
 	}

@@ -440,3 +440,8 @@ void Instantiation::setTotalPlayers(int n)
 {
 	this->totalPlayers = n;
 }
+
+void Instantiation::setMapFilename(string filename)
+{
+	this->mapFilename = filename;
+}

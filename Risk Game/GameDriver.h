@@ -45,6 +45,7 @@ private:
 	void reinforcePhase(Player* player);
 	void attackPhase(Player* player);
 	void fortifcationPhase(Player* player);
+	void saveGame();
 	
 	void displayCountriesWithArmy(vector<Country*> countries);
 };
