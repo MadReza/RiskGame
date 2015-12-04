@@ -10,9 +10,11 @@ using std::cout;
 
 //Derived class
 class Random : public Strategy{
+private:
+	string name = "Random";
 
 public:
-
+	string getStrategyName(){ return name; };
 	void doStrategy(Country *c1){
 
 		vector<Country*> VectorCountry = c1->getAdjacencyVector();
@@ -31,4 +33,5 @@ public:
 
 		cout << "\t Computer Turns End" << endl;
 	};
+
 };

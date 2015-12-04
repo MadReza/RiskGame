@@ -6,14 +6,17 @@
 #include <ctime>
 #include <iostream>
 
+
 using std::vector;
 using std::cout;
 
 
 class Defensive : public Strategy {
+private:
+	string name = "Defensive";
 
 public:
-
+	string getStrategyName(){ return name; };
 	void doStrategy(Country *c1){
 
 		vector<Country*> vectorcountry = c1->getAdjacencyVector();
@@ -35,5 +38,6 @@ public:
 
 		cout << "\t computer turns end" << endl;
 	};
+
 
 };

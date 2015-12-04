@@ -83,7 +83,9 @@ void GameDriver::switchPlayerType(Player* player){
 	if (player->isHuman())
 		cout << "A human";
 	else{
-		cout << "A Computer with strategy of " << typeid(player->getPlayerStrategy()).name(); //LAURENDY FIX THIS, what type of strategy
+		//cout << "A Computer with strategy of " << typeid(player->getPlayerStrategy()); //LAURENDY FIX THIS, what type of strategy
+		cout << "A Computer with strategy of: " << player->getPlayerStrategy()->getStrategyName() << ".";
+		
 	}
 	cout << endl;
 

@@ -3,14 +3,17 @@
 #include "../Screen.h"
 #include <iostream>
 
+
 using std::vector;
 using std::cout;
 
 //Derived class
 class Agressive : public Strategy{
+private:
+	string name = "Agressive";
 
 public:
-
+	string getStrategyName(){ return name; };
 	void doStrategy(Country *c1){
 
 		vector<Country*> VectorCountry = c1->getAdjacencyVector();
@@ -32,6 +35,8 @@ public:
 				break;
 			}
 		}
+
+
 
 
 		cout << "\t Computer Turns End" << endl;
