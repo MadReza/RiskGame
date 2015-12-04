@@ -49,10 +49,10 @@ void GameDriver::play()
 		{
 			if (!player->getAlive())
 				continue;
+			saveGame();
 			reinforcePhase(player);
 			attackPhase(player);
 			fortifcationPhase(player);
-			saveGame();
 		}
 	}
 }
@@ -250,7 +250,7 @@ void GameDriver::saveGame()
 	{
 		cout << "Type the save name: ";
 		string saveName;
-		getline(cin, saveName, '\n');
+		cin >> saveName;
 
 		pugi::xml_document doc;
 		pugi::xml_node save = doc.append_child("save");
@@ -321,7 +321,6 @@ void GameDriver::saveGame()
 			}
 		}
 
-		system("cls");
 		milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 		string file = "GameSaves\\" + to_string(ms.count()) + ".save.xml";
 		char* filename = new char[(file.length()) + 1];
@@ -329,9 +328,9 @@ void GameDriver::saveGame()
 		doc.save_file(filename);
 
 		pugi::xml_document saves_xml;
-		pugi::xml_parse_result result = saves_xml.load_file("GameSaves\\saves.xml");
+		pugi::xml_parse_result result2 = saves_xml.load_file("GameSaves\\saves.xml");
 
-		if (result)
+		if (result2)
 		{
 			pugi::xml_node saves = saves_xml.child("saves");
 			pugi::xml_node save_node = saves.append_child("save");
@@ -342,20 +341,30 @@ void GameDriver::saveGame()
 			char* id = new char[(to_string(ms.count()).length()) + 1];
 			strcpy_s(id, (to_string(ms.count())).length() + 1, (to_string(ms.count())).c_str());
 
+			string file = to_string(ms.count()) + ".save.xml";
+			char* filename = new char[(file.length()) + 1];
+			strcpy_s(filename, (file).length() + 1, (file).c_str());
+
 			save_node.append_attribute("name") = name;
 			save_node.append_attribute("id") = id;
 			save_node.append_attribute("filename") = filename;
 
-			saves_xml.save_file("GamesSaves\\saves.xml");
+			saves_xml.save_file("GameSaves\\saves.backup.xml");
+			// remove saves.xml
+			if (!remove("GameSaves\\saves.xml") != 0)
+			{
+				perror("Error saving file");
+				// rename file
+				rename("GameSaves\\saves.backup.xml", "GameSaves\\saves.xml");
+			}
 		}
 		else
 		{
 			//	SAVES FILE DID NOT LOAD CORRECTLY
-			cout << "Game did not save correctly: " << result.description() << "\n";
+			cout << "Game did not save correctly: " << result2.description() << "\n";
 		}
 
-		system("pause");
-		cout << "\nfile saved as " << saveName;
+		cout << "\nfile saved as " << filename << endl << endl;
 		system("pause");
 	}
 }
