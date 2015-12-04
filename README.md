@@ -5,7 +5,7 @@
   - [ ] When dominating a country in attack. BattleEngine.cpp line 120-123
   - [ ] Not All in play. Crash... 
 - [ ] Reinforcement
-  - [ ] Feature: Continent Bonus needs to be used/implemented.
+  - [x] Feature: Continent Bonus needs to be used/implemented.
   - [x] Bug: Reinforcement message showing twice
   - [ ] Formatting: Clean user messages for reinforcement part
   - [ ] Formatting: Card part clean up message to user.
