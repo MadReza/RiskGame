@@ -1,5 +1,4 @@
 ﻿#include "BattleEngine.h"
-#include "../Screen.h"	
 
 bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
 	int* attackerRollsList = nullptr;
@@ -54,6 +53,7 @@ skipAllIn:
 	cout << " Defender rolls :" << endl;
 	displayRolls(defenderRollsList, defenderNumRoll);
 
+	cout << endl;
 
 	risk::pause();
 
