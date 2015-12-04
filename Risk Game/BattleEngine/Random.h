@@ -12,7 +12,6 @@ public:
 
 	void doStrategy(Country *c1){
 
-		srand((unsigned)time(0));
 		vector<Country*> VectorCountry = c1->getAdjacencyVector();
 		
 		for (vector<Country*>::iterator it = VectorCountry.begin(); it != VectorCountry.end(); ++it){

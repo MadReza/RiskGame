@@ -35,6 +35,7 @@ skipAllIn:
 	defenderNumRoll = defenderCountry->getNumArmies() > 1 ? 2 : 1;
 
 	//Creating the arrays that will contains the rolls list
+	
 	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
 	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
 
@@ -128,20 +129,13 @@ int* BattleEngine::generateDescSortedRollList(int size){
 	int* rollList = new int[size];
 
 	for (int i = 0; i < size; i++){
-		rollList[i] = roll(1, 6); //Inclusive
+		rollList[i] = (rand() % 6) + 1; //Inclusive
 	}
 
 	//Sort Descending
 	sort(rollList, rollList + size, greater<int>());
 
 	return rollList;
-}
-
-int BattleEngine::roll(int min, int max){
-	
-	srand(time(NULL));
-	int temp = (rand() % max) + min;
-	return temp;
 }
 
 //Check if the attack is over. (Attack Phase is over when there's is no defending armies or attacker contains only 1 army).
@@ -211,7 +205,7 @@ int BattleEngine::numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls
 
 	//Attacker Player is a computer? then randomize the # of armies to be send (
 	if (!attackerPlayer->isHuman(*attackerPlayer)) {
-		numArmtoSend = roll(minimumTransArmy, attackerNumArmies - minimumTransArmy); //return random number between (min trans armies and max armies -1)			
+		numArmtoSend = (rand() % (attackerNumArmies - minimumTransArmy)) + minimumTransArmy;// minimumTransArmy, attackerNumArmies - minimumTransArmy); //return random number between (min trans armies and max armies -1)			
 		cout << "\n" << attackerPlayer->getName() << " returned " << numArmtoSend << " Army(ies)\n" << endl;	//TODO check formatting Kendy, Sentence restructure
 		return numArmtoSend;
 	}

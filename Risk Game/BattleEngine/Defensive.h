@@ -15,7 +15,6 @@ public:
 
 	void doStrategy(Country *c1){
 
-		srand((unsigned)time(0));
 		vector<Country*> vectorcountry = c1->getAdjacencyVector();
 		bool isgonna_attack = true;
 

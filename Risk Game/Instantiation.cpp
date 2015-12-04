@@ -349,12 +349,10 @@ vector<Player*> Instantiation::getPlayers() const
 void Instantiation::randomizePlayerOrder()
 {
 	vector<Player*> newOrder;
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(0, players.size()-1);
 
 	while (newOrder.size() != players.size())
 	{
-		int dice_roll = distribution(generator);  // generates number in the range 0..maxPlayers
+		int dice_roll = rand() % players.size();  // generates number in the range 0..maxPlayers
 		Player* p = players[dice_roll];
 
 		if (p != nullptr)

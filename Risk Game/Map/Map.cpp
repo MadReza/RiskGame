@@ -168,17 +168,14 @@ bool Map::checkAllCountriesOwned()
 
 void Map::distributePlayers(vector<Player*> player_vector)
 {
-	default_random_engine generator;
 	int k = 0;
 
 	//while array of countries is not filled
 	while (this->checkAllCountriesOwned() == false)
 	{
-		uniform_int_distribution<int> continent_distribution(0, (continents.size() - 1));
-		int i = continent_distribution(generator);
+		int i = rand() % continents.size();
 		
-		uniform_int_distribution<int> country_distribution(0, (continents[i]->getContinentVector().size() - 1));
-		int j = country_distribution(generator);
+		int j = rand() % continents[i]->getContinentVector().size();
 		
 		Player* next_player = player_vector[k % player_vector.size()];
 		

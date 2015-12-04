@@ -9,9 +9,7 @@
 #include <string>
 #include <algorithm>	//sort algorithm used
 #include <functional>
-
-#include <random> //random
-#include <ctime> //random
+#include <random>
 
 using std::cout;
 using std::wcout;
@@ -36,8 +34,6 @@ private:
 	static bool attackerLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies);
 	static void compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll);
 	static int* generateDescSortedRollList(int size);
-
-	static int roll(int min, int max);
 	
 	static void displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry);
 	static void displayDefenderLost();

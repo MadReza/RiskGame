@@ -4,12 +4,13 @@
 //#include "BattleEngine\CardUtilities.h"
 //#include <windows.h>
 #include <iostream>
-
+#include <ctime> //random
 //OLD 
 //#include "GameDriver.h"
 //#include "GUI.h"
 //#include <thread>
 //using std::thread;
+//
 
 #include "Screen.h"
 
@@ -17,6 +18,7 @@ using namespace risk;
 
 int main()
 {
+	srand(time(0)); //Random Seed
 	////Test output to work on.
 	//for (int i = 0; i < 60; i++)
 	//{
