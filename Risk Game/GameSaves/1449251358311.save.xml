@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<save>
+	<map>Small.map</map>
+	<players>
+		<player name="p2" type="human" alive="true" armiesTotal="5" battlesWonTotal="0" cardRedemptionsTotal="0" redeemThisTurn="false" turnVictory="false">
+			<continents>
+				<continent name="Linkin" index="0">
+					<countries>
+						<country name="1L" index="0" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Park" index="1">
+					<countries>
+						<country name="3P" index="0" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Left Side" index="2">
+					<countries>
+						<country name="9LS" index="1" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Right Side" index="4">
+					<countries>
+						<country name="5RS" index="0" armies="1" />
+						<country name="6RS" index="1" armies="1" />
+					</countries>
+				</continent>
+			</continents>
+		</player>
+		<player name="p1" type="human" alive="true" armiesTotal="5" battlesWonTotal="0" cardRedemptionsTotal="0" redeemThisTurn="false" turnVictory="false">
+			<continents>
+				<continent name="Linkin" index="0">
+					<countries>
+						<country name="2L" index="1" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Park" index="1">
+					<countries>
+						<country name="4P" index="1" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Left Side" index="2">
+					<countries>
+						<country name="8LS" index="0" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Top and Bottom" index="3">
+					<countries>
+						<country name="7TB" index="0" armies="1" />
+						<country name="10TB" index="1" armies="1" />
+					</countries>
+				</continent>
+			</continents>
+		</player>
+	</players>
+</save>

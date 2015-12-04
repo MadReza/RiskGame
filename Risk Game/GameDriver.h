@@ -11,6 +11,7 @@
 #include "Screen.h"
 
 #include <iostream>
+#include <stdio.h>
 #include <set>
 #include <vector>
 #include <chrono>
