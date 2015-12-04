@@ -198,8 +198,6 @@ void Player::assignReinforcements()
 		risk::clsGame();
 		cout << "Assigning Reinforcements" << endl;
 		cout << "===================" << endl;
-
-		int selection;
 		
 		cout << endl << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };

@@ -6,6 +6,8 @@
 #include "Map\UtilityMap.h"
 #include "Map\MapCreator.h"
 #include "GameDriver.h"
+#include "GameState\GameBuilder.h"
+#include "GameState\GameDirector.h"
 #include "libs/PugiXML/pugixml.hpp"
 #include "Validation.h"
 #include "BattleEngine\Agressive.h"
@@ -30,11 +32,24 @@ public:
 	Instantiation();
 	~Instantiation();
 
-	int getTotalPlayers() const;
-	vector<Player*> getPlayers() const;
-	Map *getMap() const;
-	bool getIsNewGame() const;
-	GameDriver *getGameDriver() const;
+	int getTotalPlayers();
+	vector<Player*> getPlayers();
+	void setPlayers(vector<Player*> players);
+	Map *getMap();
+	bool getIsNewGame();
+	GameDriver *getGameDriver();
+
+	void setIsNewGame(bool newGame);
+	void setMap(Map* m);
+	void setMapPath(string path);
+	int getTotalHumanPlayers();
+	void setTotalHumanPlayers(int n);
+	int getTotalCompPlayers();
+	void setTotalCompPlayers(int n);
+	void setTotalPlayers(int n);
+
+	void displayTitleScreen();
+	void gameSelection();
 
 private:
 	GameDriver* _game;
@@ -47,10 +62,8 @@ private:
 	bool isNewGame;
 
 	void intro();
-	void gameSelection();
 	void assignCountriesToPlayer();
 	void playerInfo();
-	void displayTitleScreen();
 	int startOrLoad();
 	void newGame();
 	void loadGame();

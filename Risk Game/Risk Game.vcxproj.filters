@@ -135,12 +135,6 @@
     <ClCompile Include="BattleEngine\CardUtilities.cpp">
       <Filter>BattleEngine\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Loader\GameBuilder.cpp">
-      <Filter>GameState\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Loader\GameDirector.cpp">
-      <Filter>GameState\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="libs\PugiXML\pugixml.cpp">
       <Filter>libs\PugiXML\Source Files</Filter>
     </ClCompile>
@@ -149,6 +143,12 @@
     </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Utilities\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameBuilder.cpp">
+      <Filter>GameState\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameDirector.cpp">
+      <Filter>GameState\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,12 +227,6 @@
     <ClInclude Include="BattleEngine\CardUtilities.h">
       <Filter>BattleEngine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Loader\GameBuilder.h">
-      <Filter>GameState\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\GameDirector.h">
-      <Filter>GameState\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="libs\PugiXML\pugiconfig.hpp">
       <Filter>libs\PugiXML\Header Files</Filter>
     </ClInclude>
@@ -247,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Utilities\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameBuilder.h">
+      <Filter>GameState\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameDirector.h">
+      <Filter>GameState\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

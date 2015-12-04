@@ -2,8 +2,6 @@
 
 Instantiation::Instantiation()
 {
-	displayTitleScreen();
-	gameSelection();
 }
 
 Instantiation::~Instantiation()
@@ -31,17 +29,17 @@ void Instantiation::gameSelection()
 	}
 }
 
-int Instantiation::getTotalPlayers() const
+int Instantiation::getTotalPlayers()
 {
 	return totalPlayers;
 }
 
-Map* Instantiation::getMap() const
+Map* Instantiation::getMap()
 {
 	return map;
 }
 
-bool Instantiation::getIsNewGame() const
+bool Instantiation::getIsNewGame()
 {
 	return isNewGame;
 }
@@ -100,7 +98,20 @@ void Instantiation::loadGame()
 		// SAVE FILE GETTING LOADED
 		char* filename = new char[(savesDir + filenames[choice]).length() + 1];
 		strcpy_s(filename, (savesDir + filenames[choice]).length() + 1, (savesDir + filenames[choice]).c_str());
+		//*
+		GameBuilder* builder = new GameBuilder(filename);
+		GameDirector* director = new GameDirector(builder);
 
+		director->buildGame();
+
+		Instantiation* loadedGame = director->getGame();
+
+		_game = GameDriver::getInstance();
+		_game->setTotalPlayers(loadedGame->getTotalPlayers());
+		_game->setPlayers(loadedGame->getPlayers());
+		_game->setSelectedMap(loadedGame->getMap());
+		//*/
+		/*
 		pugi::xml_parse_result result = doc.load_file(filename);
 
 		if (result)
@@ -171,10 +182,11 @@ void Instantiation::loadGame()
 		{
 			//	SAVE FILE DID NOT LOAD CORRECTLY
 			cout << "Save file did not load correctly." << endl;
-			cout << "XML [" << source << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
+			cout << "XML [" << filename << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
 			cout << "Error description: " << result.description() << "\n";
-			cout << "Error offset: " << result.offset << " (error at [..." << (source + result.offset) << "]\n\n";
+			cout << "Error offset: " << result.offset << " (error at [..." << (filename + result.offset) << "]\n\n";
 		}
+		*/
 	}
 	else
 	{
@@ -187,16 +199,13 @@ void Instantiation::loadGame()
 
 	//return;
 
-	_game = GameDriver::getInstance();
-	_game->setTotalPlayers(this->getTotalPlayers());
-	_game->setPlayers(this->getPlayers());
-	_game->setSelectedMap(this->getMap());
+	
 
 	/*
 	TODO by @zack : load serialized game from file and build the game using the GameBuilder
-	string serializedGame = "serialized-string-example";
+	string saveFileLocation = "serialized-string-example";
 
-	GameBuilder* builder = new GameBuilder(serializedGame);
+	GameBuilder* builder = new GameBuilder(saveFileLocation);
 	GameDirector* director = new GameDirector(builder);
 
 	director->buildGame();
@@ -205,7 +214,7 @@ void Instantiation::loadGame()
 	//*/
 }
 
-GameDriver* Instantiation::getGameDriver() const
+GameDriver* Instantiation::getGameDriver()
 {
 	return _game;
 }
@@ -345,9 +354,15 @@ void Instantiation::displayTitleScreen()
 	cout << endl;
 }
 
-vector<Player*> Instantiation::getPlayers() const
+vector<Player*> Instantiation::getPlayers()
 {
 	return players;
+}
+
+
+void Instantiation::setPlayers(vector<Player*> players)
+{
+	this->players = players;
 }
 
 void Instantiation::randomizePlayerOrder()
@@ -384,4 +399,44 @@ int Instantiation::chooseCompStrategy(int computerNumber)
 	}
 	return selection;
 
+}
+
+void Instantiation::setIsNewGame(bool new_game)
+{
+	this->isNewGame = new_game;
+}
+
+void Instantiation::setMap(Map* m)
+{
+	this->map = m;
+}
+
+void Instantiation::setMapPath(string path)
+{
+	this->mapPath = path;
+}
+
+int Instantiation::getTotalHumanPlayers()
+{
+	return this->totalHumanPlayers;
+}
+
+void Instantiation::setTotalHumanPlayers(int n)
+{
+	this->totalHumanPlayers = n;
+}
+
+int Instantiation::getTotalCompPlayers()
+{
+	return this->totalCompPlayers;
+}
+
+void Instantiation::setTotalCompPlayers(int n)
+{
+	this->totalCompPlayers = n;
+}
+
+void Instantiation::setTotalPlayers(int n)
+{
+	this->totalPlayers = n;
 }

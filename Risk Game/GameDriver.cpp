@@ -27,7 +27,9 @@ GameDriver::~GameDriver()
 
 void GameDriver::startGame()
 {
-	Instantiation start;	//Initializes all components then sends to GameDriver.
+	Instantiation* start = new Instantiation();	//Initializes all components then sends to GameDriver.
+	start->displayTitleScreen();
+	start->gameSelection();
 	
 	play();
 }

@@ -116,6 +116,11 @@ skipAllIn:
 stop:
 
  	//Clean
+	if (attackerRollsList != nullptr)
+		delete[]attackerRollsList;//Deallocate memory
+	if (defenderRollsList != nullptr)
+		delete[]defenderRollsList;//Deallocate memory
+
 	return countryConquered;
 }
 
