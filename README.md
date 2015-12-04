@@ -7,6 +7,7 @@
   - [x] Bug: Reinforcement message showing twice
   - [ ] Formatting: Clean user messages for reinforcement part
   - [ ] Formatting: Card part clean up message to user.
+  - [X] Bug: Card redemption message showing up before and after reinforcements are assigned to countries*DONE* was being called in PlayerView at beginning of attack phase.
   - [x] Add: Card ASCII Art
   - [ ] Change: Display All card 
   - [ ] Test: Card part at begenning of reinforcement.
@@ -16,12 +17,12 @@
   - [x] Bug: no enemy countries connected to our selected attacker country
   - [ ] Test/Bug: All countries lost when transferring cards after defeat
   - [x] Bug: All In mode skips country stats being shown every step ... System("pause")
-  - [ ] Bug: Dice Rolls always show 4.	
-- [ ] Fortification
-  - [ ] Nothing left ???
-  - [ ] Bug: Exiting fortification with -1 results in "vector subscript out of range" bug
-- [ ] GameDriver
-  - [ ] Add Winner Notification note: Player countries size == map countries size... DO SOMETHING
+  - [x] Bug: Dice Rolls always show 4.	*DONE* Laurendy changed random generator.
+- [X] Fortification
+  - [x] Nothing left ???
+  - [x] Bug: Exiting fortification with -1 results in "vector subscript out of range" bug *DONE* Laurendy filters out -1 with a break
+- [x] GameDriver
+  - [x] Add Winner Notification note: Player countries size == map countries size...*DONE* Added congratz msg to GameDriver::checkWinCondition()
   
 ## GRADING TODO
 - [ ] Functional Requirements 35
@@ -34,7 +35,7 @@
           map is a connected graph, and that each continent is a connected graph) 2
   - [ ] Game driver 4
     - [x] Implementation of a round - robin loop for players’ turns / phases, 
-    - [ ] identification of a winner and end of game, 
+    - [x] identification of a winner and end of game, *DONE* See comment above on GameDriver::checkWinCondition()
     - [x] defeated player is removed from the round - robin loop. 2
     - [ ] Save / Load a game in progress using a Builder pattern(see individual assignment 3). 2
   - [ ] Game display 8 -- TOMORROW -- 
@@ -51,16 +52,16 @@
     - [x] User chooses the number of players, all countries are randomly assigned. 1
     - [ ] Types of players are initially assigned and implemented using a Strategy pattern(see individual assignment 2).
           Types of players can be changed at any time during play. 2
-  - [ ] Reinforcement phase 4
-    - [ ] Calculation of correct number of reinforcement armies and placement of armies on the map. 1 @CHRIS TEST
-    - [ ] Correct implementation of cards and their additional reinforcements. 3 @CHRIS TEST 
+  - [x] Reinforcement phase 4
+    - [x] Calculation of correct number of reinforcement armies and placement of armies on the map. 1 @CHRIS TEST
+    - [ x Correct implementation of cards and their additional reinforcements. 3 @CHRIS TEST 
   - [ ] Attack phase 6
     - [x] Correct identification of valid attacking / attacked country. 1
     - [ ] Correct implementation of an attack using the Risk battle model. 3 @Kendy Semi done... check and test...
     - [x] Correct implementation of the post - battle movement after a victory. 1
     - [ ] A victory gives a card, eliminating a player transfers all the defeated player’s cards. 1 @CHRIS test
-  - [ ] Fortification phase 1
-    - [ ] Implementation of a single valid move according to the Risk rules. 1 @CHRIS do we do more than one move ?
+  - [x] Fortification phase 1
+    - [x] Implementation of a single valid move according to the Risk rules. 1 @CHRIS do we do more than one move ? @EVERYONE no we do not
     
 Graduation stuff....
 Graduate attributes—skills 15
