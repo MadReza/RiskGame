@@ -110,5 +110,7 @@ public:
 	int getCardRedemptionsTotal();
 
 	bool ownsContinent(Continent* c);
+
+	
 };
 
