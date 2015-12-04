@@ -46,10 +46,10 @@ void GameDriver::play()
 		{
 			if (!player->getAlive())
 				continue;
-			//saveGame();
 			reinforcePhase(player);
 			attackPhase(player);
 			fortifcationPhase(player);
+			saveGame();
 		}
 	}
 }
@@ -239,7 +239,7 @@ void GameDriver::saveGame()
 	{
 		cout << "Type the save name: ";
 		string saveName;
-		getline(cin, saveName);
+		getline(cin, saveName, '\n');
 
 		pugi::xml_document doc;
 		pugi::xml_node save = doc.append_child("save");
@@ -316,6 +316,33 @@ void GameDriver::saveGame()
 		char* filename = new char[(file.length()) + 1];
 		strcpy_s(filename, (file).length() + 1, (file).c_str());
 		doc.save_file(filename);
+
+		pugi::xml_document saves_xml;
+		pugi::xml_parse_result result = saves_xml.load_file("GameSaves\\saves.xml");
+
+		if (result)
+		{
+			pugi::xml_node saves = saves_xml.child("saves");
+			pugi::xml_node save_node = saves.append_child("save");
+
+			char* name = new char[(saveName.length()) + 1];
+			strcpy_s(name, (saveName).length() + 1, (saveName).c_str());
+
+			char* id = new char[(to_string(ms.count()).length()) + 1];
+			strcpy_s(id, (to_string(ms.count())).length() + 1, (to_string(ms.count())).c_str());
+
+			save_node.append_attribute("name") = name;
+			save_node.append_attribute("id") = id;
+			save_node.append_attribute("filename") = filename;
+
+			saves_xml.save_file("GamesSaves\\saves.xml");
+		}
+		else
+		{
+			//	SAVES FILE DID NOT LOAD CORRECTLY
+			cout << "Game did not save correctly: " << result.description() << "\n";
+		}
+
 		system("pause");
 		cout << "\nfile saved as " << saveName;
 		system("pause");
