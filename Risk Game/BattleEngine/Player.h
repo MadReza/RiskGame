@@ -7,10 +7,11 @@
 #include "../Validation.h"
 
 #include <vector>
+#include <set>
 #include <string>
 #include <algorithm>
 
-using std::string;
+using namespace std;
 
 //forward declarations
 class Card;
@@ -98,5 +99,7 @@ public:
 
 	void incrementCardRedemptionsTotal();
 	int getCardRedemptionsTotal();
+
+	bool ownsContinent(Continent* c);
 };
 
