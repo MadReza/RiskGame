@@ -1,7 +1,7 @@
 #pragma once
 #include "../UI/PlayerView.h"
 #include "../Map/Country.h"
-
+#include "../Screen.h"
 
 #include <iostream>
 #include <string>
@@ -18,10 +18,21 @@ class PlayerView;
 //Decorative Player view Pattern
 
 class PlayerViewDecorator : public PlayerView{
-
+private:
+	bool startedScreenOutput = false;
+	COORD gameCursorCoordinates;
 public:
 
 	PlayerViewDecorator(Player *p) : PlayerView(*p){
+		
+		if (!risk::obsDisplaying)
+		{
+			risk::obsDisplaying = true;
+			startedScreenOutput = true;
+			gameCursorCoordinates = risk::getCursorPosition();
+			risk::clsObserver();
+		}
+		
 		//pass reference to a player object
 		Player *a_Player(p);
 
@@ -36,22 +47,42 @@ public:
 		PlayerView::update();
 	}
 
+	~PlayerViewDecorator(){
+		if (startedScreenOutput)
+		{
+			risk::setCursorPosition(gameCursorCoordinates);
+			risk::obsDisplaying = false;
+		}
+	}
+
 };
 
 //This class decorate the Info class by adding the total Number of battle won and the cards owned.
 class CompletePlayerView : public PlayerViewDecorator {
+private:
+	bool startedScreenOutput = false;
+	COORD gameCursorCoordinates;
 
 public:
 	//Decorate the already existing Playerview Decorator
 	CompletePlayerView(Player *p) : PlayerViewDecorator(p){
 
-		Player *a_Player(p);//pass reference to a player object
+		if (!risk::obsDisplaying)
+		{
+			risk::obsDisplaying = true;
+			startedScreenOutput = true;
+			gameCursorCoordinates = risk::getCursorPosition();
+			risk::clsObserver();
+		}
 
-		vector<Card*> playerCards = *a_Player->getCards();
+		CardUtilities::displayPlayerCards(p);
+	}
 
-		cout << "\tCards owned (Display Nothing if no cards has been assigned)\n" << endl;
-		for (vector<Card*>::iterator it = playerCards.begin(); it != playerCards.end(); ++it){
-			cout << (*it)->getCardSuit() << endl; 
+	~CompletePlayerView(){
+		if (startedScreenOutput)
+		{
+			risk::setCursorPosition(gameCursorCoordinates);
+			risk::obsDisplaying = false;
 		}
 	}
 };

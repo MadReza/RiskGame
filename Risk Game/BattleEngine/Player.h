@@ -12,7 +12,9 @@
 #include <algorithm>
 #include <time.h>
 
-using namespace std;
+using std::vector;
+using std::string;
+using std::set;
 
 //forward declarations
 class Card;
@@ -65,8 +67,11 @@ public:
 	void setName(string name);
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
+
 	Strategy* getPlayerStrategy();
 	bool isHuman(Player p);
+	bool isHuman();
+
 	void setTurnVictory(bool trueFalse);
 	bool getTurnVictory();
 	void setRedeemThisTurn(bool trueFalse);

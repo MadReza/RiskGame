@@ -1,5 +1,4 @@
 #pragma once
-using namespace std;
 #include<string>
 #include "../BattleEngine/Player.h"
 #include<vector>
@@ -12,6 +11,9 @@ class Continent; //forward declaration
 class Player;
 class Strategy;
 class Agressive;
+
+using std::string;
+using std::vector;
 
 class Country
 {

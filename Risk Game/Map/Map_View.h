@@ -6,6 +6,10 @@
 #include "../Observer.h"
 #include "Map.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 class Map_View : public Observer
 {

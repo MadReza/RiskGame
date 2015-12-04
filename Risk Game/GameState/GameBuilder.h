@@ -1,18 +1,22 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "../libs/PugiXML/pugixml.hpp"
 #include "../Map/Map.h"
 #include "../Instantiation.h"
 #include "../BattleEngine/Player.h"
+#include "../Map/UtilityMap.h"
 
-using namespace std;
+
+class Instantiation;
 
 class GameBuilder {
 private:
-    string _serializedGame;
-    Instantiation* _game;
+    char* _filename;
+	Instantiation* _game;
+
 public:
-    GameBuilder(string serializedGame);
+    GameBuilder(char* filename);
     void buildMap();
     void buildPlayers();
     Instantiation* getGame();

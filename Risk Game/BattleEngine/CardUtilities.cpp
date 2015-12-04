@@ -1,5 +1,7 @@
 #include "CardUtilities.h"
 
+const char* CardUtilities::cardTypes[] = { "Infantry", "Artillery", "Cavalry" };
+
 bool CardUtilities::checkRedemption(Player *p)
 {
 	int infantry_count=0, artillery_count=0, cavalry_count=0;
@@ -69,31 +71,24 @@ int CardUtilities::selectRedemption(Player * p)
 		cout << "The following redemptions are possible: " << endl;
 		if (infantry_count >= 3)
 		{
-			cout << "\tEnter 'i'. Redeem three " << Infantry << " cards." << endl;
+			cout << "\tEnter 'i'. Redeem three " << CardUtilities::cardTypes[Infantry] << " cards." << endl;
 		}
 		if (cavalry_count >= 3)
 		{
-			cout << "\tEnter 'c'. Redeem three " << Cavalry << " cards." << endl;
+			cout << "\tEnter 'c'. Redeem three " << CardUtilities::cardTypes[Cavalry] << " cards." << endl;
 		}
 		if (artillery_count >= 3)
 		{
-			cout << "\tEnter 'a'. Redeem three " << Artillery << " cards." << endl;
+			cout << "\tEnter 'a'. Redeem three " << CardUtilities::cardTypes[Artillery] << " cards." << endl;
 		}
 		if (artillery_count >= 1 && cavalry_count >= 1 && infantry_count >= 1)
 		{
-			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 " << Infantry << ", 1 " << Artillery << ", 1" << Cavalry << ")." << endl;
+			cout << "\tEnter 'd'. Redeem three DIFFERENTLY suited cards (1 " << CardUtilities::cardTypes[Infantry] << ", 1 " << CardUtilities::cardTypes[Artillery] << ", 1" << CardUtilities::cardTypes[Cavalry] << ")." << endl;
 		}
 		cout << "\tEnter 'q' to quit redemption" << endl;
 
 		cout << "Please enter your selection from the above choices: ";
 		cin >> selection;	//VALIDATION DONE, BELOW
-
-		while (!std::cin >> selection){
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				cout << "Try Again > ";
-				cin >> selection;
-		}
 
 	} while (selection != 'i' && selection != 'c' && selection != 'a' && selection != 'd' && selection != 'q');
 
@@ -125,21 +120,17 @@ int CardUtilities::selectRedemption(Player * p)
 
 void CardUtilities::displayPlayerCards(Player * p)
 {
-	cout << "Player: " << p->getName()
-		<< ", has the following card hand sequence: ";
+	int infantry = 0, artillery = 0, cavalry = 0;
 
-	for (int i = 0; i != p->getCards()->size(); i++)
-	{
-		cout << (*p->getCards())[i]->getCardSuit() << ", ";
-	}
+	getTotalOfEachCard(p, infantry, artillery, cavalry);
+	
+	cout << "Player: " << p->getName() << ", has the following card count: " << endl;;	//TODO DRAW CARDS AND MOVE IT TO THE OBSERVER VIEW
 
-	//TODO: @chris Add Emptry Drawing....
-	//Reza wants something similar to BattleEngine::displayBattleInfo
-	//Cavalry X5
-	//Infantry X3
-	//Artillery X2
-
-	cout << endl;
+	//TODO Maybe Align numbers check battlenegine output
+	cout << "\t" << CardUtilities::cardTypes[Cavalry] << ": " << cavalry << endl;
+	cout << "\t" << CardUtilities::cardTypes[Infantry] << ":" << infantry << endl;
+	cout << "\t" << CardUtilities::cardTypes[Artillery] << ": " << artillery << endl;
+	
 }
 
 void CardUtilities::takePlayerCards(Player * loser, Player * winner)
@@ -150,8 +141,7 @@ void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 		loser->getCards()->pop_back();
 	}
 
-	cout << "All of Player: " << loser->getName() << "'s cards have been moved to "
-		<< winner->getName() << "'s hand." << endl;
+	cout << "All of Player: " << loser->getName() << "'s cards have been moved to "	<< winner->getName() << "'s hand." << endl;
 }
 
 void CardUtilities::getVictoryCard(Player * p)

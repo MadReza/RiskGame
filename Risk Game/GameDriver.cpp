@@ -27,7 +27,9 @@ GameDriver::~GameDriver()
 
 void GameDriver::startGame()
 {
-	Instantiation start;	//Initializes all components then sends to GameDriver.
+	Instantiation* start = new Instantiation();	//Initializes all components then sends to GameDriver.
+	start->displayTitleScreen();
+	start->gameSelection();
 	
 	play();
 }
@@ -67,7 +69,8 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
-	cout << "\n****Reinforcment Phase:: ****" << endl << endl;
+	risk::clsGame();
+	cout << "****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
 
@@ -80,7 +83,8 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
-	cout << "\n****Attack Phase:: ****" << endl << endl;
+	risk::clsGame();
+	cout << "****Attack Phase:: ****" << endl << endl << endl;
 	char answer;
 
 	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
@@ -93,8 +97,10 @@ void GameDriver::attackPhase(Player* player)
 			player->assignAttack();
 			break;
 		}
-		cout << endl << "Would you like to attack a country (y,n): ";
+		cout << "Would you like to attack a country (y,n): ";
 		cin >> answer;
+
+		delete playerInfo;	//To Clean screen stuff..
 
 		if (answer == 'y' || answer == 'Y')
 			player->assignAttack();
@@ -114,7 +120,7 @@ void GameDriver::attackPhase(Player* player)
 
 void GameDriver::fortifcationPhase(Player* player)
 {
-	cout << "\n****Fortification Phase:: ****" << endl;
+	cout << "****Fortification Phase:: ****" << endl;
 	cout << "\tFor all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
 
 	vector<Country*> playerCountries = player->getCountries();

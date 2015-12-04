@@ -2,8 +2,6 @@
 
 Instantiation::Instantiation()
 {
-	displayTitleScreen();
-	gameSelection();
 }
 
 Instantiation::~Instantiation()
@@ -31,24 +29,24 @@ void Instantiation::gameSelection()
 	}
 }
 
-int Instantiation::getTotalPlayers() const
+int Instantiation::getTotalPlayers()
 {
 	return totalPlayers;
 }
 
-Map* Instantiation::getMap() const
+Map* Instantiation::getMap()
 {
 	return map;
 }
 
-bool Instantiation::getIsNewGame() const
+bool Instantiation::getIsNewGame()
 {
 	return isNewGame;
 }
 
 void Instantiation::newGame()
 {
-	clsGame();
+	risk::clsGame();
 	isNewGame = true;
 	mapSelection();
 	createPlayers();
@@ -63,7 +61,7 @@ void Instantiation::newGame()
 
 void Instantiation::loadGame()
 {
-	clsGame();
+	risk::clsGame();
 	this->isNewGame = false;
 	// TODO @zack : Assign Continent bonus to players who own complete continents
 
@@ -100,7 +98,20 @@ void Instantiation::loadGame()
 		// SAVE FILE GETTING LOADED
 		char* filename = new char[(savesDir + filenames[choice]).length() + 1];
 		strcpy_s(filename, (savesDir + filenames[choice]).length() + 1, (savesDir + filenames[choice]).c_str());
+		//*
+		GameBuilder* builder = new GameBuilder(filename);
+		GameDirector* director = new GameDirector(builder);
 
+		director->buildGame();
+
+		Instantiation* loadedGame = director->getGame();
+
+		_game = GameDriver::getInstance();
+		_game->setTotalPlayers(loadedGame->getTotalPlayers());
+		_game->setPlayers(loadedGame->getPlayers());
+		_game->setSelectedMap(loadedGame->getMap());
+		//*/
+		/*
 		pugi::xml_parse_result result = doc.load_file(filename);
 
 		if (result)
@@ -171,10 +182,11 @@ void Instantiation::loadGame()
 		{
 			//	SAVE FILE DID NOT LOAD CORRECTLY
 			cout << "Save file did not load correctly." << endl;
-			cout << "XML [" << source << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
+			cout << "XML [" << filename << "] parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
 			cout << "Error description: " << result.description() << "\n";
-			cout << "Error offset: " << result.offset << " (error at [..." << (source + result.offset) << "]\n\n";
+			cout << "Error offset: " << result.offset << " (error at [..." << (filename + result.offset) << "]\n\n";
 		}
+		*/
 	}
 	else
 	{
@@ -187,16 +199,13 @@ void Instantiation::loadGame()
 
 	//return;
 
-	_game = GameDriver::getInstance();
-	_game->setTotalPlayers(this->getTotalPlayers());
-	_game->setPlayers(this->getPlayers());
-	_game->setSelectedMap(this->getMap());
+	
 
 	/*
 	TODO by @zack : load serialized game from file and build the game using the GameBuilder
-	string serializedGame = "serialized-string-example";
+	string saveFileLocation = "serialized-string-example";
 
-	GameBuilder* builder = new GameBuilder(serializedGame);
+	GameBuilder* builder = new GameBuilder(saveFileLocation);
 	GameDirector* director = new GameDirector(builder);
 
 	director->buildGame();
@@ -205,7 +214,7 @@ void Instantiation::loadGame()
 	//*/
 }
 
-GameDriver* Instantiation::getGameDriver() const
+GameDriver* Instantiation::getGameDriver()
 {
 	return _game;
 }
@@ -218,7 +227,7 @@ void Instantiation::createMap()
 void Instantiation::createPlayers()
 {	
 	//TODO: maybe Add Design at observer area of the screen.
-	clsGame();
+	risk::clsGame();
 	do
 	{
 		cout << "Total amount of Players(2 to " << map->getMaxPlayers() << "): ";
@@ -276,7 +285,7 @@ void Instantiation::createCompPlayers()
 
 void Instantiation::mapSelection()
 {
-	clsGame();
+	risk::clsGame();
 	string str(Directory::GetCurrentWorkingDirectory());
 	const char* cd = str.c_str();
 	string path = Directory::CombinePaths(2, cd, "Mapfiles");
@@ -299,18 +308,18 @@ void Instantiation::mapSelection()
 	mapPath = path + "\\" + maps[selection];
 	UtilityMap m(mapPath);
 	map = m.getMapObject();
-	pause();
+	risk::pause();
 }
 
 void Instantiation::assignCountriesToPlayer()
 {
 	map->distributePlayers(players);
-	pause();
+	risk::pause();
 }
 
 int Instantiation::startOrLoad()
 {
-	setCursorPosition(COORD_INI_GAME_SCREEN);
+	risk::setCursorPosition(risk::COORD_INI_GAME_SCREEN);
 	int selection;
 	cout << "Type 0: To Start a New Game" << endl;
 	cout << "Type 1: To Load a Game" << endl;
@@ -345,9 +354,15 @@ void Instantiation::displayTitleScreen()
 	cout << endl;
 }
 
-vector<Player*> Instantiation::getPlayers() const
+vector<Player*> Instantiation::getPlayers()
 {
 	return players;
+}
+
+
+void Instantiation::setPlayers(vector<Player*> players)
+{
+	this->players = players;
 }
 
 void Instantiation::randomizePlayerOrder()
@@ -384,4 +399,44 @@ int Instantiation::chooseCompStrategy(int computerNumber)
 	}
 	return selection;
 
+}
+
+void Instantiation::setIsNewGame(bool new_game)
+{
+	this->isNewGame = new_game;
+}
+
+void Instantiation::setMap(Map* m)
+{
+	this->map = m;
+}
+
+void Instantiation::setMapPath(string path)
+{
+	this->mapPath = path;
+}
+
+int Instantiation::getTotalHumanPlayers()
+{
+	return this->totalHumanPlayers;
+}
+
+void Instantiation::setTotalHumanPlayers(int n)
+{
+	this->totalHumanPlayers = n;
+}
+
+int Instantiation::getTotalCompPlayers()
+{
+	return this->totalCompPlayers;
+}
+
+void Instantiation::setTotalCompPlayers(int n)
+{
+	this->totalCompPlayers = n;
+}
+
+void Instantiation::setTotalPlayers(int n)
+{
+	this->totalPlayers = n;
 }

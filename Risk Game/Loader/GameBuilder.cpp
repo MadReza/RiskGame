@@ -1,6 +1,6 @@
 #include "GameBuilder.h"
 
-using namespace std;
+
 
 GameBuilder::GameBuilder(string serializedGame) {
     _serializedGame = serializedGame;

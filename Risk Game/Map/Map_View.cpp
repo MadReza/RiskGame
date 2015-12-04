@@ -1,10 +1,6 @@
-//CHRISTOPHER KRAJEWSKI 25189209
-//COMP 345 ASSIGNMENT 2
-
 #include "Map_View.h"
-#include "Map.h"
-#include <iostream>
-using namespace std;
+
+
 
 Map_View::Map_View()
 {
