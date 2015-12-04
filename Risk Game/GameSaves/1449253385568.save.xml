@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<save>
+	<map>Earth.map</map>
+	<players>
+		<player name="chris" type="human" alive="true" armiesTotal="23" battlesWonTotal="0" cardRedemptionsTotal="0" redeemThisTurn="false" turnVictory="false">
+			<continents>
+				<continent name="North America" index="0">
+					<countries>
+						<country name="AA" index="0" armies="1" />
+						<country name="AG" index="6" armies="1" />
+						<country name="AH" index="7" armies="1" />
+						<country name="AJ" index="9" armies="1" />
+						<country name="AK" index="10" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Central America" index="1">
+					<countries>
+						<country name="AP" index="1" armies="1" />
+						<country name="AQ" index="2" armies="1" />
+						<country name="AR" index="3" armies="1" />
+					</countries>
+				</continent>
+				<continent name="South America" index="2">
+					<countries>
+						<country name="AW" index="3" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Africa" index="3">
+					<countries>
+						<country name="BJ" index="1" armies="1" />
+						<country name="BK" index="2" armies="1" />
+						<country name="BM" index="4" armies="1" />
+						<country name="BO" index="6" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Middle East" index="4">
+					<countries>
+						<country name="BQ" index="0" armies="1" />
+						<country name="BU" index="4" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Europe" index="5">
+					<countries>
+						<country name="AY" index="0" armies="1" />
+						<country name="BB" index="3" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Asia" index="6">
+					<countries>
+						<country name="CC" index="7" armies="1" />
+						<country name="CE" index="9" armies="1" />
+						<country name="CF" index="10" armies="1" />
+						<country name="CG" index="11" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Australia" index="7">
+					<countries>
+						<country name="CI" index="1" armies="1" />
+						<country name="CP" index="8" armies="1" />
+					</countries>
+				</continent>
+			</continents>
+			<cards />
+		</player>
+		<player name="reza" type="human" alive="true" armiesTotal="23" battlesWonTotal="0" cardRedemptionsTotal="0" redeemThisTurn="false" turnVictory="false">
+			<continents>
+				<continent name="North America" index="0">
+					<countries>
+						<country name="AC" index="2" armies="1" />
+						<country name="AL" index="11" armies="1" />
+						<country name="AN" index="13" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Central America" index="1">
+					<countries>
+						<country name="AS" index="4" armies="1" />
+					</countries>
+				</continent>
+				<continent name="South America" index="2">
+					<countries>
+						<country name="AU" index="1" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Africa" index="3">
+					<countries>
+						<country name="BL" index="3" armies="1" />
+						<country name="BP" index="7" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Middle East" index="4">
+					<countries>
+						<country name="BS" index="2" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Europe" index="5">
+					<countries>
+						<country name="BA" index="2" armies="1" />
+						<country name="BC" index="4" armies="1" />
+						<country name="BE" index="6" armies="1" />
+						<country name="BF" index="7" armies="1" />
+						<country name="BG" index="8" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Asia" index="6">
+					<countries>
+						<country name="BW" index="1" armies="1" />
+						<country name="BX" index="2" armies="1" />
+						<country name="CA" index="5" armies="1" />
+						<country name="CB" index="6" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Australia" index="7">
+					<countries>
+						<country name="CH" index="0" armies="1" />
+						<country name="CJ" index="2" armies="1" />
+						<country name="CL" index="4" armies="1" />
+						<country name="CN" index="6" armies="1" />
+						<country name="CO" index="7" armies="1" />
+						<country name="CQ" index="9" armies="1" />
+					</countries>
+				</continent>
+			</continents>
+			<cards />
+		</player>
+		<player name="zack" type="human" alive="true" armiesTotal="23" battlesWonTotal="0" cardRedemptionsTotal="0" redeemThisTurn="false" turnVictory="false">
+			<continents>
+				<continent name="North America" index="0">
+					<countries>
+						<country name="AB" index="1" armies="1" />
+						<country name="AD" index="3" armies="1" />
+						<country name="AE" index="4" armies="1" />
+						<country name="AF" index="5" armies="1" />
+						<country name="AI" index="8" armies="1" />
+						<country name="AM" index="12" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Central America" index="1">
+					<countries>
+						<country name="AO" index="0" armies="1" />
+					</countries>
+				</continent>
+				<continent name="South America" index="2">
+					<countries>
+						<country name="AT" index="0" armies="1" />
+						<country name="AV" index="2" armies="1" />
+						<country name="AX" index="4" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Africa" index="3">
+					<countries>
+						<country name="BI" index="0" armies="1" />
+						<country name="BN" index="5" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Middle East" index="4">
+					<countries>
+						<country name="BR" index="1" armies="1" />
+						<country name="BT" index="3" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Europe" index="5">
+					<countries>
+						<country name="AZ" index="1" armies="1" />
+						<country name="BD" index="5" armies="1" />
+						<country name="BH" index="9" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Asia" index="6">
+					<countries>
+						<country name="BV" index="0" armies="1" />
+						<country name="BY" index="3" armies="1" />
+						<country name="BZ" index="4" armies="1" />
+						<country name="CD" index="8" armies="1" />
+					</countries>
+				</continent>
+				<continent name="Australia" index="7">
+					<countries>
+						<country name="CK" index="3" armies="1" />
+						<country name="CM" index="5" armies="1" />
+					</countries>
+				</continent>
+			</continents>
+			<cards />
+		</player>
+	</players>
+</save>

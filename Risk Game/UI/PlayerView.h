@@ -21,6 +21,7 @@ private:
 	COORD gameCursorCoordinates;
 
 public:
+	PlayerView();
     PlayerView(Player &p);
     void update();
 };

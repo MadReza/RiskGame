@@ -1,5 +1,9 @@
 #include "PlayerView.h"
 
+PlayerView::PlayerView()
+{
+}
+
 PlayerView::PlayerView(Player &p) {
     p.attach(this);
     _player = &p;

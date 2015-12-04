@@ -319,6 +319,20 @@ void GameDriver::saveGame()
 					}
 				}
 			}
+			pugi::xml_node cards = player_node.append_child("cards");
+			vector<Card*>* player_cards = player->getCards();
+			for (int i = 0; i < player_cards->size(); i++)
+			{
+				Card* card = player_cards->at(i);
+				pugi::xml_node card_node = cards.append_child("card");
+
+				if (card->getCardSuit() == CardType::Artillery)
+					card_node.append_attribute("type") = "artillery";
+				else if (card->getCardSuit() == CardType::Infantry)
+					card_node.append_attribute("type") = "infantry";
+				else
+					card_node.append_attribute("type") = "cavalry";
+			}
 		}
 
 		milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());

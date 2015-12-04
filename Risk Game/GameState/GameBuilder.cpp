@@ -94,6 +94,28 @@ void GameBuilder::buildPlayers() {
 				Map* gameMap = _game->getMap();
 				gameMap->assignCountriesToPlayer(p, continent_index, countries_indices, armies);
 			}
+
+			//	GET THE CARDS
+			pugi::xml_node cards = player.child("cards");
+			for (pugi::xml_node card = cards.child("card"); card; card = card.next_sibling("card"))
+			{
+				CardType type;
+				if (strcmp(card.attribute("type").as_string(), "infantry") == 0)
+				{
+					type = CardType::Infantry;
+				}
+				else if (strcmp(card.attribute("type").as_string(), "artillery") == 0)
+				{
+					type = CardType::Artillery;
+				}
+				else
+				{
+					type = CardType::Cavalry;
+				}
+				Card* c = new Card(type);
+				vector<Card*>* player_cards = p->getCards();
+				player_cards->push_back(c);
+			}
 		}
 	}
 	else

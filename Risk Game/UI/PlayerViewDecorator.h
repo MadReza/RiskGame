@@ -24,7 +24,6 @@ private:
 public:
 
 	PlayerViewDecorator(Player *p) : PlayerView(*p){
-		
 		if (!risk::obsDisplaying)
 		{
 			risk::obsDisplaying = true;
