@@ -1,5 +1,7 @@
 #include "Player.h"
 
+const char* Player::playerTypes[] = { "Human", "Computer" };
+
 Player::Player()
 {
 	initialize();
@@ -358,7 +360,8 @@ int Player::getCardRedemptionsTotal()
 
 bool Player::assignAttack()	//TODO maybe return false if there is no country to be able to attack from or attack to ?  .... Maybe better to do this in GameDriver and make sure its possible.
 {
-	cout << "Select Country to attack from: " << endl;
+	//if(!isHuman()) //CONFLICT
+	cout << endl << "Select Country to attack from: " << endl;
 	Country* attackingCountry(selectPlayerCountry(true, 2));
 	cout << endl;
 

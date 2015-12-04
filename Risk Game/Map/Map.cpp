@@ -237,7 +237,7 @@ bool Map::connectedDFS(Player* owner, Country* start, Country* target)
 	{
 		if (start->getAdjacencyVector()[i] == target)	//found target
 		{
-			cout << "There is a path between these two countries, reinforcement is possible!" << endl;
+			cout << endl << "There is a path between these two countries, reinforcement is possible!" << endl;
 			return true;
 		}
 		if (start->getAdjacencyVector()[i]->getOwner() == owner && start->getAdjacencyVector()[i]->getReinforcementVisit() == false)	//If owned and not visited

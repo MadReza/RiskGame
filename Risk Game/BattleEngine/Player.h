@@ -26,6 +26,7 @@ class Player : public Subject
 {
 public :
 	enum Type { Human, Computer };
+	static const char* playerTypes[];
 	enum Color
 	{
 		Red,
@@ -111,6 +112,7 @@ public:
 
 	bool ownsContinent(Continent* c);
 
-	
+	/*void pushCard(Card c);		//TODO for future
+	void popCard();*/
 };
 

@@ -139,6 +139,8 @@ void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 	{
 		winner->getCards()->push_back(loser->getCards()->back());
 		loser->getCards()->pop_back();
+		winner->notify();
+		loser->notify();
 	}
 
 	cout << "All of Player: " << loser->getName() << "'s cards have been moved to "	<< winner->getName() << "'s hand." << endl;
@@ -147,6 +149,7 @@ void CardUtilities::takePlayerCards(Player * loser, Player * winner)
 void CardUtilities::getVictoryCard(Player * p)
 {
 	p->getCards()->push_back(new Card());
+	p->notify();
 }
 
 /*This return sequence is according to official Hasbro Risk rules
@@ -216,6 +219,7 @@ void CardUtilities::deleteSuit(Player *p, CardType suit)
 		if ((*p->getCards())[i]->getCardSuit() == suit)
 		{
 			p->getCards()->erase(p->getCards()->begin() + i);
+			p->notify();
 			return;
 		}
 	}

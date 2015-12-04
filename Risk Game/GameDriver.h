@@ -7,6 +7,7 @@
 #include "BattleEngine\CardUtilities.h"
 #include "Validation.h"
 #include "UI\PlayerViewDecorator.h"
+#include "UI\StatsObserver.h"
 #include "Screen.h"
 
 #include <iostream>
@@ -34,6 +35,8 @@ public:
 
 private:
 	static GameDriver* instance;
+
+	StatsObserver* statsObserver = nullptr;
 
 	int totalPlayers;
 	vector<Player*> players;
