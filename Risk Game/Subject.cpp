@@ -19,9 +19,9 @@ void Subject::detach(Observer *observer){
 void Subject::notify(){
 	for (vector<Observer*>::const_iterator iter = observers.begin(); iter != observers.end(); ++iter)
     {
-        //if(*iter != 0)
-        //{
+        if(*iter != 0)
+        {
             (*iter)->update();
-        //}
+        }
     }
 }

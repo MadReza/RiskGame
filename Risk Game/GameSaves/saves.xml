@@ -1,4 +1,6 @@
+<?xml version="1.0"?>
 <saves>
-	<save name="save 01" id="1" filename="1.save.xml"></save>
-	<save name="save 02" id="2" filename="2.save.xml"></save>
+	<save name="save 01" id="1" filename="1.save.xml" />
+	<save name="save 02" id="2" filename="2.save.xml" />
+	<save name="hello_save" id="1449251358311" filename="1449251358311.save.xml" />
 </saves>
