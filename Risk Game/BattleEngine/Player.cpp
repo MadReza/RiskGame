@@ -52,6 +52,15 @@ Player::Type Player::getType()
 	return typeOfPlayer;
 }
 
+void Player::setType(Type type_Player)
+{
+	typeOfPlayer = type_Player;
+}
+
+void Player::setStrategy(Strategy *strat){
+	Astrategy = strat;
+}
+
 void Player::setName(string name)
 {
 	_name = name;

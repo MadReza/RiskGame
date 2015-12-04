@@ -68,6 +68,8 @@ public:
 	void setName(string name);
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
+	void setType(Type type_Player);
+	void setStrategy(Strategy *strat);
 
 	Strategy* getPlayerStrategy();
 	bool isHuman();
