@@ -60,12 +60,6 @@ skipAllIn:
 	//Defender Lost
 	if (defenderLost(attackerCountry, defenderCountry)){
 
-		//TODO:: @Laurendy... I don't get this error on my PC...
-		if (attackerRollsList != nullptr)
-			delete[]attackerRollsList;//Deallocate memory
-		if (defenderRollsList != nullptr)
-			delete[]defenderRollsList;//Deallocate memory
-
 		displayDefenderLost();
 		risk::clsGame();
 		cout << "Defender lost his country" << endl;
@@ -90,11 +84,6 @@ skipAllIn:
 
 	//Attacker Lost
 	if (attackerLost(attackerCountry, defenderCountry)){
-
-		if (attackerRollsList != nullptr)
-			delete[]attackerRollsList;//Deallocate memory
-		if (defenderRollsList != nullptr)
-			delete[]defenderRollsList;//Deallocate memory
 
 		displayAttackerLost();
 		risk::clsGame();
