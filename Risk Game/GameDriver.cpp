@@ -67,6 +67,7 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
+	clsGame();
 	cout << "\n****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
@@ -80,6 +81,7 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 
 void GameDriver::attackPhase(Player* player)
 {
+	clsGame();
 	cout << "\n****Attack Phase:: ****" << endl << endl;
 	char answer;
 

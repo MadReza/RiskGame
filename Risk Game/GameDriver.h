@@ -7,9 +7,12 @@
 #include "BattleEngine\CardUtilities.h"
 #include "Validation.h"
 #include "UI\PlayerViewDecorator.h"
+#include "Screen.h"
 
 #include <iostream>
 #include <thread>
+
+using namespace risk;
 
 class GameDriver
 {

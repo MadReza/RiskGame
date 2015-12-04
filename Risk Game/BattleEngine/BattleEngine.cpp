@@ -254,7 +254,7 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 void BattleEngine::compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll)
 {
 	//Will return the minimum number of roll that we will compare (3,2 or 1)
-	int minNumOfRolls = std::min(attackerNumRoll, defenderNumRoll);
+	int minNumOfRolls = (std::min)(attackerNumRoll, defenderNumRoll);
 
 	for (int i = 0; i < minNumOfRolls; i++){
 		if (attackerRollsList[i] > defenderRollsList[i]){
