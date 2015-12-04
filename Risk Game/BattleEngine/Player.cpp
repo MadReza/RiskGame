@@ -360,7 +360,7 @@ int Player::getCardRedemptionsTotal()
 
 void Player::assignAttack()
 {
-	cout << "Select Country to attack from: " << endl; 
+	cout << endl << "Select Country to attack from: " << endl; //LAURENDY FORMATTING 
 	Country* attackingCountry(selectPlayerCountry(true,2)); 
 	
 	if (!isHuman())//If this Player is a computer
@@ -390,10 +390,7 @@ void Player::assignAttack()
 	if(isHuman())//If its a human computer.	//TODO ??? what does this comment mean ???
 		bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
 
-	defender->countries[0]->setOwner(this); //Kendy : WHat does that do?
-	defender->countries[0]->setOwner(this);
-	defender->countries[0]->setOwner(this);
-	defender->countries[0]->setOwner(this);
+	//REMOVED 
 
 	if (!defender->getAlive())	
 	{		

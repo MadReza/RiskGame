@@ -70,7 +70,7 @@ bool GameDriver::checkWinCondition()
 
 void GameDriver::reinforcePhase(Player* player)
 {
-	risk::clsGame();
+	risk::clsGame(); 
 	cout << "****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
@@ -89,7 +89,8 @@ void GameDriver::attackPhase(Player* player)
 	char answer;
 
 	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
-	
+
+	delete playerInfo;	//To Clean screen stuff..
 
 	do
 	{
@@ -98,10 +99,8 @@ void GameDriver::attackPhase(Player* player)
 			player->assignAttack();
 			break;
 		}
-		cout << "Would you like to attack a country (y,n): ";
+		cout << endl << "Would you like to attack a country (y,n): "; //LAURENDY
 		cin >> answer;
-
-		delete playerInfo;	//To Clean screen stuff..
 
 		if (answer == 'y' || answer == 'Y')
 			player->assignAttack();
@@ -121,8 +120,9 @@ void GameDriver::attackPhase(Player* player)
 
 void GameDriver::fortifcationPhase(Player* player)
 {
-	cout << "****Fortification Phase:: ****" << endl;
-	cout << "\tFor all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
+	risk::setCursorPosition(risk::COORD_INI_GAME_SCREEN); //LAURENDY 
+	cout << "****Fortification Phase:: ****" << endl << endl;
+	cout << "For all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
 
 	vector<Country*> playerCountries = player->getCountries();
 	int selectionFrom{ -2 };
@@ -140,7 +140,7 @@ void GameDriver::fortifcationPhase(Player* player)
 	{
 		displayCountriesWithArmy(playerCountries);
 
-		cout << "Type -1 to End fortification at any time." << endl;
+		cout  << endl << "Type -1 to End fortification at any time." << endl;
 
 		do{
 			cout << "Select Which country to transfer from(must have more than 1 army): ";
@@ -157,7 +157,7 @@ void GameDriver::fortifcationPhase(Player* player)
 		}while (playerCountries[selectionFrom]->getNumArmies() <= 1);
 
 		displayCountriesWithArmy(playerCountries);
-		cout << "Type -1 to End fortification at any time." << endl;
+		cout << endl << "Type -1 to End fortification at any time." << endl;
 
 		do
 		{
@@ -193,10 +193,11 @@ void GameDriver::fortifcationPhase(Player* player)
 				playerCountries[selectionFrom]->addArmies(-armyTransfer);
 				playerCountries[selectionTo]->addArmies(armyTransfer);
 
-				cout << "Transfer Succeeded" << endl;
+				cout << endl << "Transfer Succeeded" << endl;
 				cout << playerCountries[selectionFrom]->getName() << " has army size of " << playerCountries[selectionFrom]->getNumArmies() << endl;
 				cout << playerCountries[selectionTo]->getName() << " has army size of " << playerCountries[selectionTo]->getNumArmies() << endl;
 				system("pause");
+
 				return;
 			}
 		}
