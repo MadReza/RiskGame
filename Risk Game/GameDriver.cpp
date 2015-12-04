@@ -31,6 +31,9 @@ void GameDriver::startGame()
 	start->displayTitleScreen();
 	start->gameSelection();
 	
+	statsObserver = new StatsObserver(players, selectedMap->countCountries());
+	statsObserver->display();
+
 	play();
 }
 

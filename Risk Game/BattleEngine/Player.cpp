@@ -1,5 +1,7 @@
 #include "Player.h"
 
+const char* Player::playerTypes[] = { "Human", "Computer" };
+
 Player::Player()
 {
 	initialize();
