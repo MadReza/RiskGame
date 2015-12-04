@@ -1,7 +1,9 @@
 ﻿# RiskGame
 
 ## TODO
-- [ ] 
+- [ ] Bugs (BY: Laurendy)
+  - [ ] When dominating a country in attack. BattleEngine.cpp line 120-123
+  - [ ] Not All in play. Crash... 
 - [ ] Reinforcement
   - [ ] Feature: Continent Bonus needs to be used/implemented.
   - [x] Bug: Reinforcement message showing twice
