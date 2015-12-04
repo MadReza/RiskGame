@@ -87,7 +87,7 @@ void GameDriver::attackPhase(Player* player)
 
 	do
 	{
-		cout << "Would you like to attack a country (y,n): ";
+		cout << endl << "Would you like to attack a country (y,n): ";
 		cin >> answer;
 
 		if (answer == 'y' || answer == 'Y')
@@ -130,23 +130,18 @@ void GameDriver::fortifcationPhase(Player* player)
 		cout << "Type -1 to End fortification at any time." << endl;
 
 		do{
-
 			cout << "Select Which country to transfer from(must have more than 1 army): ";
-
-			while (!std::validInteger(selectionFrom, -1, playerCountries.size() - 1)){/*selectionFrom < 0 || playerCountries[selectionFrom]->getNumArmies() <= 1*/
-				/*cin >> selectionFrom;*/
-				cout << endl << "Please select a country from the list... > ";  //just tries to validate the cin >> selection
-
+			while (!std::validInteger(selectionFrom, -1, playerCountries.size() - 1)){
+				cout << endl << "Please select a country from the list... > ";  
 			}
-		}while (selectionFrom < -1 || playerCountries[selectionFrom]->getNumArmies() <= 1);
-
-		if (selectionFrom == -1)	//End Fortification
-		{
-			cout << "Fortification Done." << endl;
-			system("pause");
-			system("cls");
-			return;
-		}
+			if (selectionFrom == -1)	//End Fortification
+			{
+				cout << "Fortification Done." << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+		}while (playerCountries[selectionFrom]->getNumArmies() <= 1);
 
 		displayCountriesWithArmy(playerCountries);
 		cout << "Type -1 to End fortification at any time." << endl;
