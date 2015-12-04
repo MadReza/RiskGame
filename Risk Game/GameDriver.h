@@ -15,6 +15,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <typeinfo>
 
 using namespace std;
 using namespace std::chrono;
@@ -53,7 +54,8 @@ private:
 	void attackPhase(Player* player);
 	void fortifcationPhase(Player* player);
 	void saveGame();
-	
+	void switchPlayerType(Player* player);
+
 	void displayCountriesWithArmy(vector<Country*> countries);
 };
 #endif 

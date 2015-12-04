@@ -1,5 +1,6 @@
 #include "GameDriver.h"
 
+
 GameDriver* GameDriver::instance = 0;
 
 GameDriver* GameDriver::getInstance()
@@ -50,6 +51,7 @@ void GameDriver::play()
 			if (!player->getAlive())
 				continue;
 			//saveGame();
+			switchPlayerType(player);
 			reinforcePhase(player);
 			attackPhase(player);
 			fortifcationPhase(player);
@@ -71,6 +73,61 @@ bool GameDriver::checkWinCondition()
 	return true;
 }
 
+void GameDriver::switchPlayerType(Player* player){
+	risk::clsGame();
+	
+	cout << "||-=-=-=-=-=-=-=-=||" << endl;
+	cout << "||PLAYER SWTICHER!||" << endl;
+	cout << "||-=-=-=-=-=-=-=-=||" << endl << endl;
+	cout << "Currently you are : ";
+	if (player->isHuman())
+		cout << "A human";
+	else{
+		cout << "A Computer with strategy of " << typeid(player->getPlayerStrategy()).name(); //LAURENDY FIX THIS, what type of strategy
+	}
+	cout << endl;
+
+	char answer;
+
+	cout << "Would you like to switch player type? y/n > ";
+	cin >> answer;
+
+	while (!std::validYesNo(answer)){
+		cout << "Try again > ";
+		cin >> answer;
+	}
+
+	if (answer == 'N' || answer == 'n')
+		return;
+
+	int type;
+	cout << endl << "What would you like to switch to? ";
+	cout << "0: Human" << endl;
+	cout << "1: Computer Agressive" << endl;
+	cout << "2: Computer Defensive" << endl;
+	cout << "3: Computer Random" << endl;
+	cout << "> ";
+
+	while (!std::validInteger(type, 0, 3)){ cout << "Try again > "; }
+
+	switch (type){
+		case 0 :
+			player->setType(Player::Human);
+			return;
+		case 1 :
+			player->setType(Player::Computer);
+			player->setPlayerStrategy(new Agressive());
+			return;
+		case 2 : 
+			player->setType(Player::Computer);
+			player->setPlayerStrategy(new Defensive());
+			return;
+		case 3 :
+			player->setType(Player::Computer);
+			player->setPlayerStrategy(new Random());
+			return;
+	}
+}
 void GameDriver::reinforcePhase(Player* player)
 {
 	risk::clsGame(); 
