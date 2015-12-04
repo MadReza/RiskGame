@@ -65,9 +65,9 @@ void Player::setPlayerStrategy(Strategy *strat)
 	Astrategy = strat;
 }
 
-bool Player::isHuman(Player p)
+bool Player::isHuman(Player *p)
 {
-	if (p.getType() == Player::Human)
+	if (p->getType() == Player::Human)
 		return true;
 	else
 		return false;
@@ -139,6 +139,10 @@ int Player::getReinforcementTotal() {
 	reinforcement = max(reinforcement, MIN_REINFORCEMENT);
 	reinforcement += getCardReinforcementTotal();
 
+	cout << endl;
+	cout << "Total Reinforcment: " << reinforcement << endl;
+	pause();
+
 	return reinforcement;
 }
 
@@ -147,14 +151,19 @@ int Player::getCardReinforcementTotal()
 	char answer;
 	int cardReinforcement = 0;
 	do {
-		system("cls");
 
-		CardUtilities::displayPlayerCards(this);
+		CardUtilities::getVictoryCard(this);
+		CardUtilities::getVictoryCard(this);
+		CardUtilities::getVictoryCard(this);
+		CardUtilities::getVictoryCard(this);
+		CardUtilities::getVictoryCard(this);
+
+		CardUtilities::displayPlayerCards(this);	//TODO should be an used or called by an observer or something
 		cout << "You have redeemed " << getCardRedemptionsTotal() << " times." << endl;
 		if (CardUtilities::mandatoryRedemption(this))
 		{
 			cout << "You have more than or equal to the maximum " << CardUtilities::MAX_REDEMPTION_HAND_SIZE << " cards allowed." << endl;
-			cout << "You must redeem below " << CardUtilities::MAX_REDEMPTION_HAND_SIZE << " cards." << endl;
+			cout << "You must redeem to a hand size of less than " << CardUtilities::MAX_REDEMPTION_HAND_SIZE << " cards." << endl;
 		}
 
 		if (!CardUtilities::checkRedemption(this))	//Nothing to Redeem
@@ -166,18 +175,16 @@ int Player::getCardReinforcementTotal()
 		}
 
 		cout << "Do you want to redeem a set of cards (y,n): ";
-		cin >> answer;	//TODO validate this DONE
-		while (!std::validYesNo(answer)){
-			cout << "Try again > ";
-			cin >> answer;
-		}
+		cin >> answer;
 
 		if (answer == 'y' || answer == 'Y')
 		{
 			cardReinforcement += CardUtilities::selectRedemption(this);
 		}
 
-	} while (CardUtilities::mandatoryRedemption(this)/* && answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y'*/);
+	} while (CardUtilities::mandatoryRedemption(this) && !std::validYesNo(answer));
+
+	cout << "Reinforcements from card redemption: " << cardReinforcement;
 
 	return cardReinforcement;
 }
@@ -188,10 +195,9 @@ void Player::assignReinforcements()
 
 	while (armyToAssign > 0)
 	{
-		cout << "Assigning Countries" << endl;
+		clsGame();
+		cout << "Assigning Reinforcements" << endl;
 		cout << "===================" << endl;
-
-		int selection;
 		
 		cout << endl << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };
@@ -200,15 +206,11 @@ void Player::assignReinforcements()
 		int armyToAdd;		
 		do {
 			cout << countrySelection->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
-			/*cin >> armyToAdd;*/
-		} while (!std::validInteger(armyToAdd, 0, armyToAssign)/*armyToAdd < 0 || armyToAdd > armyToAssign*/);
+		} while (!std::validInteger(armyToAdd, 0, armyToAssign));
 
 		countrySelection->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
-
-		system("cls");
 	}
-	 //COMPLETED TODO: Done by Zack, bumped up by LAURENDY
 }
 
 Country* Player::selectAdjacentEnemyCountriesTo(Country* country)

@@ -62,6 +62,7 @@ skipAllIn:
 	for (int i = 0; i < defenderNumRoll; i++){
 		if (i == defenderNumRoll - 1){
 			cout << "\t" << defenderRollsList[i] << ", ";
+			continue;
 		}
 		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
 	}
@@ -96,7 +97,6 @@ skipAllIn:
 
 	//Attacker Lost
 	if (attackerLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){	//TODO reformating: doesn't need to pass NumArmies
-		
 		displayAttackerLost();
 		cout << endl;
 		cout << "\n\t\tAttacker ran out of armies\n";
@@ -122,6 +122,7 @@ stop:
 		delete[]attackerRollsList;//Deallocate memory
 	if (defenderRollsList != nullptr)
 		delete[]defenderRollsList;//Deallocate memory
+
 	return countryConquered;
 }
 
@@ -180,7 +181,7 @@ or  b) the attacking country runs out of armies and cannot attack anymore */
 bool BattleEngine::isAllInMode(Player *attackerPlayer){
 
 	//Attacker is a computer player no need to ask anything 
-	if (!attackerPlayer->isHuman(*attackerPlayer))
+	if (!attackerPlayer->isHuman(attackerPlayer))
 		return true;
 
 	//Attacker is Human
@@ -190,7 +191,7 @@ bool BattleEngine::isAllInMode(Player *attackerPlayer){
 		cin >> choice;	
 	} while (choice != 'y' && choice != 'n');
 
-	system("cls");
+	system("cls"); //TODO
 
 	if (choice == 'y')
 		return true;
@@ -204,7 +205,7 @@ int BattleEngine::numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls
 	minimumTransArmy = numberOfRolls >= attackerNumArmies ? attackerNumArmies - 1 : numberOfRolls;
 
 	//Attacker Player is a computer? then randomize the # of armies to be send (
-	if (!attackerPlayer->isHuman(*attackerPlayer)) {
+	if (!attackerPlayer->isHuman(attackerPlayer)) {
 		numArmtoSend = (rand() % (attackerNumArmies - minimumTransArmy)) + minimumTransArmy;// minimumTransArmy, attackerNumArmies - minimumTransArmy); //return random number between (min trans armies and max armies -1)			
 		cout << "\n" << attackerPlayer->getName() << " returned " << numArmtoSend << " Army(ies)\n" << endl;	//TODO check formatting Kendy, Sentence restructure
 		return numArmtoSend;
@@ -246,7 +247,7 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 void BattleEngine::compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll)
 {
 	//Will return the minimum number of roll that we will compare (3,2 or 1)
-	int minNumOfRolls = std::min(attackerNumRoll, defenderNumRoll);
+	int minNumOfRolls = (std::min)(attackerNumRoll, defenderNumRoll);
 
 	for (int i = 0; i < minNumOfRolls; i++){
 		if (attackerRollsList[i] > defenderRollsList[i]){

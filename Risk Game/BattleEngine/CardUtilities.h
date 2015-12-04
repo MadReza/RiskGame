@@ -10,6 +10,9 @@ TODO:
 #pragma once
 #include "Card.h"
 #include "Player.h"
+#include "../Screen.h"
+
+using namespace risk;
 
 class Card;
 
@@ -18,6 +21,7 @@ enum CardType { Infantry, Artillery, Cavalry };
 class CardUtilities{
 
 public:
+	static const char* cardTypes[];
 
 	static const int MAX_REDEMPTION_HAND_SIZE = 5;
 	

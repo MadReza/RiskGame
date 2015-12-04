@@ -4,6 +4,7 @@
 #include <set>
 #include "../Observer.h"
 #include "../BattleEngine/Player.h"
+#include "../Screen.h"
 
 class PlayerView : public Observer {
 private:
@@ -15,6 +16,10 @@ private:
 	int _continentReinforcements;
     int _armiesTotal;
     int _battlesWonTotal;
+
+	bool startedScreenOutput = false;
+	COORD gameCursorCoordinates;
+
 public:
     PlayerView(Player &p);
     void update();
