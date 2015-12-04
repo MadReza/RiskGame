@@ -49,12 +49,21 @@ skipAllIn:
 
 	//displaying attacker rolls
 	cout << " Attackers rolls :" << endl;
-	for (int i = 0; i < attackerNumRoll; i++)
-		cout << attackerRollsList[i] << ", "; //TODO PRETTY THIS
+	for (int i = 0; i < attackerNumRoll; i++){
+		if (i == attackerNumRoll - 1){
+			cout << "\t" << attackerRollsList[i];
+			continue;
+		}
+		cout << "\t" << attackerRollsList[i] << ", "; //LAURENDY
+	}
 	//displaying Defender rolls
 	cout << "\n Defender rolls :" << endl;
-	for (int i = 0; i < defenderNumRoll; i++)
-		cout << defenderRollsList[i] << ", "; //TODO PRETTY THIS
+	for (int i = 0; i < defenderNumRoll; i++){
+		if (i == defenderNumRoll - 1){
+			cout << "\t" << defenderRollsList[i] << ", ";
+		}
+		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
+	}
 
 	cout << endl; 
 
@@ -119,7 +128,7 @@ int* BattleEngine::generateDescSortedRollList(int size){
 	int* rollList = new int[size];
 
 	for (int i = 0; i < size; i++){
-		rollList[i] = roll();
+		rollList[i] = roll(1, 6); //Inclusive
 	}
 
 	//Sort Descending
@@ -130,10 +139,9 @@ int* BattleEngine::generateDescSortedRollList(int size){
 
 int BattleEngine::roll(int min, int max){
 	
-	default_random_engine generator;
-	uniform_int_distribution<int> distribution(0, 1000);
-	return (distribution(generator) % max)+min;
-	//return rand() % max + min;
+	srand(time(NULL));
+	int temp = (rand() % max) + min;
+	return temp;
 }
 
 //Check if the attack is over. (Attack Phase is over when there's is no defending armies or attacker contains only 1 army).
