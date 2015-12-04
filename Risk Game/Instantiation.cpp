@@ -308,6 +308,7 @@ void Instantiation::mapSelection()
 	mapPath = path + "\\" + maps[selection];
 	UtilityMap m(mapPath);
 	map = m.getMapObject();
+	map->setFilename(maps[selection]);
 	risk::pause();
 }
 

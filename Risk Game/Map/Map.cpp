@@ -262,3 +262,13 @@ void Map::resetFortificationDFS()
 		}
 	}
 }
+
+void Map::setFilename(string filename)
+{
+	this->filename = filename;
+}
+
+string Map::getFilename()
+{
+	return filename;
+}

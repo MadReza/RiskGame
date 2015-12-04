@@ -240,8 +240,8 @@ void GameDriver::saveGame()
 		pugi::xml_node map = save.append_child("map");
 		
 		//	ADD MAP NAME
-		char* mapName = new char[(this->selectedMap->getMapName().length()) + 1];
-		strcpy_s(mapName, (this->selectedMap->getMapName()).length() + 1, (this->selectedMap->getMapName()).c_str());
+		char* mapName = new char[(this->selectedMap->getFilename().length()) + 1];
+		strcpy_s(mapName, (this->selectedMap->getFilename()).length() + 1, (this->selectedMap->getFilename()).c_str());
 		map.append_child(pugi::node_pcdata).set_value(mapName);
 
 
@@ -256,7 +256,7 @@ void GameDriver::saveGame()
 			player_node.append_attribute("name") = player_name;
 			player_node.append_attribute("type") = (player->getType() == Player::Human) ? "human" : "computer";
 			player_node.append_attribute("alive") = player->getAlive();
-			player_node.append_attribute("reinforcementTotal") = player->getReinforcementTotal();
+			//player_node.append_attribute("reinforcementTotal") = player->getReinforcementTotal();
 			player_node.append_attribute("armiesTotal") = player->getArmiesTotal();
 			player_node.append_attribute("battlesWonTotal") = player->getBattlesWonTotal();
 			player_node.append_attribute("cardRedemptionsTotal") = player->getCardRedemptionsTotal();
@@ -264,14 +264,53 @@ void GameDriver::saveGame()
 			player_node.append_attribute("turnVictory") = player->getTurnVictory();
 
 			pugi::xml_node continents = player_node.append_child("continents");
-			for (Continent* continent : this->selectedMap->getMapVector())
+			set<Continent*> player_continents;
+			for (Country* country : player->getCountries())
 			{
-				pugi::xml_node continent_node = continents.append_child("continent");
+				player_continents.insert(country->getContinentObject());
+			}
+			vector<Continent*> map_continents = this->selectedMap->getMapVector();
+			for (int i = 0; i < map_continents.size(); i++)
+			{
+				Continent* continent = map_continents[i];
+				if (find(player_continents.begin(), player_continents.end(), continent) != player_continents.end()) // if continent is owned by player
+				{
+					pugi::xml_node continent_node = continents.append_child("continent");
+					
+					char* continent_name = new char[(continent->getContinentName().length()) + 1];
+					strcpy_s(continent_name, (continent->getContinentName()).length() + 1, (continent->getContinentName()).c_str());
+
+					continent_node.append_attribute("name") = continent_name;
+					continent_node.append_attribute("index") = i;
+
+					pugi::xml_node countries = continent_node.append_child("countries");
+					vector<Country*> map_countries = continent->getContinentVector();
+					for (int j = 0; j < map_countries.size(); j++)
+					{
+						Country* country = map_countries[j];
+						if (country->getOwner() == player)
+						{
+							pugi::xml_node country_node = countries.append_child("country");
+							
+							char* country_name = new char[(country->getName().length()) + 1];
+							strcpy_s(country_name, (country->getName()).length() + 1, (country->getName()).c_str());
+
+							country_node.append_attribute("name") = country_name;
+							country_node.append_attribute("index") = j;
+							country_node.append_attribute("armies") = country->getNumArmies();
+						}
+					}
+				}
 			}
 		}
 
-		
-
+		system("cls");
+		milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+		string file = "GameSaves\\" + to_string(ms.count()) + ".save.xml";
+		char* filename = new char[(file.length()) + 1];
+		strcpy_s(filename, (file).length() + 1, (file).c_str());
+		doc.save_file(filename);
+		system("pause");
 		cout << "\nfile saved as " << saveName;
 		system("pause");
 	}

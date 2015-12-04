@@ -27,6 +27,7 @@ void GameBuilder::buildMap() {
 		_game->setMapFilename(map.child_value());
 		UtilityMap m(mapPath);
 		_game->setMap(m.getMapObject());
+		_game->getMap()->setFilename(map.child_value());
 	}
 	else
 	{
