@@ -1,6 +1,7 @@
 #pragma once
 #include "Strategy.h"
 #include "../Map/Country.h"
+#include "../Screen.h"
 
 #include <ctime>
 #include <iostream>
@@ -25,6 +26,10 @@ public:
 
 		if (isgonna_attack){
 			int r = rand() % vectorcountry.size();
+			cout << "Computer " << c1->getOwner()->getName() << " decided to attack: " << endl;
+			cout << "Attacking from " << c1->getName() << " to " << vectorcountry[r]->getName() << endl;
+			risk::pause();
+
 			bool countryConquered = BattleEngine::attack(c1, vectorcountry[r]);
 		}
 

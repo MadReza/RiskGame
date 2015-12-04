@@ -88,15 +88,22 @@ void GameDriver::attackPhase(Player* player)
 	cout << "****Attack Phase:: ****" << endl << endl << endl;
 	char answer;
 
-	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
-
-	delete playerInfo;	//To Clean screen stuff..
+	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);	//Displays decorator view
+	delete playerInfo;
 
 	do
 	{
-		if (!player->isHuman())
+		if (player->isHuman())
 		{
-			player->assignAttack();
+			cout << "Would you like to attack a country (y,n): ";
+			cin >> answer;
+
+			if (answer == 'y' || answer == 'Y')
+				player->assignAttack();
+		}
+		else
+		{
+			player->assignAttack();	//TODO: Does the computer only attack once ???
 			break;
 		}
 		cout << endl << "Would you like to attack a country (y,n): "; //LAURENDY
@@ -113,9 +120,8 @@ void GameDriver::attackPhase(Player* player)
 		CardUtilities::getVictoryCard(player);
 	}
 
-	system("pause");
-	system("cls");
-	//If won move to country X soldies.
+	risk::pause();
+	risk::clsGame();
 }
 
 void GameDriver::fortifcationPhase(Player* player)

@@ -126,7 +126,7 @@ int Player::getContinentReinforcements()
 	}
 	for each (Continent* continent in continents_touched_by_player)
 	{
-		if (this->ownsContinent(continent)) // if the player owns this continent
+		if (this->ownsContinent(continent)) 
 		{
 			reinforcement += continent->getOccupationValue();
 			cout << "Bonus From Continent: " << continent->getContinentName() << " is " << continent->getOccupationValue() << endl;
@@ -153,7 +153,7 @@ int Player::getReinforcementTotal() {
 	return reinforcement;
 }
 
-int Player::getCardReinforcementTotal()
+int Player::getCardReinforcementTotal()	//TODO: @chris & @kendy, auto cards if computer
 {
 	char answer;
 	int cardReinforcement = 0;
@@ -189,7 +189,7 @@ int Player::getCardReinforcementTotal()
 			cardReinforcement += CardUtilities::selectRedemption(this);
 		}
 
-	} while (CardUtilities::mandatoryRedemption(this) && !std::validYesNo(answer));
+	} while (CardUtilities::mandatoryRedemption(this) || !std::validYesNo(answer));
 
 	cout << "Reinforcements from card redemption: " << cardReinforcement;
 
@@ -206,21 +206,19 @@ void Player::assignReinforcements()
 		cout << "Assigning Reinforcements" << endl;
 		cout << "===================" << endl;
 
-		int selection;
-		int armyToAdd;
-
 		cout << endl << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };
 
-	
 		cout << endl;	
+		int armyToAdd = 0;
+
 		do {
 			if (!isHuman())
 			{
 				cout << "\nComputer : " << this->getName() << " selected " << countrySelection->getName();
 				armyToAdd = armyToAssign;
 				cout << "\nComputer : " << this->getName() << " Added " << armyToAdd << " Armies to " << countrySelection->getName() << endl;
-				system("pause");
+				risk::pause();
 				break;
 			}
 			cout << countrySelection->getName() << " selected. Enter number of armies to add to country from 0 to " << armyToAssign << ": ";
@@ -229,8 +227,6 @@ void Player::assignReinforcements()
 		countrySelection->addArmies(armyToAdd);
 		armyToAssign -= armyToAdd;
 	}
-	 //COMPLETED TODO: Done by Zack, bumped up by LAURENDY, Boosted by Kendy
-
 }
 
 Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
@@ -247,7 +243,7 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 		}
 	}
 
-	if ((int)enemyAdjacentCountries.size() == 0) return NULL; //LAURENDY
+	if ((int)enemyAdjacentCountries.size() == 0) return NULL;
 
 	//Display Enemy Adjacent Countries to attack
 	for (int x = 0; x < (int)enemyAdjacentCountries.size(); x++)
@@ -258,8 +254,7 @@ Country* Player::selectAdjacentEnemyCountriesTo(Country* country)
 
 	do {
 		cout << "Select the country number from 0 to " << enemyAdjacentCountries.size() - 1 << ": ";
-		/*cin >> selection;*/
-	} while (!std::validInteger(selection, 0, enemyAdjacentCountries.size() - 1)/*selection < 0 || selection >((int)enemyAdjacentCountries.size() - 1)*/);
+	} while (!std::validInteger(selection, 0, enemyAdjacentCountries.size() - 1));
 
 	return enemyAdjacentCountries[selection];
 }
@@ -276,7 +271,7 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 		}
 	}
 
-	if (eligibleCountries.size() == 0) return NULL; //LAURENDY
+	if (eligibleCountries.size() == 0) return NULL;
 
 	for (int i = 0; i < (int)eligibleCountries.size(); i++)
 	{
@@ -288,15 +283,17 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 	int selection;
 
 	do {
-		cout << "Select the country number from 0 to " << eligibleCountries.size() - 1 << ": ";
-		if (!isHuman())//If this Player is a computer
-		{	
+		if (isHuman())
+		{
+			cout << "Select the country number from 0 to " << eligibleCountries.size() - 1 << ": ";
+		}
+		else //If this Player is a computer
+		{
 			srand(time(0));
 			selection = eligibleCountries.size() > 1 ? rand() % (eligibleCountries.size() - 1) : 0; //Computer choose from 0 to eligible # of country
 			break;
 		}
-		/*cin >> selection;*/
-	} while (!std::validInteger(selection, 0, eligibleCountries.size() - 1)/*selection < 0 || selection >((int)eligibleCountries.size() - 1)*/);
+	} while (!std::validInteger(selection, 0, eligibleCountries.size() - 1));
 
 	return eligibleCountries[selection];
 }
@@ -358,45 +355,65 @@ int Player::getCardRedemptionsTotal()
 	return _cardRedemptionsTotal;
 }
 
-void Player::assignAttack()
+bool Player::assignAttack()	//TODO maybe return false if there is no country to be able to attack from or attack to ?  .... Maybe better to do this in GameDriver and make sure its possible.
 {
-	cout << endl << "Select Country to attack from: " << endl; //LAURENDY FORMATTING 
-	Country* attackingCountry(selectPlayerCountry(true,2)); 
-	
-	if (!isHuman())//If this Player is a computer
+	//if(!isHuman()) //CONFLICT
+	cout << endl << "Select Country to attack from: " << endl;
+	Country* attackingCountry(selectPlayerCountry(true, 2));
+	cout << endl;
+
+	vector<Country*> eligibleCountries;
+
+	for (int i = 0; i < (int)countries.size(); i++)
 	{
-		cout << "\nComputer Player : " << this->getName() << " chose " << attackingCountry->getName() << " to attack with." << endl;
-		this->doStrategy(attackingCountry);
-		goto computerFinishAttack;
+		eligibleCountries.push_back(countries[i]);
 	}
 
-	if (attackingCountry == NULL){ //LAURENDY
+
+	if (eligibleCountries.size() == 0){
 		cout << "Looks like there are no eligible coutries to attack with..." << endl;
-		return;
+		return false;
+	}
+
+	if (isHuman())
+	{
+		cout << "Select Country to attack from: " << endl;
+		cout << endl;
+	}
+	else
+	{		
+		vector<Country*> eligibleCountries;
+
+		for (int i = 0; i < (int)countries.size(); i++)
+		{
+			if (countries[i]->getNumArmies() >= 2)
+			{
+				eligibleCountries.push_back(countries[i]);
+			}
+		}
+		this->doStrategy(attackingCountry);
+		return true;
 	}
 
 	cout << endl;
 	cout << "Select Country to attack: " << endl;
 	Country* targetCountry(selectAdjacentEnemyCountriesTo(attackingCountry)); //returning elegible attacking adjacent country
 
-	if (targetCountry == NULL){ //LAURENDY
+	if (targetCountry == NULL){ 
 		cout << "Looks like there are no enemies near to attack..." << endl;
-		return;
+		return false;
 	}
-
 
 	Player* defender = targetCountry->getOwner();
 	
-	if(isHuman())//If its a human computer.	//TODO ??? what does this comment mean ???
+	if(isHuman())
 		bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
-
-	//REMOVED 
 
 	if (!defender->getAlive())	
 	{		
 		CardUtilities::takePlayerCards(defender, this);
 	}
-computerFinishAttack:; //Computer end turn
+	return true;
 }
 
 void Player::setTurnVictory(bool trueFalse)

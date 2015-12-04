@@ -96,7 +96,7 @@ public:
     int getBattlesWonTotal();
 
 	void assignReinforcements();
-	void assignAttack();
+	bool assignAttack();
 
 	bool getAlive();
 	void setAlive(bool trueFalse);
