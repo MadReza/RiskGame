@@ -10,8 +10,13 @@
 #include "Screen.h"
 
 #include <iostream>
+#include <set>
+#include <vector>
+#include <chrono>
 #include <thread>
 
+using namespace std;
+using namespace std::chrono;
 
 class GameDriver
 {
@@ -44,6 +49,7 @@ private:
 	void reinforcePhase(Player* player);
 	void attackPhase(Player* player);
 	void fortifcationPhase(Player* player);
+	void saveGame();
 	
 	void displayCountriesWithArmy(vector<Country*> countries);
 };

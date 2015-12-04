@@ -26,6 +26,8 @@ public:
 	void visitAllCountries(Country* c); //This method is used to visit all connected countries on the map and set their visited attribute to true.
 										//It is a DFS of the country nodes and their edges
 	string getMapName(); //Returns map name
+	void setFilename(string filename);
+	string getFilename();
 	void setContinentOwnership();
 	bool checkAllCountriesOwned();
 
@@ -44,6 +46,7 @@ private:
 
 	vector<Continent*> continents; //This resizable container holds all the continent objects
 	string name;
+	string filename;
 	int num_continents; 
 	int num_countries;
 	string author; //Map Creator's name	
