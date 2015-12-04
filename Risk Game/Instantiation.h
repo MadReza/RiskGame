@@ -11,6 +11,7 @@
 #include "BattleEngine\Agressive.h"
 #include "BattleEngine\Defensive.h"
 #include "BattleEngine\Random.h"
+#include "Screen.h"
 
 #include <iostream>
 #include <string>
@@ -20,6 +21,7 @@ using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
+using namespace risk;
 
 class GameDriver;
 

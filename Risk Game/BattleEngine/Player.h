@@ -7,10 +7,11 @@
 #include "../Validation.h"
 
 #include <vector>
+#include <set>
 #include <string>
 #include <algorithm>
 
-using std::string;
+using namespace std;
 
 //forward declarations
 class Card;
@@ -70,6 +71,9 @@ public:
 	bool getRedeemThisTurn();
 	void resetRoundVariables();
 
+	int getContinentReinforcements();
+	int getCountryReinforcements();
+
 	void doStrategy(Country* country){
 		Astrategy->doStrategy(country);
 	}
@@ -98,5 +102,7 @@ public:
 
 	void incrementCardRedemptionsTotal();
 	int getCardRedemptionsTotal();
+
+	bool ownsContinent(Continent* c);
 };
 

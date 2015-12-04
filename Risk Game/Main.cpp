@@ -1,8 +1,6 @@
 //#include "GameManager.h"
 //#include "MainMenu.h"
 #include "GameDriver.h"
-//#include "BattleEngine\CardUtilities.h"
-//#include <windows.h>
 #include <iostream>
 #include <ctime> //random
 //OLD 
@@ -65,7 +63,25 @@ int main()
 	//return 0;
 
 
+	//Loading/Preparing Risk To be Played
+	std::cout << "Preparing Game for your Enjoyment!" << std::endl;
+	while (!checkConsoleSize(200, 300))
+	{
+		std::cout << "Console buffer needs to be set to the following settings: " << std::endl;
+		std::cout << "Screen Buffer Size: " << std::endl;
+		std::cout << "\tWidth: 200" << std::endl;
+		std::cout << "\tHeight: 300" << std::endl;
+		std::cout << "Window Size:" << std::endl;
+		std::cout << "\tWidth: 200" << std::endl;
+		std::cout << "\tHeight: 75" << std::endl;
+		system("pause");
+	}
 
+	std::cout << "Game prepared! Enjoy!" << endl;
+	system("pause");
+	cls();
+
+	/************************COLOR PART **********************************/
 	//http://stackoverflow.com/a/20725888
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED |
 		FOREGROUND_GREEN |
@@ -88,6 +104,10 @@ Select the country number
 	system("Color 3C");
 
 	system("pause");*/
+	/*****************************END OF COLOR********************************/
+
+	GameDriver *myRiskGame = GameDriver::getInstance();	//Lazy Loading the Game
+	myRiskGame->startGame();
 
 
 	/********* GUI VERSION OF GAME ***********/
@@ -96,16 +116,6 @@ Select the country number
 
 	//theGame.gameLoop();
 	/**********END OF GUI ********************/
-
-	//Gui myGui;
-	GameDriver *myRiskGame = GameDriver::getInstance();	//Lazy Loading the Game
-	myRiskGame->startGame();
-
-	//thread gameThread = myRiskGame->startGameThread();
-
-	//myGui.start();
-
-	//gameThread.join();
 
 	system("pause");
 	return 0;

@@ -11,6 +11,8 @@ private:
     std::set<Country> _countries;
     std::set<Continent> _continents;
     int _reinforcementTotal;
+	int _countryReinforcements;
+	int _continentReinforcements;
     int _armiesTotal;
     int _battlesWonTotal;
 public:

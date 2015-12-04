@@ -94,21 +94,46 @@ int Player::getArmiesTotal() {
     return _armiesTotal;
 }
 
-//	TODO @zack for reinforcement total calculation
-//bool Player::checkContinentOwnership(Continent* c)
-//{
+bool Player::ownsContinent(Continent* continent)
+{
+	for each (Country* country in continent->getContinentVector())
+	{
+		if (find(this->countries.begin(), this->countries.end(), country) == this->countries.end()) // if the continent country is not found in the player's countries
+			return false;
+	}
+	return true;
+} 
 
-//} 
+int Player::getCountryReinforcements()
+{
+	return countries.size() / 3;
+}
+
+int Player::getContinentReinforcements()
+{
+	int reinforcement{ 0 };
+	set<Continent*> continents_touched_by_player;
+	for each (Country* country in this->countries)
+	{
+		continents_touched_by_player.insert(country->getContinentObject()); // set of continents where the player owns a country
+	}
+	for each (Continent* continent in continents_touched_by_player)
+	{
+		if (this->ownsContinent(continent)) // if the player owns this continent
+		{
+			reinforcement += continent->getOccupationValue();
+			cout << "Bonus From Continent: " << continent->getContinentName() << " is " << continent->getOccupationValue() << endl;
+		}
+	}
+	return reinforcement;
+}
 
 int Player::getReinforcementTotal() {
 	int reinforcement{0};
-	reinforcement += countries.size() / 3;
-	cout << "Bonus From Countries: " << reinforcement << endl;;
-	for each (Continent* continent in continents)
-	{
-		reinforcement += continent->getOccupationValue();
-		cout << "Bonus From Continent: " << continent->getContinentName() << " is " << continent->getOccupationValue() << endl;	
-	}
+	reinforcement += getCountryReinforcements();
+	cout << "Bonus From Countries: " << reinforcement << endl;
+	
+	reinforcement += getContinentReinforcements();
 	cout << "Total Reinforcement from Countries with lower limit of 3: " << max(reinforcement, MIN_REINFORCEMENT) << endl;
 
 	reinforcement = max(reinforcement, MIN_REINFORCEMENT);

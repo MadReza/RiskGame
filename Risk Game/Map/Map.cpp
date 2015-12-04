@@ -170,6 +170,8 @@ void Map::distributePlayers(vector<Player*> player_vector)
 {
 	int k = 0;
 
+	cout << endl;
+
 	//while array of countries is not filled
 	while (this->checkAllCountriesOwned() == false)
 	{
@@ -190,7 +192,7 @@ void Map::distributePlayers(vector<Player*> player_vector)
 		}
 
 	}
-
+	cout << endl;
 }
 
 void Map::assignCountriesToPlayer(Player* player, int continent_index, vector<int> countries_indices, vector<int> armies)
