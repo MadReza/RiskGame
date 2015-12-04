@@ -38,6 +38,10 @@ namespace risk
 
 	/*Make sure the console is set to the correct size */
 	bool checkConsoleSize(int width, int height);
+
+	/*For Multiple Observer Part Displaying
+	E.g.: Decorator pattern decorating another*/
+	static bool obsDisplaying = false;
 }
 
 #endif //SCREEN_H

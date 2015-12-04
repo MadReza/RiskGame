@@ -86,7 +86,7 @@ void GameDriver::attackPhase(Player* player)
 	char answer;
 
 	PlayerViewDecorator *playerInfo = new CompletePlayerView(player);//Displays decorator view
-
+	delete playerInfo;	//To Clean screen stuff...
 	do
 	{
 		cout << endl << "Would you like to attack a country (y,n): ";
