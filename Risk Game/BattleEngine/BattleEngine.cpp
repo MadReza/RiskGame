@@ -51,15 +51,6 @@ skipAllIn:
 	cout << endl;
 
 	//displaying Defender rolls
-	cout << "\n Defender rolls :" << endl;
-	for (int i = 0; i < defenderNumRoll; i++){
-		if (i == defenderNumRoll - 1){
-			cout << "\t" << defenderRollsList[i] << ", ";
-			continue;//added Kendy
-		}
-		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
-	}
-
 	cout << " Defender rolls :" << endl;
 	displayRolls(defenderRollsList, defenderNumRoll);
 

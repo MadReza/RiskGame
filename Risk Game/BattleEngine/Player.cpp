@@ -72,7 +72,7 @@ Strategy* Player::getPlayerStrategy()
 }
 
 
-bool Player::isHuman(Player p)
+bool Player::isHuman()
 {
 	if (getType() == Player::Human)
 		return true;
@@ -215,7 +215,7 @@ void Player::assignReinforcements()
 	
 		cout << endl;	
 		do {
-			if (!this->isHuman(*this))
+			if (!isHuman())
 			{
 				cout << "\nComputer : " << this->getName() << " selected " << countrySelection->getName();
 				armyToAdd = armyToAssign;
@@ -289,7 +289,7 @@ Country* Player::selectPlayerCountry(bool showArmy, int showWithMinArmy)
 
 	do {
 		cout << "Select the country number from 0 to " << eligibleCountries.size() - 1 << ": ";
-		if (!this->isHuman(*this))//If this Player is a computer
+		if (!isHuman())//If this Player is a computer
 		{	
 			srand(time(0));
 			selection = eligibleCountries.size() > 1 ? rand() % (eligibleCountries.size() - 1) : 0; //Computer choose from 0 to eligible # of country
@@ -363,7 +363,7 @@ void Player::assignAttack()
 	cout << "Select Country to attack from: " << endl; 
 	Country* attackingCountry(selectPlayerCountry(true,2)); 
 	
-	if (!this->isHuman(*this))//If this Player is a computer
+	if (!isHuman())//If this Player is a computer
 	{
 		cout << "\nComputer Player : " << this->getName() << " chose " << attackingCountry->getName() << " to attack with." << endl;
 		this->doStrategy(attackingCountry);
@@ -387,7 +387,7 @@ void Player::assignAttack()
 
 	Player* defender = targetCountry->getOwner();
 	
-	if(this->isHuman(*this))//If its a human computer.
+	if(isHuman())//If its a human computer.	//TODO ??? what does this comment mean ???
 		bool countryConquered = BattleEngine::attack(attackingCountry, targetCountry);
 
 	defender->countries[0]->setOwner(this); //Kendy : WHat does that do?
@@ -396,19 +396,7 @@ void Player::assignAttack()
 	defender->countries[0]->setOwner(this);
 
 	if (!defender->getAlive())	
-	{
-		//TODO @Chris test your randomness
-		/*defender->getCards()->push_back(new Card());
-		system("pause");
-		defender->getCards()->push_back(new Card());
-		system("pause");
-		defender->getCards()->push_back(new Card());
-		system("pause");
-		defender->getCards()->push_back(new Card());
-		system("pause");
-		defender->getCards()->push_back(new Card());
-		system("pause");
-		defender->getCards()->push_back(new Card());*/
+	{		
 		CardUtilities::takePlayerCards(defender, this);
 	}
 computerFinishAttack:; //Computer end turn

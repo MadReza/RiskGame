@@ -69,7 +69,6 @@ public:
 	void setPlayerStrategy(Strategy *strat);
 
 	Strategy* getPlayerStrategy();
-	bool isHuman(Player p);
 	bool isHuman();
 
 	void setTurnVictory(bool trueFalse);

@@ -93,7 +93,7 @@ void GameDriver::attackPhase(Player* player)
 
 	do
 	{
-		if (!player->isHuman(*player))
+		if (!player->isHuman())
 		{
 			player->assignAttack();
 			break;
