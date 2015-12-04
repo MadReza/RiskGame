@@ -14,7 +14,7 @@ void PlayerView::update(){
 		risk::obsDisplaying = true;
 		startedScreenOutput = true;
 		gameCursorCoordinates = risk::getCursorPosition();
-		clsObserver();
+		risk::clsObserver();
 	}
 
     _reinforcementTotal = 0;	//TODO @CHRIS @REZA reinforcement call in player was  ouputting shit.

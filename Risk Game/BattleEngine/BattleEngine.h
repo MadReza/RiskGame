@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "../Map/Country.h"
 #include "../Validation.h"
+#include "../Screen.h"
 
 #include <iostream> 
 #include <iomanip>
@@ -16,6 +17,7 @@ using std::wcout;
 using std::cin;
 using std::endl;
 using std::setw;
+using std::setfill;
 using std::sort;
 using std::greater;
 using std::string;
@@ -30,14 +32,16 @@ private:
 
 	static int attackerRoll(Player* attackerPlayer, Player* defenderPlayer, Country *attackerCountry, Country *defenderCountry);
 	static bool isAttackOver(int attackerNum_armies, int defenderNum_armies);
-	static bool defenderLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies);
-	static bool attackerLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies);
+	static bool defenderLost(Country* attackerCountry, Country *defenderCountry);
+	static bool attackerLost(Country* attackerCountry, Country *defenderCountry);
 	static void compareRolls(Country *attackerCountry, Country* defenderCountry, int* attackerRollsList, int* defenderRollsList, int attackerNumRoll, int defenderNumRoll);
 	static int* generateDescSortedRollList(int size);
 	
 	static void displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry);
 	static void displayDefenderLost();
 	static void displayAttackerLost();
+
+	static void displayRolls(int* rollList, int rollCount);
 
 public:
 	static bool attack(Country *attacker, Country *defender);

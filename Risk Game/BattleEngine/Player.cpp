@@ -65,9 +65,9 @@ void Player::setPlayerStrategy(Strategy *strat)
 	Astrategy = strat;
 }
 
-bool Player::isHuman(Player *p)
+bool Player::isHuman()
 {
-	if (p->getType() == Player::Human)
+	if (getType() == Player::Human)
 		return true;
 	else
 		return false;
@@ -141,7 +141,7 @@ int Player::getReinforcementTotal() {
 
 	cout << endl;
 	cout << "Total Reinforcment: " << reinforcement << endl;
-	pause();
+	risk::pause();
 
 	return reinforcement;
 }
@@ -195,7 +195,7 @@ void Player::assignReinforcements()
 
 	while (armyToAssign > 0)
 	{
-		clsGame();
+		risk::clsGame();
 		cout << "Assigning Reinforcements" << endl;
 		cout << "===================" << endl;
 		

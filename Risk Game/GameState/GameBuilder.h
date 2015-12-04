@@ -7,7 +7,6 @@
 #include "../BattleEngine/Player.h"
 #include "../Map/UtilityMap.h"
 
-using namespace std;
 
 class Instantiation;
 

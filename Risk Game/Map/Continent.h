@@ -1,6 +1,3 @@
-//CHRISTOPHER KRAJEWSKI 25189209
-//COMP 345 ASSIGNMENT 2
-
 #pragma once
 #include "Country.h"
 #include "../BattleEngine/Player.h"
@@ -10,7 +7,8 @@
 class Country; //forward declaration
 class Player;
 
-using namespace std;
+using std::vector;
+using std::string;
 
 class Continent
 {

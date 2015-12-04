@@ -1,9 +1,3 @@
-//CHRISTOPHER KRAJEWSKI 25189209
-//COMP 345 ASSIGNMENT 2
-
-/*The Map class is also the Subject class*/
-
-
 #pragma once
 #include "Continent.h"
 #include "Country.h"
@@ -12,8 +6,8 @@
 #include <random>
 #include <algorithm>
 
-
-using namespace std;
+using std::vector;
+using std::string;
 
 class Map : public Subject
 {

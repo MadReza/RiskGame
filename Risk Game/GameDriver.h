@@ -12,7 +12,6 @@
 #include <iostream>
 #include <thread>
 
-using namespace risk;
 
 class GameDriver
 {

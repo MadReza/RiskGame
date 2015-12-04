@@ -10,8 +10,7 @@ bool BattleEngine::attack(Country *attackerCountry, Country *defenderCountry) {
 	int	attackerNumRoll, defenderNumRoll;
 	bool allInMode = false;
 	
-	system("cls");
-	cout << "\n\t*****Attacking*****\n\n";
+	risk::clsGame();
 		
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 		
@@ -28,54 +27,41 @@ playerAttack:
 	goto skipAllIn;
 
 allIn:
-
 	attackerNumRoll = attackerCountry->getNumArmies() > 2 ? 3 : 2;
 
 skipAllIn:
 	defenderNumRoll = defenderCountry->getNumArmies() > 1 ? 2 : 1;
 
-	//Creating the arrays that will contains the rolls list
-	
+	//Creating the arrays that will contains the rolls list	
 	attackerRollsList = generateDescSortedRollList(attackerNumRoll);
 	defenderRollsList = generateDescSortedRollList(defenderNumRoll);
-
-	
 	
 	compareRolls(attackerCountry, defenderCountry,attackerRollsList, defenderRollsList, attackerNumRoll, defenderNumRoll);
 
-	system("cls");
+	risk::clsGame();
 	cout << "\n\t*****RESULT*****\n\n";
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << endl;
 
 	//displaying attacker rolls
 	cout << " Attackers rolls :" << endl;
-	for (int i = 0; i < attackerNumRoll; i++){
-		if (i == attackerNumRoll - 1){
-			cout << "\t" << attackerRollsList[i];
-			continue;
-		}
-		cout << "\t" << attackerRollsList[i] << ", "; //LAURENDY
-	}
-	//displaying Defender rolls
-	cout << "\n Defender rolls :" << endl;
-	for (int i = 0; i < defenderNumRoll; i++){
-		if (i == defenderNumRoll - 1){
-			cout << "\t" << defenderRollsList[i] << ", ";
-			continue;
-		}
-		cout << "\t" << defenderRollsList[i] << ", ";//LAURENDY
-	}
+	displayRolls(attackerRollsList, attackerNumRoll);
 
-	cout << endl; 
+	cout << endl;
+
+	//displaying Defender rolls
+	cout << " Defender rolls :" << endl;
+	displayRolls(defenderRollsList, defenderNumRoll);
+
+	risk::pause();
 
 	int num_ArmiesToSend;
 
 	//Defender Lost
-	if (defenderLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){
-		//Display
+	if (defenderLost(attackerCountry, defenderCountry)){
+
 		displayDefenderLost();
-		cout << endl;
+		risk::clsGame();
 		cout << "Defender lost his country" << endl;
 		cout << attackerPlayer->getName() << " now owns " << defenderCountry->getName() << endl;
 
@@ -87,30 +73,31 @@ skipAllIn:
 		//Move Army from country to new country
 		attackerCountry->addArmies(-num_ArmiesToSend);
 		defenderCountry->addArmies(num_ArmiesToSend);
-
+		
+		cout << endl;
 		cout << attackerPlayer->getName() << " sent " << num_ArmiesToSend << " to " << defenderCountry->getName() << endl;
-		system("pause");
+		risk::pause();
 		
 		countryConquered = true;
 		goto stop;
 	}
 
 	//Attacker Lost
-	if (attackerLost(attackerCountry, defenderCountry, attackerCountry->getNumArmies(), defenderCountry->getNumArmies())){	//TODO reformating: doesn't need to pass NumArmies
+	if (attackerLost(attackerCountry, defenderCountry)){
+
 		displayAttackerLost();
-		cout << endl;
-		cout << "\n\t\tAttacker ran out of armies\n";
+		risk::clsGame();
+		cout << "\t\tAttacker ran out of armies\n";
 		defenderPlayer->setBattlesWonTotal(defenderPlayer->getBattlesWonTotal() + 1);//Add 1 to the number of Battle won
 		goto stop;
 	}
 
 	//Loop back if allin
 	if (allInMode){
-		system("pause");
 		goto allIn;
 	}
 	else{
-		if (isContinue() && (attackerCountry->getOwner()->getType() == Player::Human))
+		if (isContinue() && (attackerCountry->getOwner()->isHuman()))
 			goto playerAttack;
 	}
 
@@ -124,6 +111,16 @@ stop:
 		delete[]defenderRollsList;//Deallocate memory
 
 	return countryConquered;
+}
+
+void BattleEngine::displayRolls(int* rollList, int rollCount)
+{
+	for (int i = 0; i < rollCount; i++){
+		if (i == rollCount - 1)
+			cout << "\t" << rollList[i];
+		else
+			cout << "\t" << rollList[i] << ", "; 
+	}
 }
 
 int* BattleEngine::generateDescSortedRollList(int size){
@@ -147,14 +144,14 @@ bool BattleEngine::isAttackOver(int attackerNum_armies, int defenderNum_armies){
 		return false;
 }
 
-bool BattleEngine::defenderLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies)
+bool BattleEngine::defenderLost(Country* attackerCountry, Country *defenderCountry)
 {
 	if (isAttackOver(attackerCountry->getNumArmies(), defenderCountry->getNumArmies()) && defenderCountry->getNumArmies() < 1)
 		return true;
 	return false;
 }
 
-bool BattleEngine::attackerLost(Country* attackerCountry, Country *defenderCountry, int attackerNum_armies, int defenderNum_armies)
+bool BattleEngine::attackerLost(Country* attackerCountry, Country *defenderCountry)
 {
 	if (isAttackOver(attackerCountry->getNumArmies(), defenderCountry->getNumArmies()) && attackerCountry->getNumArmies() <= 1)
 		return true;
@@ -168,7 +165,7 @@ bool BattleEngine::isContinue(){
 	do{
 		cout << "\nDo you wish to launch another attack ? y/n : ";
 		cin >> choice;
-	} while (choice != 'y' && choice == 'Y' && choice != 'n' && choice != 'N');
+	} while (!std::validYesNo(choice));
 
 	if (choice == 'y' || choice == 'Y')
 		return true;
@@ -181,7 +178,7 @@ or  b) the attacking country runs out of armies and cannot attack anymore */
 bool BattleEngine::isAllInMode(Player *attackerPlayer){
 
 	//Attacker is a computer player no need to ask anything 
-	if (!attackerPlayer->isHuman(attackerPlayer))
+	if (!attackerPlayer->isHuman())
 		return true;
 
 	//Attacker is Human
@@ -189,11 +186,11 @@ bool BattleEngine::isAllInMode(Player *attackerPlayer){
 	do{
 		cout << "\nDo you wish to go All in ? y/n: ";
 		cin >> choice;	
-	} while (choice != 'y' && choice != 'n');
+	} while (!std::validYesNo(choice));
 
-	system("cls"); //TODO
+	risk::clsGame();
 
-	if (choice == 'y')
+	if (choice == 'y' || choice == 'Y')
 		return true;
 	return false;
 }
@@ -205,7 +202,7 @@ int BattleEngine::numberOfArmiesToSend(Player* attackerPlayer, int numberOfRolls
 	minimumTransArmy = numberOfRolls >= attackerNumArmies ? attackerNumArmies - 1 : numberOfRolls;
 
 	//Attacker Player is a computer? then randomize the # of armies to be send (
-	if (!attackerPlayer->isHuman(attackerPlayer)) {
+	if (!attackerPlayer->isHuman()) {
 		numArmtoSend = (rand() % (attackerNumArmies - minimumTransArmy)) + minimumTransArmy;// minimumTransArmy, attackerNumArmies - minimumTransArmy); //return random number between (min trans armies and max armies -1)			
 		cout << "\n" << attackerPlayer->getName() << " returned " << numArmtoSend << " Army(ies)\n" << endl;	//TODO check formatting Kendy, Sentence restructure
 		return numArmtoSend;
@@ -226,7 +223,7 @@ int BattleEngine::attackerRoll(Player* attackerPlayer, Player* defenderPlayer, C
 	start:
 	//Determine the # of armies the attacker will send
 	int sentArmies; 
-	system("cls");
+	risk::clsGame(); 
 	displayBattleInfo(attackerPlayer, defenderPlayer, attackerCountry, defenderCountry);
 	cout << attackerPlayer->getName() << " : How many armies do you wish to send to attack?";
 	cout << "(Not more than " << attackerCountry->getNumArmies() - 1 << ") and 0 to cancel current attack: " << endl;
@@ -266,6 +263,10 @@ void BattleEngine::compareRolls(Country *attackerCountry, Country* defenderCount
 //Will display the Battle Information before the attack
 void BattleEngine::displayBattleInfo(Player* attackerPlayer, Player* defenderPlayer, Country* attackerCountry, Country* defenderCountry){
 
+	COORD gameCursorCoordinates = risk::getCursorPosition();
+	risk::clsObserver();
+
+	cout << "\t*****Attacking*****\n\n";
 	cout << setfill(' ') << setw(29) << "Attacker" << setfill(' ') << setw(19) << "Defender" << endl;
 	cout << " " << setfill('#') << setw(54) << "";
 	cout << endl;
@@ -293,28 +294,32 @@ void BattleEngine::displayBattleInfo(Player* attackerPlayer, Player* defenderPla
 
 	cout << " " << setfill('#') << setw(54) << "";
 	cout << endl;
+
+	risk::setCursorPosition(gameCursorCoordinates);
 }
 
 void BattleEngine::displayDefenderLost()
 {
-	system("pause");
-	system("cls");
+	COORD gameCursorCoordinates = risk::getCursorPosition();
+	risk::clsObserver();
 	cout << "______ ___________ _____ _   _______ ___________   _     _____ _____ _____ " << endl;
 	cout << "|  _  \\  ___|  ___|  ___| \\ | |  _  \\  ___| ___ \\ | |   |  _  /  ___|_   _|" << endl;
 	cout << "| | | | |__ | |_  | |__ |  \\| | | | | |__ | |_/ / | |   | | | \\ `--.  | |  " << endl;
 	cout << "| | | |  __||  _| |  __|| . ` | | | |  __||    /  | |   | | | |`--. \\ | |  " << endl;
 	cout << "| |/ /| |___| |   | |___| |\\  | |/ /| |___| |\\ \\  | |___\\ \\_/ /\\__/ / | |  " << endl;
 	cout << "|___/ \\____/\\_|   \\____/\\_| \\_/___/ \\____/\\_| \\_| \\_____/\\___/\\____/  \\_/  " << endl;
+	risk::setCursorPosition(gameCursorCoordinates);
 }
 
 void BattleEngine::displayAttackerLost()
 {
-	system("pause");
-	system("cls");
+	COORD gameCursorCoordinates = risk::getCursorPosition();
+	risk::clsObserver();
 	cout << "  ___ _____ _____ ___  _____  _   __ ___________   _     _____ _____ _____ " << endl;
 	cout << " / _ \\_   _|_   _/ _ \\/  __ \\| | / /|  ___| ___ \\ | |   |  _  /  ___|_   _|" << endl;
 	cout << "/ /_\\ \\| |   | |/ /_\\ \\ /  \\/| |/ / | |__ | |_/ / | |   | | | \\ `--.  | |  " << endl;
 	cout << "|  _  || |   | ||  _  | |    |    \\ |  __||    /  | |   | | | |`--. \\ | |  " << endl;
 	cout << "| | | || |   | || | | | \\__/\\| |\\  \\| |___| |\\ \\  | |___\\ \\_/ /\\__/ / | |  " << endl;
 	cout << "\\_| |_/\\_/   \\_/\\_| |_/\\____/\\_| \\_/\\____/\\_| \\_| \\_____/\\___/\\____/  \\_/  " << endl;
+	risk::setCursorPosition(gameCursorCoordinates);
 }

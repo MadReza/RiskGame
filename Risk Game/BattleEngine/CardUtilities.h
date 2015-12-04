@@ -12,8 +12,6 @@ TODO:
 #include "Player.h"
 #include "../Screen.h"
 
-using namespace risk;
-
 class Card;
 
 enum CardType { Infantry, Artillery, Cavalry };
