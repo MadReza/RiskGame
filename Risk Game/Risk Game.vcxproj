@@ -82,6 +82,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GUIold.cpp" />
     <ClCompile Include="libs\PugiXML\pugixml.cpp" />
+    <ClCompile Include="Logger\LogFile.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameDriver.cpp" />
     <ClCompile Include="Instantiation.cpp" />
@@ -118,6 +119,8 @@
     <ClInclude Include="Instantiation.h" />
     <ClInclude Include="libs\PugiXML\pugiconfig.hpp" />
     <ClInclude Include="libs\PugiXML\pugixml.hpp" />
+    <ClInclude Include="Logger\LogFile.h" />
+    <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map\Continent.h" />
     <ClInclude Include="Map\Country.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="Map\Map_View.h" />
     <ClInclude Include="Map\UtilityMap.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Phase.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="UI\PlayerView.h" />

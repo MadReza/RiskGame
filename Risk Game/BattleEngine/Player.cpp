@@ -188,8 +188,8 @@ int Player::getCardReinforcementTotal()	//TODO: @chris & @kendy, auto cards if c
 		if (!CardUtilities::checkRedemption(this))	//Nothing to Redeem
 		{
 			cout << "Nothing to redeem" << endl;
-			system("pause");
-			system("cls");
+			risk::pause();
+			risk::clsGame();
 			return 0;
 		}
 

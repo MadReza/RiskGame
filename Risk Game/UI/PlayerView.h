@@ -5,6 +5,9 @@
 #include "../Observer.h"
 #include "../BattleEngine/Player.h"
 #include "../Screen.h"
+#include "../Logger/Logger.h"
+#include "../Logger/LogFile.h"
+#include "../Phase.h"
 
 class PlayerView : public Observer {
 private:
@@ -20,9 +23,22 @@ private:
 	bool startedScreenOutput = false;
 	COORD gameCursorCoordinates;
 
+	//What to log for each player !
+	Logger* _log = nullptr;
+	Phase* _logPhase = nullptr;		//Only a Specific Phase
+	bool _logAllPhase = false;
+
+	void updateReinforcement();
+	void updateAttack();
+	void updateFortification();
 public:
 	PlayerView();
 	~PlayerView();
     PlayerView(Player &p);
+	~PlayerView();
     void update();
+
+	void changeLogger(Logger* log);
+	void logAllPhase(bool trueFalse);
+	void logOnlyPhase(Phase* phase);
 };

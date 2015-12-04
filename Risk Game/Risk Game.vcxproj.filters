@@ -73,6 +73,15 @@
     <Filter Include="libs\PugiXML\Source Files">
       <UniqueIdentifier>{f311d62c-7852-4080-8e10-1b62e1d96e88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{03339d38-0dbc-481b-9880-213b4bf205aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Header Files">
+      <UniqueIdentifier>{533b1ac6-974d-4e28-b655-ea667fc18710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Source Files">
+      <UniqueIdentifier>{3a2b8f68-f42f-4acb-afe5-714cdc84ea91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameDriver.cpp">
@@ -152,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="UI\StatsObserver.cpp">
       <Filter>UI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger\LogFile.cpp">
+      <Filter>Logger\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="UI\StatsObserver.h">
       <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\LogFile.h">
+      <Filter>Logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\Logger.h">
+      <Filter>Logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phase.h">
+      <Filter>Utilities\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

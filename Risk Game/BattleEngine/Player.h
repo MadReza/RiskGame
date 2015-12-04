@@ -5,6 +5,7 @@
 #include "../Subject.h"
 #include "CardUtilities.h"
 #include "../Validation.h"
+#include "../Phase.h"
 
 #include <vector>
 #include <set>
@@ -73,6 +74,7 @@ public:
 
 	Strategy* getPlayerStrategy();
 	bool isHuman();
+	Phase currentPhase;
 
 	void setTurnVictory(bool trueFalse);
 	bool getTurnVictory();

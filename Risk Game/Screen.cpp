@@ -2,6 +2,8 @@
 
 namespace risk
 {
+	extern bool obsDisplaying = false;
+
 	void setCursorPosition(COORD coordinates)
 	{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

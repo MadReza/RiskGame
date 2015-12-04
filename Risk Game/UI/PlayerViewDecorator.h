@@ -50,6 +50,7 @@ public:
 		if (startedScreenOutput)
 		{
 			risk::setCursorPosition(gameCursorCoordinates);
+			startedScreenOutput = false;
 			risk::obsDisplaying = false;
 		}
 	}
@@ -81,6 +82,7 @@ public:
 		if (startedScreenOutput)
 		{
 			risk::setCursorPosition(gameCursorCoordinates);
+			startedScreenOutput = false;
 			risk::obsDisplaying = false;
 		}
 	}

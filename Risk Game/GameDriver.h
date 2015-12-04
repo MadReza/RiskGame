@@ -42,6 +42,7 @@ private:
 
 	int totalPlayers;
 	vector<Player*> players;
+	vector<PlayerView*> playerViews;
 	Map* selectedMap = nullptr;
 	
 	GameDriver();
@@ -50,6 +51,8 @@ private:
 
 	void playerAssignReinforcmentToCountries(Player* player);
 	
+	void log();
+
 	void play();
 	void reinforcePhase(Player* player);
 	void attackPhase(Player* player);

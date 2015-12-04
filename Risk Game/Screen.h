@@ -41,7 +41,7 @@ namespace risk
 
 	/*For Multiple Observer Part Displaying
 	E.g.: Decorator pattern decorating another*/
-	static bool obsDisplaying = false;
+	extern bool obsDisplaying;
 }
 
 #endif //SCREEN_H

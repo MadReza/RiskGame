@@ -35,11 +35,95 @@ void GameDriver::startGame()
 	statsObserver = new StatsObserver(players, selectedMap->countCountries());
 	statsObserver->display();
 
+	log();
 	play();
 }
 
 std::thread GameDriver::startGameThread() {
 	return std::thread([=] { startGame(); });
+}
+
+void GameDriver::log()
+{
+	risk::clsGame();
+	cout << "****Logging:: ****" << endl << endl;
+
+	char selection;
+
+	for each (Player* player in players)
+	{
+		cout << "For player: " << player->getName() << ": " << endl;
+		cout << endl;
+
+		do
+		{
+			cout << "\tWould you like to log every Phase(y,n): ";
+			cin >> selection;
+		} while (!std::validYesNo(selection));
+
+		if (selection == 'y' || selection == 'Y')
+		{
+			PlayerView *pV = new PlayerView(*player);
+			pV->logAllPhase(true);
+			playerViews.push_back(pV);
+			continue;
+		}
+
+		cout << endl;
+		selection = 'z';	//Just reset
+		PlayerView *pV = nullptr;
+
+		do
+		{
+			cout << "\tWould you like to log Attack Phase: ";
+			cin >> selection;
+		} while (!std::validYesNo(selection));
+
+		if (selection == 'y' || selection == 'Y')
+		{
+			if (pV == nullptr)
+				pV = new PlayerView(*player);
+			pV->logOnlyPhase(new Phase(Phase::Attack));
+		}
+
+		cout << endl;
+		selection = 'z';	//Just reset
+
+		do
+		{
+			cout << "\tWould you like to log Reinforce Phase: ";
+			cin >> selection;
+		} while (!std::validYesNo(selection));
+
+		if (selection == 'y' || selection == 'Y')
+		{
+			if (pV == nullptr)
+				pV = new PlayerView(*player);
+			pV->logOnlyPhase(new Phase(Phase::Reinforce));
+		}
+
+		cout << endl;
+		selection = 'z';	//Just reset
+
+		do
+		{
+			cout << "\tWould you like to log Fortification Phase: ";
+			cin >> selection;
+		} while (!std::validYesNo(selection));
+
+		if (selection == 'y' || selection == 'Y')
+		{
+			if (pV == nullptr)
+				pV = new PlayerView(*player);
+			pV->logOnlyPhase(new Phase(Phase::Fortification));
+		}
+
+		if (pV != nullptr)
+		{
+			playerViews.push_back(pV);
+		}
+
+	}
 }
 
 void GameDriver::play()
@@ -133,6 +217,7 @@ void GameDriver::switchPlayerType(Player* player){
 void GameDriver::reinforcePhase(Player* player)
 {
 	risk::clsGame(); 
+	player->currentPhase = Phase::Reinforce;
 	cout << "****Reinforcment Phase:: ****" << endl << endl;
 	playerAssignReinforcmentToCountries(player);
 }
@@ -147,6 +232,7 @@ void GameDriver::playerAssignReinforcmentToCountries(Player* player)
 void GameDriver::attackPhase(Player* player)
 {
 	risk::clsGame();
+	player->currentPhase = Phase::Attack;
 	cout << "****Attack Phase:: ****" << endl << endl << endl;
 	char answer;
 
@@ -168,8 +254,6 @@ void GameDriver::attackPhase(Player* player)
 			player->assignAttack();	//TODO: Does the computer only attack once ???
 			break;
 		}
-		cout << endl << "Would you like to attack a country (y,n): "; //LAURENDY
-		cin >> answer;
 
 		if (answer == 'y' || answer == 'Y')
 			player->assignAttack();
@@ -183,11 +267,12 @@ void GameDriver::attackPhase(Player* player)
 	}
 
 	risk::pause();
-	risk::clsGame();
 }
 
 void GameDriver::fortifcationPhase(Player* player)
 {
+	risk::clsGame();
+	player->currentPhase = Phase::Reinforce;
 	risk::setCursorPosition(risk::COORD_INI_GAME_SCREEN); //LAURENDY 
 	cout << "****Fortification Phase:: ****" << endl << endl;
 	cout << "For all countries, allow player to Move Army from one country to adjacent country to fortify" << endl;
