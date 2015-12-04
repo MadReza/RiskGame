@@ -65,9 +65,9 @@ void Player::setPlayerStrategy(Strategy *strat)
 	Astrategy = strat;
 }
 
-bool Player::isHuman(Player p)
+bool Player::isHuman(Player *p)
 {
-	if (p.getType() == Player::Human)
+	if (p->getType() == Player::Human)
 		return true;
 	else
 		return false;
@@ -198,8 +198,6 @@ void Player::assignReinforcements()
 		clsGame();
 		cout << "Assigning Reinforcements" << endl;
 		cout << "===================" << endl;
-
-		int selection;
 		
 		cout << endl << "Select the country to reinforce (" << armyToAssign << " reinforcement left): " << endl;
 		Country* countrySelection{ selectPlayerCountry() };

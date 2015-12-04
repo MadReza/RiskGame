@@ -64,7 +64,7 @@ public:
 	void setName(string name);
 	string getName();
 	void setPlayerStrategy(Strategy *strat);
-	bool isHuman(Player p);
+	bool isHuman(Player *p);
 	void setTurnVictory(bool trueFalse);
 	bool getTurnVictory();
 	void setRedeemThisTurn(bool trueFalse);
