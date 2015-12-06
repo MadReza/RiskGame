@@ -1,10 +1,5 @@
 #include "PlayerView.h"
 
-PlayerView::~PlayerView()
-{
-	_player->detach(this);
-}
-
 PlayerView::PlayerView(Player &p) {
     p.attach(this);
     _player = &p;
