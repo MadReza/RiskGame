@@ -35,7 +35,7 @@ public:
 	PlayerView();
 	~PlayerView();
     PlayerView(Player &p);
-	~PlayerView();
+
     void update();
 
 	void changeLogger(Logger* log);
